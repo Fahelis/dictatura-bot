@@ -9,8 +9,12 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-    if (message.content === 'ping') {
+    if ('ping' === message.content) {
     	message.reply('pong');
+  	}
+    
+    if ('Ah!' === message.content) {
+    	message.reply('Bah oui!');
   	}
 
 
