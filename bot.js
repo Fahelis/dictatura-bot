@@ -12,7 +12,6 @@ client.on('message', message => {
     if (message.content === 'ping') {
     	message.reply('pong');
   	}
-});
 
 
 if(message.content.startsWith(prefix + "reminder")){
@@ -53,5 +52,6 @@ reminder(time, timeofreminder);
 }
 }
 
+});
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
