@@ -63,11 +63,12 @@ client.on('message', message => {
                 message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
                 .then(function (message) {
                     // To get the unicode send \emoji in the chat
-                    message.react("👍")
-                }).then(function (message) {
-                    message.react("👊")
-                }).then(function (message) {
-                    message.react("👎")
+                    message.react("👍");
+                    console.log('First reaction incoming.');
+                    message.react("👊");
+                    console.log('Second reaction incoming.');
+                    message.react("👎");
+                    console.log('Third reaction incoming.');
                 }).catch(function() {
                     console.log("Can't do the vote");
                 });
