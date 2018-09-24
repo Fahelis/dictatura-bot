@@ -5,7 +5,7 @@ var prefix = "!";
 
 
 client.on('ready', () => {
-    client.channels.get("name", "général").send('Je suis là bande de moules !');
+    client.channels.get("463314734108639234").send('Je suis là bande de moules !');
 });
 
 client.on('message', message => {
