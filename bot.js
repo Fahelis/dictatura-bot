@@ -68,7 +68,7 @@ client.on('message', message => {
                 var embed = new Discord.RichEmbed()
                     .addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure")
                 message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
-                .then(function (message) {
+                .then(async function (message) {
                     // To get the unicode send \emoji in the chat
                     message.react("👍");
                     console.log('First reaction incoming.');
