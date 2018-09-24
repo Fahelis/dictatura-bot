@@ -73,12 +73,12 @@ client.on('message', message => {
                 console.log("Can't do the vote");
             });
         }
+    }
         
-        if(message.content.startsWith(prefix + "votes")) {
-            let args = message.content.split(" ").slice(1);
-            for (arg in args) {
-                client.channels.get("493678576772841493").send('!new vote test');
-            }
+    if(message.content.startsWith(prefix + "votes")) {
+        let args = message.content.split(" ").slice(1);
+        for (arg in args) {
+            client.channels.get("493678576772841493").send('!new vote test');
         }
     }
     
