@@ -58,7 +58,7 @@ client.on('message', message => {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ");
             var embed = neww Discord.RichEmbed()
-                .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure de la guilde");
+                .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure de la guilde")
             message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
             .then(function (message) {
                 message.react(":thumbsup:")
