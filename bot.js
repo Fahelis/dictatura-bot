@@ -79,7 +79,7 @@ client.on('message', message => {
                 });
                 index++;
             }
-            message.guild.channels.find("name", "annonces").message.send("@everyone Les votes pour l'intégration des recrues sont ouverts");
+            client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
         }
     }
    
