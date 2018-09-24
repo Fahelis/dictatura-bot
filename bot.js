@@ -61,9 +61,11 @@ client.on('message', message => {
             let index = 0;
             for (let arg in args) {
                 console.log('New line of vote');
+                targetChannel = message.guild.channels.find("name", "les_nouveaux");
+                targetChannel.message.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
                 var embed = new Discord.RichEmbed()
                     .addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure\n⚠ Attention l'ordre peut varier")
-                message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
+                targetChannel.sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
                     message.react("👍");
@@ -77,6 +79,7 @@ client.on('message', message => {
                 });
                 index++;
             }
+            message.guild.channels.find("name", "annonces").message.send("@everyone Les votes pour l'intégration des recrues sont ouverts");
         }
     }
    
