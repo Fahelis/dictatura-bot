@@ -57,15 +57,15 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ");
-            let thumbsupEmoji = client.emojis.find("name", "thumbsup");
+            let thumbsupEmoji = client.emojis.find("name", ":thumbsup:");
             if (thumbsupEmoji === null) {
                 message.channel.send("Je n'ai pas pu trouver l'emoji thumbsup");
             }
-            let punchEmoji = client.emojis.find("name", "punch");
+            let punchEmoji = client.emojis.find("name", ":punch:");
             if (punchEmoji === null) {
                 message.channel.send("Je n'ai pas pu trouver l'emoji punch");
             }
-            let thumbsdownEmoji = client.emojis.find("name", "thumbsdown");
+            let thumbsdownEmoji = client.emojis.find("name", ":thumbsdown:");
             if (thumbsdownEmoji === null) {
                 message.channel.send("Je n'ai pas pu trouver l'emoji thumbsdown");
             }
@@ -73,9 +73,9 @@ client.on('message', message => {
                 .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure")
             message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
             .then(function (message) {
-                message.react("👍")
+                message.react(thumbsupEmoji)
                 message.react(punchEmoji)
-                message.react("👎")
+                message.react(thumbsdownEmoji)
             }).catch(function() {
                 message.channel.send('J'ai eu un problème');
             });
