@@ -64,7 +64,9 @@ client.on('message', message => {
                 .then(function (message) {
                     // To get the unicode send \emoji in the chat
                     message.react("👍")
+                }).then(function (message) {
                     message.react("👊")
+                }).then(function (message) {
                     message.react("👎")
                 }).catch(function() {
                     console.log("Can't do the vote");
