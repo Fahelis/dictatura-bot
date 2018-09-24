@@ -57,7 +57,6 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             if (1 === message.content.split(" ").length) {
-                message.channel.send('Pas darguments');
                 message.guild.roles.find("name", "Nouveaux").members.forEach(function(guildMember, guildMemberId) {
                     args.push(guildMember.user.username);
                 });
@@ -83,8 +82,11 @@ client.on('message', message => {
                 index++;
             }
         }
-    }  
+    }
     
+    msg.say('Hi').then(message => {
+    message.edit('Hello');
+});
 
 });
 // THIS  MUST  BE  THIS  WAY
