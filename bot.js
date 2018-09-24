@@ -57,7 +57,7 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             if (null === args) {
-                message.channel.send(client.roles.get("name", "Nouveaux").name;
+                args = newMembers client.roles.get("name", "Nouveaux").members;
             }
             let thingToEcho = args.join(" ");
             let index = 0;
