@@ -55,7 +55,17 @@ client.on('message', message => {
         if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
             return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
         } else {
-            message.channel.send('test!');
+            let args = message.content.split(" ").slice(1);
+            let thingToEcho = args.join(" ");
+            var embed = new Discord.RichEmbed()
+                .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure de la guilde")
+            message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
+            .then(function (message) {
+                message.react(":thumbsup:")
+                message.react(":punch:")
+                message.react(":thumbsdown:")
+            }).catch(function() {
+            });
         }
     }
     
