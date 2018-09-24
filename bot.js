@@ -62,9 +62,7 @@ client.on('message', message => {
                 .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure")
             message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
             .then(function (message) {
-                message.react(":)")
                 message.react("👍")
-                message.react(punchEmoji)
                 message.react("👎")
             }).catch(function() {
             });
