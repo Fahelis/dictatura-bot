@@ -77,7 +77,7 @@ client.on('message', message => {
                 message.react(punchEmoji)
                 message.react(thumbsdownEmoji)
             }).catch(function() {
-                message.channel.send('J'ai eu un problème');
+                message.channel.send("J'ai eu un problème");
             });
         }
     }
