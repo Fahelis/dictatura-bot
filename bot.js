@@ -57,10 +57,11 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ");
+            let index = 0;
             for (let arg in args) {
                 console.log('New line of vote');
                 var embed = new Discord.RichEmbed()
-                    .addField(arg, "${arg} :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure")
+                    .addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure")
                 message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
                 .then(function (message) {
                     // To get the unicode send \emoji in the chat
@@ -73,6 +74,7 @@ client.on('message', message => {
                 }).catch(function() {
                     console.log("Can't do the vote");
                 });
+                index++;
             }
         }
     }  
