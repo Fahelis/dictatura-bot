@@ -56,10 +56,10 @@ client.on('message', message => {
             return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
         } else {
             let args = message.content.split(" ").slice(1);
-            if ('undefined' === typeof args) {
-                message.channel.send('votons');
+            //if ('undefined' === typeof args) {
+                message.channel.send(args);
                 //args = newMembers client.roles.get("name", "Nouveaux").members;
-            }
+            //}
             let thingToEcho = args.join(" ");
             let index = 0;
             for (let arg in args) {
