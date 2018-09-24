@@ -56,7 +56,7 @@ client.on('message', message => {
             return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
         } else {
             let args = message.content.split(" ").slice(1);
-            if ('' === args) {
+            if (1 === message.content.split(" ").length) {
                 //args = newMembers client.roles.get("name", "Nouveaux").members;
                 message.channel.send('Pas darguments!');
             }
