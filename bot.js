@@ -61,6 +61,7 @@ client.on('message', message => {
                 .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure de la guilde")
             message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
             .then(function (message) {
+                message.react(":)")
                 message.react(":thumbsup:")
                 message.react(":punch:")
                 message.react(":thumbsdown:")
