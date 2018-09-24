@@ -5,7 +5,7 @@ var prefix = "!";
 
 
 client.on('ready', () => {
-    bot.channels.find("name", "général").send('Je suis là bande de moules !');
+    //bot.channels.find("name", "général").send('Je suis là bande de moules !');
 });
 
 client.on('message', message => {
@@ -70,7 +70,7 @@ client.on('message', message => {
                 console.log('Unable to find emoji with name thumbsdown');
             }
             var embed = new Discord.RichEmbed()
-                .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure")
+                .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure")
             message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
             .then(function (message) {
                 message.react(thumbsupEmoji)
