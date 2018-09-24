@@ -76,6 +76,7 @@ client.on('message', message => {
                 index++;
             }
             client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
+            message.delete();
         }
     }
    
