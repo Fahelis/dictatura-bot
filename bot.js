@@ -5,7 +5,7 @@ var prefix = "!";
 
 
 client.on('ready', () => {
-    //bot.channels.get("général").send('Je suis là bande de moules !');
+    bot.channels.get("général").send('Je suis là bande de moules !');
 });
 
 client.on('message', message => {
@@ -57,14 +57,27 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ");
+            let thumbsupEmoji = client.emojis.find("name", "thumbsup");
+            if (thumbsupEmoji === null) {
+                message.channel.send("Je n'ai pas pu trouver l'emoji thumbsup");
+            }
             let punchEmoji = client.emojis.find("name", "punch");
+            if (punchEmoji === null) {
+                message.channel.send("Je n'ai pas pu trouver l'emoji punch");
+            }
+            let thumbsdownEmoji = client.emojis.find("name", "thumbsdown");
+            if (thumbsdownEmoji === null) {
+                message.channel.send("Je n'ai pas pu trouver l'emoji thumbsdown");
+            }
             var embed = new Discord.RichEmbed()
                 .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure")
             message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
             .then(function (message) {
                 message.react("👍")
+                message.react(punchEmoji)
                 message.react("👎")
             }).catch(function() {
+                message.channel.send('J'ai eu un problème');
             });
         }
     }
