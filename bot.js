@@ -59,15 +59,21 @@ client.on('message', message => {
             let thingToEcho = args.join(" ");
             let thumbsupEmoji = client.emojis.find("name", ":thumbsup:");
             if (thumbsupEmoji === null) {
-                message.channel.send("Je n'ai pas pu trouver l'emoji thumbsup");
+                console.log('Unable to find emoji with name thumbsup');
+                process.exit(0);
+                return;
             }
             let punchEmoji = client.emojis.find("name", ":punch:");
             if (punchEmoji === null) {
-                message.channel.send("Je n'ai pas pu trouver l'emoji punch");
+                console.log('Unable to find emoji with name punch');
+                process.exit(0);
+                return;
             }
             let thumbsdownEmoji = client.emojis.find("name", ":thumbsdown:");
             if (thumbsdownEmoji === null) {
-                message.channel.send("Je n'ai pas pu trouver l'emoji thumbsdown");
+                console.log('Unable to find emoji with name thumbsdown');
+                process.exit(0);
+                return;
             }
             var embed = new Discord.RichEmbed()
                 .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure")
@@ -77,7 +83,7 @@ client.on('message', message => {
                 message.react(punchEmoji)
                 message.react(thumbsdownEmoji)
             }).catch(function() {
-                message.channel.send("J'ai eu un problème");
+                console.log("Can't do the vote");
             });
         }
     }
