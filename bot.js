@@ -51,6 +51,14 @@ client.on('message', message => {
         }
     }
     
+    if(message.content.startsWith(prefix + "vote")) {
+        if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
+            return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
+        } else {
+            message.channel.send('test!');
+        }
+    }
+    
     
 
 });
