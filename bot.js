@@ -51,37 +51,31 @@ client.on('message', message => {
         }
     }
     
-    if(message.content.startsWith(prefix + "new vote")) {
+    if(message.content.startsWith(prefix + "votes")) {
         if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
             return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
         } else {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ");
-            console.log('New line of vote');
-            var embed = new Discord.RichEmbed()
-                .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure")
-            message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
-            .then(function (message) {
-                // To get the unicode send \emoji in the chat
-                message.react("👍");
-                console.log('First reaction incoming.');
-                message.react("👊");
-                console.log('Second reaction incoming.');
-                message.react("👎");
-                console.log('Third reaction incoming.');
-            }).catch(function() {
-                console.log("Can't do the vote");
-            });
+            for (arg in args) {
+                console.log('New line of vote');
+                var embed = new Discord.RichEmbed()
+                    .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure")
+                message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
+                .then(function (message) {
+                    // To get the unicode send \emoji in the chat
+                    message.react("👍");
+                    console.log('First reaction incoming.');
+                    message.react("👊");
+                    console.log('Second reaction incoming.');
+                    message.react("👎");
+                    console.log('Third reaction incoming.');
+                }).catch(function() {
+                    console.log("Can't do the vote");
+                });
+            }
         }
-    }
-        
-    if(message.content.startsWith(prefix + "votes")) {
-        let args = message.content.split(" ").slice(1);
-        for (arg in args) {
-            client.channels.get("493678576772841493").send('!new vote test');
-        }
-    }
-    
+    }  
     
 
 });
