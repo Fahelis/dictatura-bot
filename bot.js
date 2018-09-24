@@ -57,8 +57,7 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             if (1 === message.content.split(" ").length) {
-                //args = newMembers client.roles.get("name", "Nouveaux").members;
-                message.channel.send('Pas darguments!');
+                args = newMembers client.roles.get("name", "Nouveaux").members;
             }
             let thingToEcho = args.join(" ");
             let index = 0;
