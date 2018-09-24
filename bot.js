@@ -83,10 +83,7 @@ client.on('message', message => {
             }
         }
     }
-    
-    msg.say('Hi').then(message => {
-    message.edit('Hello');
-});
+   
 
 });
 // THIS  MUST  BE  THIS  WAY
