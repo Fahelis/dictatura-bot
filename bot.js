@@ -57,25 +57,13 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ");
-            let thumbsupEmoji = client.emojis.find("name", "thumbsup");
-            if (thumbsupEmoji === null) {
-                console.log('Unable to find emoji with name thumbsup');
-            }
-            let punchEmoji = client.emojis.find("name", "punch");
-            if (punchEmoji === null) {
-                console.log('Unable to find emoji with name punch');
-            }
-            let thumbsdownEmoji = client.emojis.find("name", "thumbsdown");
-            if (thumbsdownEmoji === null) {
-                console.log('Unable to find emoji with name thumbsdown');
-            }
             var embed = new Discord.RichEmbed()
                 .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure")
             message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
             .then(function (message) {
-                message.react(thumbsupEmoji)
-                message.react(punchEmoji)
-                message.react(thumbsdownEmoji)
+                message.react(👍)
+                message.react(👊)
+                message.react(👎)
             }).catch(function() {
                 console.log("Can't do the vote");
             });
