@@ -57,7 +57,7 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             if (1 === message.content.split(" ").length) {
-                for (let member in client.roles.get("name", "Nouveaux").members) {
+                for (let member in message.guild.roles.get("name", "Nouveaux").members) {
                     message.channel.send('Votons');
                 }
                 //args = client.roles.get("name", "Nouveaux").members;
