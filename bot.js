@@ -51,6 +51,8 @@ client.on('message', message => {
         if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
             return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
         } else {
+            targetChannel = client.channels.find("name", "les_nouveaux");
+            targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
             let args = message.content.split(" ").slice(1);
             if (1 === message.content.split(" ").length) {
                 message.guild.roles.find("name", "Nouveaux").members.forEach(function(guildMember, guildMemberId) {
@@ -60,20 +62,14 @@ client.on('message', message => {
             let thingToEcho = args.join(" ");
             let index = 0;
             for (let arg in args) {
-                console.log('New line of vote');
-                targetChannel = message.guild.channels.find("name", "les_nouveaux");
-                targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
                 var embed = new Discord.RichEmbed()
                     .addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure\n⚠ Attention l'ordre peut varier")
                 targetChannel.sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
                     message.react("👍");
-                    console.log('First reaction incoming.');
                     message.react("👊");
-                    console.log('Second reaction incoming.');
                     message.react("👎");
-                    console.log('Third reaction incoming.');
                 }).catch(function() {
                     console.log("Can't do the vote");
                 });
