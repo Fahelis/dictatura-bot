@@ -58,7 +58,7 @@ client.on('message', message => {
             let args = message.content.split(" ").slice(1);
             if (1 === message.content.split(" ").length) {
                 message.channel.send('Pas darguments');
-                message.guild.roles.find("name", "Nouveaux")/members.forEach(function(guildMember, guildMemberId) {
+                message.guild.roles.find("name", "Nouveaux").members.forEach(function(guildMember, guildMemberId) {
                     message.channel.send(guildMember.user.username);
                 });
                 //for (let memberId in roleRecrues.members.array()) {
