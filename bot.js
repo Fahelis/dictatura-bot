@@ -57,15 +57,15 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ");
-            let thumbsupEmoji = client.emojis.find("name", "thumbsup");
+            let thumbsupEmoji = client.emojis.find(ReactionEmoji.of(\:thumbsup:));
             if (thumbsupEmoji === null) {
                 console.log('Unable to find emoji with name thumbsup');
             }
-            let punchEmoji = client.emojis.find("name", "punch");
+            let punchEmoji = client.emojis.find(ReactionEmoji.of(\:thumbsup:));
             if (punchEmoji === null) {
                 console.log('Unable to find emoji with name punch');
             }
-            let thumbsdownEmoji = client.emojis.find("name", "thumbsdown");
+            let thumbsdownEmoji = client.emojis.find(ReactionEmoji.of(\:thumbsup:));
             if (thumbsdownEmoji === null) {
                 console.log('Unable to find emoji with name thumbsdown');
             }
