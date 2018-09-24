@@ -62,7 +62,7 @@ client.on('message', message => {
             for (let arg in args) {
                 console.log('New line of vote');
                 targetChannel = message.guild.channels.find("name", "les_nouveaux");
-                targetChannel.message.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
+                targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
                 var embed = new Discord.RichEmbed()
                     .addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure\n⚠ Attention l'ordre peut varier")
                 targetChannel.sendEmbed(embed)
