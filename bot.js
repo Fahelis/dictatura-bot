@@ -60,20 +60,14 @@ client.on('message', message => {
             let thumbsupEmoji = client.emojis.find("name", ":thumbsup:");
             if (thumbsupEmoji === null) {
                 console.log('Unable to find emoji with name thumbsup');
-                process.exit(0);
-                return;
             }
             let punchEmoji = client.emojis.find("name", ":punch:");
             if (punchEmoji === null) {
                 console.log('Unable to find emoji with name punch');
-                process.exit(0);
-                return;
             }
             let thumbsdownEmoji = client.emojis.find("name", ":thumbsdown:");
             if (thumbsdownEmoji === null) {
                 console.log('Unable to find emoji with name thumbsdown');
-                process.exit(0);
-                return;
             }
             var embed = new Discord.RichEmbed()
                 .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure")
