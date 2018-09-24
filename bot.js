@@ -5,18 +5,14 @@ var prefix = "!";
 
 
 client.on('ready', () => {
-    client.channels.get("463314734108639234").send('Je suis là bande de moules !');
+    client.channels.find("name", "général").send("Une fois de plus je quitte l'Inglorium pour venir vous aider");
 });
 
 client.on('message', message => {
-    if ('ping' === message.content) {
-    	message.reply('pong');
-  	}
     
     if ('Ah!' === message.content) {
     	message.channel.send('Bah oui!');
   	}
-
 
     if(message.content.startsWith(prefix + "reminder")) {
         if(message.channel.type === "dm") {
@@ -66,7 +62,7 @@ client.on('message', message => {
             for (let arg in args) {
                 console.log('New line of vote');
                 var embed = new Discord.RichEmbed()
-                    .addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure")
+                    .addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure\n⚠ Attention l'ordre peut varier")
                 message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
