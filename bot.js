@@ -57,14 +57,15 @@ client.on('message', message => {
         } else {
             let args = message.content.split(" ").slice(1);
             let thingToEcho = args.join(" ");
+            let punchEmoji = client.emojis.find("name", "punch");
             var embed = new Discord.RichEmbed()
-                .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure de la guilde")
+                .addField(thingToEcho, ":thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai ou :thumbsdown: pour l'exclure")
             message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
             .then(function (message) {
                 message.react(":)")
-                message.react(":thumbsup:")
-                message.react(":punch:")
-                message.react(":thumbsdown:")
+                message.react("👍")
+                message.react(punchEmoji)
+                message.react("👎")
             }).catch(function() {
             });
         }
