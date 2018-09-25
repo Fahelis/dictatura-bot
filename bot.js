@@ -26,7 +26,7 @@ client.on('message', message => {
         message.channel.send(`Bonjour à toi ${message.member.displayName}`);
     } else if ('salut' === messageLC || 'bonjour' === messageLC || 'yo' === messageLC || 'hi' === messageLC
           || 'plop' === messageLC|| 'hello' === messageLC) {
-        message.channel.send(`Salut + ${message.member.displayName}`);
+        message.channel.send(`Salut ${message.member.displayName}`);
     }
 
     /********************** ! End : short responses to short messages ! **********************/
@@ -104,6 +104,17 @@ client.on('message', message => {
     }
     /********************** ! End : Votes fonctionnality ! **********************/
     
+    /********************** ? Start : Tweets filter ? **********************/
+    
+    // Kaelly's Id // '202917352378073088' === message.member.id && 
+    if (message.content.includes('@DOFUSfr')) {
+        // Then it's a tweet from Dofus
+        if (!messageLC.includes('maintenance')) {
+            message.delete();
+        }
+    }
+    
+    /********************** ! End : Tweets filter ! **********************/
 
 });
 
@@ -111,9 +122,9 @@ client.on('message', message => {
 
 /********************** ? Start : Timer fonctionnality ? **********************/
 /*
-const START_DATE = '2018-08-04'; // Date used as the starting point for multi-hour intervals, must be YYYY-MM-DD format
+const START_DATE = '2018-09-25'; // Date used as the starting point for multi-hour intervals, must be YYYY-MM-DD format
 const START_HOUR = 0; // Hour of the day when the timer begins (0 is 12am, 23 is 11pm), used with START_DATE and INTERVAL_HOURS param
-const INTERVAL_HOURS = 8; // Trigger at an interval of every X hours
+const INTERVAL_HOURS = 168; // Trigger at an interval of every X hours
 const TARGET_MINUTE = 0; // Minute of the hour when the chest will refresh, 30 means 1:30, 2:30, etc.
 const OFFSET = 10; // Notification will warn that the target is X minutes away
 
@@ -127,8 +138,8 @@ setInterval(function() {
     if(d.getMinutes() !== NOTIFY_MINUTE) return; // Return if current minute is not the notify minute
     NOTIFY_CHANNEL.sendMessage('The chests refresh in ' + OFFSET + ' minutes!');
 }, 60 * 1000); // Check every minute
-
 */
+
 /********************** ! End : Timer fonctionnality ! **********************/
 
 
