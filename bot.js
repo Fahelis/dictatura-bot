@@ -108,9 +108,11 @@ client.on('message', message => {
     
     // Kaelly's Id // '202917352378073088' === message.member.id && 
     // FIXME. Change the channel id before merging into master
-    if ('493779854932705300' === message.channel.id && message.content.includes('\@DOFUSfr')) {
+    if ('493779854932705300' === message.channel.id && message.content.includes('@DOFUSfr')) {
         // Then it's a tweet from Dofus
-        if (!messageLC.includes('maintenance')) {
+        if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
+              || messageLC.includes('connexion') || messageLC.includes('correctif')
+             || messageLC.includes('redémarrage') || messageLC.includes('réouverture'))) {
             message.delete();
         }
     }
