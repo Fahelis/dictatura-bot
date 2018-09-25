@@ -134,7 +134,7 @@ const CHECK_EVERY = 5 // In secondes
 setInterval(function() {
     client.channels.find('name', 'général').send('Every minute');
     var d = new Date('NOW');
-    //if (2 !== d.getDay()) return;
+    if (2 !== d.getDay()) return;
     //if (13 !== d.getHours()) return;
     //client.channels.find('name', 'général').send('Bon jour, bonne heure');
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
