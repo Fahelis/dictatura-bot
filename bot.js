@@ -125,7 +125,7 @@ client.on('message', message => {
 /********************** ! End : When a message is send ! **********************/
 
 /********************** ? Start : Timer functionality ? **********************/
-
+/*
 const TARGET_DAY = 2 // Days go from 0 (sunday) to 6 (saturday)
 const TARGET_HOUR = 15; // Hours go from 0 to 23
 const TARGET_MINUTE = 18; // Minute of the hour from 0 to 59
@@ -139,7 +139,7 @@ setInterval(function() {
         client.channels.find('name', 'général').send('Bon jour, bonne heure');
     }
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
-
+*/
 /********************** ! End : Timer functionality ! **********************/
 
 
