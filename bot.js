@@ -129,14 +129,15 @@ client.on('message', message => {
 const TARGET_DAY = 2 // Days go from 0 (sunday) to 6 (saturday)
 const TARGET_HOUR = 13; // Hours go from 0 to 23
 const TARGET_MINUTE = 0; // Minute of the hour from 0 to 59
+const CHECK_EVERY = 5 // In secondes
 
 setInterval(function() {
     client.channels.find('name', 'général').send('Every minute');
-    var d = new Date().now();
+    var d = new Date('NOW');
     //if (2 !== d.getDay()) return;
     //if (13 !== d.getHours()) return;
     //client.channels.find('name', 'général').send('Bon jour, bonne heure');
-}, 60 * 1000); // Check every minute
+}, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
 
 /********************** ! End : Timer functionality ! **********************/
 
