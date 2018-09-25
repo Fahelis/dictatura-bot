@@ -133,7 +133,7 @@ const CHECK_EVERY = 5 // In secondes
 
 setInterval(function() {
     var d = new Date();
-    if (2 == d.getDay() && 14 == d.getHours()) {
+    if (2 == d.getDay()) {// && 14 == d.getHours()
         client.channels.find('name', 'général').send('Bon jour, bonne heure');
     }
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
