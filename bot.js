@@ -20,10 +20,10 @@ client.on('message', message => {
     let messageLC = message.content.toLowerCase().trim();
     if ('ah!' === messageLC || 'ah...' === messageLC) {
     	message.channel.send('Bah oui!');
-  	} else if ((messageLC.StartsWith('salut') || messageLC.StartsWith('bonjour') || messageLC.StartsWith('yo')
-               || messageLC.StartsWith('hi') || messageLC.StartsWith('plop') || messageLC.StartsWith('hello'))
+  	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
+               || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello'))
                && messageLC.includes('iord')) {
-        //message.reply(`Bonjour à toi ${message.member.displayName}`);
+        message.reply('Bonjour à toi ${message.member.displayName}');
     } else if ('salut' === messageLC || 'bonjour' === messageLC || 'yo' === messageLC || 'hi' === messageLC
           || 'plop' === messageLC|| 'hello' === messageLC) {
         message.channel.send('Salut ' + message.member.displayName);
