@@ -128,7 +128,7 @@ client.on('message', message => {
 
 const TARGET_DAY = 2 // Days go from 0 (sunday) to 6 (saturday)
 const TARGET_HOUR = 15; // Hours go from 0 to 23
-const TARGET_MINUTE = 56; // Minute of the hour from 0 to 59
+const TARGET_MINUTE = 18; // Minute of the hour from 0 to 59
 const CHECK_EVERY = 10 // In secondes
 
 setInterval(function() {
