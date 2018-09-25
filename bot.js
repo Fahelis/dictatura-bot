@@ -63,7 +63,7 @@ client.on('message', message => {
             let index = 0;
             for (let arg in args) {
                 var embed = new Discord.RichEmbed()
-                    .addField(args[index], null)
+                    .addField(args[index], '')
                 targetChannel.sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
