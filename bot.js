@@ -107,7 +107,8 @@ client.on('message', message => {
     /********************** ? Start : Tweets filter ? **********************/
     
     // Kaelly's Id // '202917352378073088' === message.member.id && 
-    if (message.content.includes('@DOFUSfr')) {
+    // FIXME. Change the channel id before merging into master
+    if ('493779854932705300' === message.channel.id && message.content.includes('\@DOFUSfr')) {
         // Then it's a tweet from Dofus
         if (!messageLC.includes('maintenance')) {
             message.delete();
