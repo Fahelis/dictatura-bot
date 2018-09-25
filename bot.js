@@ -115,7 +115,7 @@ client.on('message', message => {
              || messageLC.includes('redémarrage') || messageLC.includes('réouverture'))) {
             message.delete();
         } else {
-            message.channel.send(message.content);
+            //message.channel.send(message.content);
         }
     }
     
