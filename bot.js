@@ -20,8 +20,8 @@ client.on('message', message => {
     let messageLC = message.content.toLowerCase().trim();
     if ('ah!' === messageLC || 'ah...' === messageLC) {
     	message.channel.send('Bah oui!');
-  	} elseif ("salut" === messageLC || "bonjour" === messageLC || "yo" === messageLC || "hi" === messageLC || "plop" === messageLC) {
-        if (message.includes('Iord')) {
+  	} else if ("salut" === messageLC || "bonjour" === messageLC || "yo" === messageLC || "hi" === messageLC || "plop" === messageLC) {
+        if (messageLC.includes("iord")) {
             message.reply('Bonjour à toi ' + message.member.displayName);
         } else {
             message.channel.send('Salut ' + message.member.displayName);
