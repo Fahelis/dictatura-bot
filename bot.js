@@ -3,17 +3,35 @@ const client = new Discord.Client();
 
 var prefix = "!";
 
+/********************** ? Start : When the bot is ready ? **********************/
 
 client.on('ready', () => {
     client.channels.find("name", "général").send("Une fois de plus je quitte l'Inglorium pour venir vous aider");
 });
 
+/********************** ! End : When the bot is ready ! **********************/
+
+/********************** ? Start : When a message is send ? **********************/
+
 client.on('message', message => {
     
-    if ('Ah!' === message.content) {
+    /********************** ? Start : Short responses to short messages ? **********************/
+    
+    let messageLC = message.content.toLowerCase().trim();
+    if ('ah!' === messageLC || 'ah...' === messageLC) {
     	message.channel.send('Bah oui!');
-  	}
+  	} elseif ("salut" === messageLC || "bonjour" === messageLC || "yo" === messageLC || "hi" === messageLC || "plop" === messageLC) {
+        if (message.includes('Iord')) {
+            message.reply('Bonjour à toi ' + message.member.displayName);
+        } else {
+            message.channel.send('Salut ' + message.member.displayName);
+        }
+    }
 
+    /********************** ! End : short responses to short messages ! **********************/
+    
+    /********************** ? Start : Reminder fonctionnality ? **********************/
+    
     if(message.content.startsWith(prefix + "reminder")) {
         if(message.channel.type === "dm") {
             return;
@@ -47,6 +65,10 @@ client.on('message', message => {
         }
     }
     
+    /********************** ! End : Reminder fonctionnality ! **********************/
+    
+    /********************** ? Start : Votes fonctionnality ? **********************/
+    
     if(message.content.startsWith(prefix + "votes")) {
         if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
             return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
@@ -79,14 +101,34 @@ client.on('message', message => {
             message.delete();
         }
     }
-    let messageLC = message.content.toLowerCase()
-    if ("salut" === messageLC || "bonjour" === messageLC || "yo" === messageLC || "hi" === messageLC || "plop" === messageLC) {
-        message.channel.send('Salut ' + message.member.displayName
-                            );
-    }
-   
-//End of on message
+    /********************** ! End : Votes fonctionnality ! **********************/
+    
+
 });
+
+/********************** ! End : When a message is send ! **********************/
+
+/********************** ? Start : Timer fonctionnality ? **********************/
+/*
+const START_DATE = '2018-08-04'; // Date used as the starting point for multi-hour intervals, must be YYYY-MM-DD format
+const START_HOUR = 0; // Hour of the day when the timer begins (0 is 12am, 23 is 11pm), used with START_DATE and INTERVAL_HOURS param
+const INTERVAL_HOURS = 8; // Trigger at an interval of every X hours
+const TARGET_MINUTE = 0; // Minute of the hour when the chest will refresh, 30 means 1:30, 2:30, etc.
+const OFFSET = 10; // Notification will warn that the target is X minutes away
+
+// Don't change any code below
+const NOTIFY_MINUTE = (TARGET_MINUTE < OFFSET ? 60 : 0) + TARGET_MINUTE - OFFSET;
+const START_TIME = new Date(new Date(START_DATE).getTime() + new Date().getTimezoneOffset() * 60000 + START_HOUR * 3600000).getTime();
+
+setInterval(function() {
+    var d = new Date();
+    if(Math.floor((d.getTime() - START_TIME) / 3600000) % INTERVAL_HOURS > 0) return; // Return if hour is not the correct interval
+    if(d.getMinutes() !== NOTIFY_MINUTE) return; // Return if current minute is not the notify minute
+    NOTIFY_CHANNEL.sendMessage('The chests refresh in ' + OFFSET + ' minutes!');
+}, 60 * 1000); // Check every minute
+
+*/
+/********************** ! End : Timer fonctionnality ! **********************/
 
 
 // THIS  MUST  BE  THIS  WAY
