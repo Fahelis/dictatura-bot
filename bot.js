@@ -133,6 +133,7 @@ const CHECK_EVERY = 10 // In secondes
 
 setInterval(function() {
     var d = new Date();
+        client.channels.find('name', 'général').send(d.getHours()+2));
         client.channels.find('name', 'général').send(d.getMinutes());
     if (TARGET_DAY === d.getDay() && TARGET_HOUR === (d.getHours()+2)) && TARGET_MINUTE === d.getMinutes()) {  
         client.channels.find('name', 'général').send('Bon jour, bonne heure');
