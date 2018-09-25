@@ -63,13 +63,13 @@ client.on('message', message => {
             let index = 0;
             for (let arg in args) {
                 var embed = new Discord.RichEmbed()
-                    .addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure\n⚠ Attention l'ordre peut varier")
+                    //.addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure\n⚠ Attention l'ordre peut varier")
                 targetChannel.sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
-                    message.react("👍");
-                    message.react("👊");
-                    message.react("👎");
+                    await message.react("👍");
+                    await message.react("👊");
+                    await message.react("👎");
                 }).catch(function() {
                     console.log("Can't do the vote");
                 });
