@@ -31,7 +31,7 @@ client.on('message', message => {
 
     /********************** ! End : short responses to short messages ! **********************/
     
-    /********************** ? Start : Reminder fonctionnality ? **********************/
+    /********************** ? Start : Reminder functionality ? **********************/
     
     if(message.content.startsWith(prefix + "reminder")) {
         if(message.channel.type === "dm") {
@@ -66,9 +66,9 @@ client.on('message', message => {
         }
     }
     
-    /********************** ! End : Reminder fonctionnality ! **********************/
+    /********************** ! End : Reminder functionality ! **********************/
     
-    /********************** ? Start : Votes fonctionnality ? **********************/
+    /********************** ? Start : Votes functionality ? **********************/
     
     if(message.content.startsWith(prefix + "votes")) {
         if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
@@ -102,7 +102,7 @@ client.on('message', message => {
             message.delete();
         }
     }
-    /********************** ! End : Votes fonctionnality ! **********************/
+    /********************** ! End : Votes functionality ! **********************/
     
     /********************** ? Start : Tweets filter ? **********************/
     
@@ -124,27 +124,30 @@ client.on('message', message => {
 
 /********************** ! End : When a message is send ! **********************/
 
-/********************** ? Start : Timer fonctionnality ? **********************/
-/*
+/********************** ? Start : Timer functionality ? **********************/
+
 const START_DATE = '2018-09-25'; // Date used as the starting point for multi-hour intervals, must be YYYY-MM-DD format
 const START_HOUR = 0; // Hour of the day when the timer begins (0 is 12am, 23 is 11pm), used with START_DATE and INTERVAL_HOURS param
 const INTERVAL_HOURS = 168; // Trigger at an interval of every X hours
-const TARGET_MINUTE = 0; // Minute of the hour when the chest will refresh, 30 means 1:30, 2:30, etc.
-const OFFSET = 10; // Notification will warn that the target is X minutes away
+const TARGET_DAY = 2 // Days go from 0 (sunday) to 6 (saturday)
+const TARGET_HOUR = 13; // Hours go from 0 to 23
+//const TARGET_MINUTE = 0; // Minute of the hour when the chest will refresh, 30 means 1:30, 2:30, etc.
+//const OFFSET = 10; // Notification will warn that the target is X minutes away
 
 // Don't change any code below
-const NOTIFY_MINUTE = (TARGET_MINUTE < OFFSET ? 60 : 0) + TARGET_MINUTE - OFFSET;
+//const NOTIFY_MINUTE = (TARGET_MINUTE < OFFSET ? 60 : 0) + TARGET_MINUTE - OFFSET;
 const START_TIME = new Date(new Date(START_DATE).getTime() + new Date().getTimezoneOffset() * 60000 + START_HOUR * 3600000).getTime();
 
 setInterval(function() {
     var d = new Date();
-    if(Math.floor((d.getTime() - START_TIME) / 3600000) % INTERVAL_HOURS > 0) return; // Return if hour is not the correct interval
-    if(d.getMinutes() !== NOTIFY_MINUTE) return; // Return if current minute is not the notify minute
-    NOTIFY_CHANNEL.sendMessage('The chests refresh in ' + OFFSET + ' minutes!');
+    //if(Math.floor((d.getTime() - START_TIME) / 3600000) % INTERVAL_HOURS > 0) return; // Return if hour is not the correct interval
+    if (2 !== d.getUTCDay()) return;
+    if (13 !== d.getHours()) return;
+    //if(d.getMinutes() !== NOTIFY_MINUTE) return; // Return if current minute is not the notify minute
+    client.channels.find('name', 'général').sendMessage('Test');
 }, 60 * 1000); // Check every minute
-*/
 
-/********************** ! End : Timer fonctionnality ! **********************/
+/********************** ! End : Timer functionality ! **********************/
 
 
 // THIS  MUST  BE  THIS  WAY
