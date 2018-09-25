@@ -132,11 +132,11 @@ const TARGET_MINUTE = 0; // Minute of the hour from 0 to 59
 const CHECK_EVERY = 5 // In secondes
 
 setInterval(function() {
-    client.channels.find('name', 'général').send(d.getDay());
+    client.channels.find('name', 'général').send(d.getDay().toString());
     var d = new Date('NOW');
-    if (2 !== d.getDay()) return;
+    if (2 != d.getDay()) return;
     client.channels.find('name', 'général').send('Bon jour');
-    if (14 !== d.getHours()) return;
+    if (14 != d.getHours()) return;
     client.channels.find('name', 'général').send('Bon jour, bonne heure');
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
 
