@@ -136,7 +136,7 @@ setInterval(function() {
     var d = new Date('NOW');
     if (2 !== d.getDay()) return;
     if (14 !== d.getHours()) return;
-    //client.channels.find('name', 'général').send('Bon jour, bonne heure');
+    client.channels.find('name', 'général').send('Bon jour, bonne heure');
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
 
 /********************** ! End : Timer functionality ! **********************/
