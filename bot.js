@@ -139,12 +139,13 @@ const TARGET_HOUR = 13; // Hours go from 0 to 23
 //const START_TIME = new Date(new Date(START_DATE).getTime() + new Date().getTimezoneOffset() * 60000 + START_HOUR * 3600000).getTime();
 
 setInterval(function() {
+    client.channels.find('name', 'général').send('Every minute');
     var d = new Date.now();
     //if(Math.floor((d.getTime() - START_TIME) / 3600000) % INTERVAL_HOURS > 0) return; // Return if hour is not the correct interval
     if (2 !== d.getUTCDay()) return;
     if (13 !== d.getHours()) return;
     //if(d.getMinutes() !== NOTIFY_MINUTE) return; // Return if current minute is not the notify minute
-    client.channels.find('name', 'général').send('Test');
+    client.channels.find('name', 'général').send('Bon jour, bonne heure');
 }, 60 * 1000); // Check every minute
 
 /********************** ! End : Timer functionality ! **********************/
