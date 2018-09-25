@@ -81,7 +81,7 @@ client.on('message', message => {
     }
     let messageLC = message.content.toLowerCase()
     if ("salut" === messageLC || "bonjour" === messageLC || "yo" === messageLC || "hi" === messageLC || "plop" === messageLC) {
-        message.channel.send('Salut ' + message.username);
+        message.channel.send('Salut ' + message.member.username);
     }
    
 //End of on message
