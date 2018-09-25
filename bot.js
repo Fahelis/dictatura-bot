@@ -20,12 +20,12 @@ client.on('message', message => {
     let messageLC = message.content.toLowerCase().trim();
     if ('ah!' === messageLC || 'ah...' === messageLC) {
     	message.channel.send('Bah oui!');
-  	} else if ("salut" === messageLC || "bonjour" === messageLC || "yo" === messageLC || "hi" === messageLC || "plop" === messageLC) {
-        if (messageLC.includes("iord")) {
-            message.reply('Bonjour à toi ' + message.member.displayName);
-        } else {
-            message.channel.send('Salut ' + message.member.displayName);
-        }
+  	} else if ((messageLC.StartsWith('salut') || messageLC.StartsWith('bonjour') || messageLC.StartsWith('yo')
+               || messageLC.StartsWith('hi") || messageLC.StartsWith('plop")) && messageLC.includes('iord')) {
+        message.reply('Bonjour à toi ' + message.member.displayName);
+    } else if ("salut" === messageLC || "bonjour" === messageLC || "yo" === messageLC || "hi" === messageLC
+          || "plop" === messageLC) {
+        message.channel.send('Salut ' + message.member.displayName);
     }
 
     /********************** ! End : short responses to short messages ! **********************/
