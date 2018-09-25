@@ -3,17 +3,36 @@ const client = new Discord.Client();
 
 var prefix = "!";
 
+/********************** ? Start : When the bot is ready ? **********************/
 
 client.on('ready', () => {
-    client.channels.find("name", "général").send("Une fois de plus je quitte l'Inglorium pour venir vous aider");
+    client.channels.find("name", "général").send("Une fois de plus je quitte l'Inglorium pour vous offrir mon aide");
 });
+
+/********************** ! End : When the bot is ready ! **********************/
+
+/********************** ? Start : When a message is send ? **********************/
 
 client.on('message', message => {
     
-    if ('Ah!' === message.content) {
+    /********************** ? Start : Short responses to short messages ? **********************/
+    
+    let messageLC = message.content.toLowerCase().trim();
+    if ('ah!' === messageLC || 'ah...' === messageLC) {
     	message.channel.send('Bah oui!');
-  	}
+  	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
+               || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello'))
+               && messageLC.includes('iord')) {
+        message.channel.send(`Bonjour à toi ${message.member.displayName}`);
+    } else if ('salut' === messageLC || 'bonjour' === messageLC || 'yo' === messageLC || 'hi' === messageLC
+          || 'plop' === messageLC|| 'hello' === messageLC) {
+        message.channel.send(`Salut ${message.member.displayName}`);
+    }
 
+    /********************** ! End : short responses to short messages ! **********************/
+    
+    /********************** ? Start : Reminder functionality ? **********************/
+    
     if(message.content.startsWith(prefix + "reminder")) {
         if(message.channel.type === "dm") {
             return;
@@ -47,10 +66,16 @@ client.on('message', message => {
         }
     }
     
+    /********************** ! End : Reminder functionality ! **********************/
+    
+    /********************** ? Start : Votes functionality ? **********************/
+    
     if(message.content.startsWith(prefix + "votes")) {
         if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
             return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
         } else {
+            targetChannel = client.channels.find("name", "les_nouveaux");
+            targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
             let args = message.content.split(" ").slice(1);
             if (1 === message.content.split(" ").length) {
                 message.guild.roles.find("name", "Nouveaux").members.forEach(function(guildMember, guildMemberId) {
@@ -60,27 +85,61 @@ client.on('message', message => {
             let thingToEcho = args.join(" ");
             let index = 0;
             for (let arg in args) {
-                console.log('New line of vote');
                 var embed = new Discord.RichEmbed()
-                    .addField(args[index], " :thumbsup: pour intégrer la recrue, :punch: pour la laisser encore à l'essai, :thumbsdown: pour l'exclure\n⚠ Attention l'ordre peut varier")
-                message.guild.channels.find("name", "les_nouveaux").sendEmbed(embed)
+                    .addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à l'essai, 👎 pour l'exclure")
+                targetChannel.sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
-                    message.react("👍");
-                    console.log('First reaction incoming.');
-                    message.react("👊");
-                    console.log('Second reaction incoming.');
-                    message.react("👎");
-                    console.log('Third reaction incoming.');
+                    await message.react("👍");
+                    await message.react("👊");
+                    await message.react("👎");
                 }).catch(function() {
                     console.log("Can't do the vote");
                 });
                 index++;
             }
+            client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
+            message.delete();
         }
     }
-   
+    /********************** ! End : Votes functionality ! **********************/
+    
+    /********************** ? Start : Tweets filter ? **********************/
+    
+    // Kaelly's Id and Ghost_channel's Id (Dictatura Dei)
+    if ('202917352378073088' === message.member.id && '494103730594119690' === message.channel.id
+        && message.content.includes('@DOFUSfr')) {
+        // Then it's a tweet from Dofus
+        if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
+              || messageLC.includes('connexion') || messageLC.includes('correctif')
+             || messageLC.includes('redémarrage') || messageLC.includes('réouverture'))) {
+            message.delete();
+        } else {
+            client.channels.find('name', 'annonces').send(message.content);
+        }
+    }
+    /********************** ! End : Tweets filter ! **********************/
 
 });
+
+/********************** ! End : When a message is send ! **********************/
+
+/********************** ? Start : Timer functionality ? **********************/
+
+const TARGET_DAY = 5; // Days go from 0 (sunday) to 6 (saturday)
+const TARGET_HOUR = 17; // Hours go from 0 to 23
+const TARGET_MINUTE = 0; // Minute of the hour from 0 to 59
+const CHECK_EVERY = 60; // In secondes
+
+setInterval(function() {
+    var d = new Date();
+    if (TARGET_DAY === d.getDay() && TARGET_HOUR === (d.getHours()+2) && TARGET_MINUTE === d.getMinutes()) {  
+        client.channels.find('name', 'les_nouveaux').send('!votes');
+    }
+}, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
+
+/********************** ! End : Timer functionality ! **********************/
+
+
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
