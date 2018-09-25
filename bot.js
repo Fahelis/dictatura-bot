@@ -21,7 +21,7 @@ client.on('message', message => {
     if ('ah!' === messageLC || 'ah...' === messageLC) {
     	message.channel.send('Bah oui!');
   	} else if ((messageLC.StartsWith('salut') || messageLC.StartsWith('bonjour') || messageLC.StartsWith('yo')
-               || messageLC.StartsWith('hi") || messageLC.StartsWith('plop")) && messageLC.includes('iord')) {
+               || messageLC.StartsWith('hi") || messageLC.StartsWith('plop')) && messageLC.includes('iord')) {
         message.reply('Bonjour à toi ' + message.member.displayName);
     } else if ("salut" === messageLC || "bonjour" === messageLC || "yo" === messageLC || "hi" === messageLC
           || "plop" === messageLC) {
