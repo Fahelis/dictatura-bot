@@ -79,8 +79,14 @@ client.on('message', message => {
             message.delete();
         }
     }
+    let messageLC = message.content.toLowerCase()
+    if ("salut" === messageLC || "bonjour" === messageLC || "yo" === messageLC || "hi" === messageLC || "plop" === messageLC) {
+        message.channel.send('Salut ' + message.username);
+    }
    
-
+//End of on message
 });
+
+
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
