@@ -23,7 +23,7 @@ client.on('message', message => {
   	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
                || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello'))
                && messageLC.includes('iord')) {
-        message.channel.send(`Bonjour à toi ${message.user.displayName}`
+        message.channel.send(`Bonjour à toi ${message.user.displayName}`);
     } else if ('salut' === messageLC || 'bonjour' === messageLC || 'yo' === messageLC || 'hi' === messageLC
           || 'plop' === messageLC|| 'hello' === messageLC) {
         message.channel.send(`Salut ${message.user.displayName}`);
