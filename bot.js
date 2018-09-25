@@ -114,6 +114,8 @@ client.on('message', message => {
               || messageLC.includes('connexion') || messageLC.includes('correctif')
              || messageLC.includes('redémarrage') || messageLC.includes('réouverture'))) {
             message.delete();
+        } else {
+            message.channel.send(message);
         }
     }
     
