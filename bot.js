@@ -111,7 +111,9 @@ client.on('message', message => {
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
     if ('484996196977344512' === message.member.id && '494101417368354816' === message.channel.id) {
         message.embeds.forEach((embed) => {
-            if (embed.title.includes('@DOFUSfr')) {
+            message.channel.send('titre : ');
+            message.channel.send(embed.title);
+            /*if (embed.title.includes('@DOFUSfr')) {
                 // Then it's a tweet from Dofus
                 var myEmbed = new Discord.RichEmbed();
                 myEmbed.setTtile(embed.title);
@@ -127,7 +129,7 @@ client.on('message', message => {
                     client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
                     client.channels.find('name', 'annonces').sendEmbed(embed);
                 }
-            }
+            }*/
             return;
         });    
     }
@@ -142,6 +144,7 @@ client.on('message', message => {
         
         var embed = new Discord.RichEmbed()
         .setTitle('@DOFUSfr')
+                    .setColor(['WHITE'])
             .addField('tweet', 'Contenu avec interet sur la maintenance');
                 message.channel.sendEmbed(embed)
     }
