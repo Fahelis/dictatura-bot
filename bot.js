@@ -109,7 +109,7 @@ client.on('message', message => {
     
     // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
-    if ('484996196977344512' === message.member.id && '494101417368354816' === message.channel.id) {
+    if ('202917352378073088' === message.member.id && '494103730594119690' === message.channel.id) {
         let embed = message.embeds[0];
         if (embed.title.includes('@DOFUSfr')) {
             // Then it's a tweet from Dofus
@@ -134,21 +134,8 @@ client.on('message', message => {
     }
     /********************** ! End : Tweets filter ! **********************/
 
-    if (message.content.startsWith(prefix + 'tweetnul')) {
-        var embed = new Discord.RichEmbed()
-            .setTitle('@DOFUSfr')
-            .addField('tweet', 'Contenu sans interet sur les koli');
-         message.channel.sendEmbed(embed)
-    } else if (message.content.startsWith(prefix + 'tweetok')) {
-        
-        var embed = new Discord.RichEmbed()
-            .setTitle('@DOFUSfr')
-            .setColor('0xFFFFFF')
-            .addField('tweet', 'Contenu avec interet sur la maintenance');
-        message.channel.sendEmbed(embed)
-    }
+    
 });
-
 /********************** ! End : When a message is send ! **********************/
 
 /********************** ? Start : Timer functionality ? **********************/
