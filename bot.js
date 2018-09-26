@@ -110,27 +110,25 @@ client.on('message', message => {
     // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
     if ('484996196977344512' === message.member.id && '494101417368354816' === message.channel.id) {
-        message.embeds.forEach((embed) => {
-            if (embed.title.includes('@DOFUSfr')) {
-                // Then it's a tweet from Dofus
-                var myEmbed = new Discord.RichEmbed();
-                myEmbed.setTitle(embed.title);
-                let field = embed.fields[0];
-                if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
-                      || field.value.includes('connexion') || field.value.includes('correctif')
-                     || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
-                    message.delete();
-                } else {
-                    myEmbed
-                        .addField(field.name, field.value)
-                        .setColor(['WHITE'])
-                    client.channels.find('name', 'annonces').sendEmbed(myEmbed);
-                    //client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
-                    //client.channels.find('name', 'annonces').sendEmbed(embed);
-                }*/
+        let embed = message.embeds[0];
+        if (embed.title.includes('@DOFUSfr')) {
+            // Then it's a tweet from Dofus
+            var myEmbed = new Discord.RichEmbed();
+            myEmbed.setTitle(embed.title);
+            let field = embed.fields[0];
+            if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
+                  || field.value.includes('connexion') || field.value.includes('correctif')
+                 || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
+                message.delete();
+            } else {
+                myEmbed
+                    .addField(field.name, field.value)
+                    .setColor(['WHITE'])
+                client.channels.find('name', 'annonces').sendEmbed(myEmbed);
+                //client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
+                //client.channels.find('name', 'annonces').sendEmbed(embed);
             }
-            return;
-        });    
+        }
     }
     /********************** ! End : Tweets filter ! **********************/
 
