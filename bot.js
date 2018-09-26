@@ -114,6 +114,7 @@ client.on('message', message => {
             //if (embed.includes('@DOFUSfr')) {
                 // Then it's a tweet from Dofus
                 message.channel.send('test');
+                message.channel.send(embed.title);
                 embed.fields.forEach((field) => {
                     message.channel.send(field.value);
                  });    
