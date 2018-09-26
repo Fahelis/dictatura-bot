@@ -116,7 +116,7 @@ client.on('message', message => {
                 message.channel.send('test');
                 message.channel.send(embed.title);
                 embed.fields.forEach((field) => {
-                    message.channel.send(field.value);
+                    message.channel.send(field.name);
                  });    
                 /*if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
                       || messageLC.includes('connexion') || messageLC.includes('correctif')
