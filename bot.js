@@ -108,10 +108,9 @@ client.on('message', message => {
     
     // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
-    if ('484996196977344512' === message.member.id && '494101417368354816' === message.channel.id
-        ) {// && message.embeds.title.includes('@DOFUSfr')
+    if ('484996196977344512' === message.member.id && '494101417368354816' === message.channel.id) {
         message.embeds.forEach((embed) => {
-            if (embed.title..includes('@DOFUSfr')) {
+            if (embed.title.includes('@DOFUSfr')) {
                 // Then it's a tweet from Dofus
                 if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
                       || messageLC.includes('connexion') || messageLC.includes('correctif')
