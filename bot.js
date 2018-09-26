@@ -18,7 +18,7 @@ client.on('message', message => {
     /********************** ? Start : Short responses to short messages ? **********************/
     
     let messageLC = message.content.toLowerCase().trim();
-    if ('ah!' === messageLC || 'ah...' === messageLC) {
+    if (messageLC.includes('ah') && 5 >= messageLC.length) {
     	message.channel.send('Bah oui!');
   	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
                || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello'))
