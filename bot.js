@@ -120,6 +120,16 @@ client.on('message', message => {
     }
     /********************** ! End : Tweets filter ! **********************/
 
+    if (message.content.startWith(prefix + 'tweetnul')) {
+        var embed = new Discord.RichEmbed()
+            .addField('@DOFUSfr', 'Contenu sans interet sur les koli');
+                 message.channel.sendEmbed(embed)
+    } else if (message.content.startWith(prefix + 'tweetok')) {
+        
+        var embed = new Discord.RichEmbed()
+            .addField('@DOFUSfr', 'Contenu avec interet sur la maintenance');
+                message.channel.sendEmbed(embed)
+    }
 });
 
 /********************** ! End : When a message is send ! **********************/
