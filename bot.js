@@ -123,8 +123,10 @@ client.on('message', message => {
             } else {
                 myEmbed
                     .addField(field.name, field.value)
-                    .setColor('WHITE')
-                    .setImage(embed.image.url)
+                    .setColor('WHITE');
+                if (embed.image) {
+                    myEmbed.setImage(embed.image.url);
+                }
                 client.channels.find('name', 'annonces').sendEmbed(myEmbed);
                 message.delete();
             }
@@ -134,16 +136,16 @@ client.on('message', message => {
 
     if (message.content.startsWith(prefix + 'tweetnul')) {
         var embed = new Discord.RichEmbed()
-        .setTitle('@DOFUSfr')
+            .setTitle('@DOFUSfr')
             .addField('tweet', 'Contenu sans interet sur les koli');
-                 message.channel.sendEmbed(embed)
+         message.channel.sendEmbed(embed)
     } else if (message.content.startsWith(prefix + 'tweetok')) {
         
         var embed = new Discord.RichEmbed()
-        .setTitle('@DOFUSfr')
-                    .setColor('0xFFFFFF')
+            .setTitle('@DOFUSfr')
+            .setColor('0xFFFFFF')
             .addField('tweet', 'Contenu avec interet sur la maintenance');
-                message.channel.sendEmbed(embed)
+        message.channel.sendEmbed(embed)
     }
 });
 
