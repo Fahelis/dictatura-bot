@@ -110,24 +110,20 @@ client.on('message', message => {
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
     if ('484996196977344512' === message.member.id && '494101417368354816' === message.channel.id) {
         message.embeds.forEach((embed) => {
-            
-            //if (embed.includes('@DOFUSfr')) {
-                // Then it's a tweet from Dofus
-                message.channel.send('test');
-                message.channel.send(embed.title);
-                embed.fields.forEach((field) => {
-                    message.channel.send(field.name);
-                 });    
-                /*if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
-                      || messageLC.includes('connexion') || messageLC.includes('correctif')
-                     || messageLC.includes('redémarrage') || messageLC.includes('réouverture'))) {
-                    message.delete();
-                } else {
-                    client.channels.find('name', 'annonces').send(message.content);
+            embed.fields.forEach((field) => {
+                if (field.name.includes('@DOFUSfr')) {
+                    // Then it's a tweet from Dofus
+                    if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
+                          || field.value.includes('connexion') || field.value.includes('correctif')
+                         || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
+                        message.delete();
+                    } else {
+                        client.channels.find('name', 'annonces').sendEmbed(embed);
+                    }
+                    return;
                 }
-                return;
-                */
-            //}
+             });
+            return;
         });    
     }
     /********************** ! End : Tweets filter ! **********************/
