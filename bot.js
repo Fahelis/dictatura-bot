@@ -142,7 +142,6 @@ client.on('message', message => {
         var embed = new Discord.RichEmbed()
         .setTitle('@DOFUSfr')
                     .setColor('0xFFFFFF')
-        .setImage('https://purr.objects-us-west-1.dream.io/i/unnamed-1.jpg')
             .addField('tweet', 'Contenu avec interet sur la maintenance');
                 message.channel.sendEmbed(embed)
     }
