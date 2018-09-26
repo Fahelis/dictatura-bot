@@ -119,13 +119,13 @@ client.on('message', message => {
                          || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
                         message.delete();
                     } else {
-                        var embed = new Discord.RichEmbed()
+                        var myembed = new Discord.RichEmbed()
                             .addField(field.name, field.value)
                             .setColor('WHITE')
                         client.channels.find('name', 'annonces').send('Je tente une annonce par field.embed');
-                        client.channels.find('name', 'annonces').sendEmbed(field.embed);
+                        //client.channels.find('name', 'annonces').sendEmbed(field.embed);
                         client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
-                        client.channels.find('name', 'annonces').sendEmbed(embed);
+                        client.channels.find('name', 'annonces').sendEmbed(myembed);
                     }
                     return;
                 }
