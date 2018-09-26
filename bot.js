@@ -115,7 +115,7 @@ client.on('message', message => {
                 // Then it's a tweet from Dofus
                 message.channel.send('test');
                 embed.fileds.forEach((field) => {
-                    message.channel.send(field);
+                    message.channel.send(field.value);
                  });    
                 /*if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
                       || messageLC.includes('connexion') || messageLC.includes('correctif')
