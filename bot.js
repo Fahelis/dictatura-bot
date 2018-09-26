@@ -118,7 +118,7 @@ client.on('message', message => {
                          || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
                         message.delete();
                     } else {
-                        client.channels.find('name', 'annonces').sendEmbed(embed);
+                        client.channels.find('name', 'annonces').sendEmbed(field.embed);
                     }
                     return;
                 }
