@@ -116,7 +116,7 @@ client.on('message', message => {
                 var myEmbed = new Discord.RichEmbed();
                 myEmbed.setTitle(embed.title);
                 let field = embed.fields[0];
-                message.channel.send('creation variable filed ok');
+                message.channel.send(field.name);
                 /*message.channel.send(field.name);
                 if (!(field.includes('maintenance') || field.includes('perturbations')
                       || field.includes('connexion') || field.includes('correctif')
