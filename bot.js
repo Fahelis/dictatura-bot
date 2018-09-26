@@ -115,7 +115,9 @@ client.on('message', message => {
                 // Then it's a tweet from Dofus
                 var myEmbed = new Discord.RichEmbed();
                 myEmbed.setTitle(embed.title);
+                message.channel.send('titre ok');
                 let field = embed.fields[0];
+                message.channel.send(field.name);
                 if (!(field.includes('maintenance') || field.includes('perturbations')
                       || field.includes('connexion') || field.includes('correctif')
                      || field.includes('redémarrage') || field.includes('réouverture'))) {
