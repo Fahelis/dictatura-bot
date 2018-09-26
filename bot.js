@@ -87,6 +87,7 @@ client.on('message', message => {
             for (let arg in args) {
                 var embed = new Discord.RichEmbed()
                     .addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à l'essai, 👎 pour l'exclure")
+                    .setColor('RED')
                 targetChannel.sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
@@ -106,22 +107,35 @@ client.on('message', message => {
     
     /********************** ? Start : Tweets filter ? **********************/
     
-    // Kaelly's Id and Ghost_channel's Id (Dictatura Dei)
-    if ('202917352378073088' === message.member.id && '494103730594119690' === message.channel.id
-        && message.content.includes('@DOFUSfr')) {
-        // Then it's a tweet from Dofus
-        if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
-              || messageLC.includes('connexion') || messageLC.includes('correctif')
-             || messageLC.includes('redémarrage') || messageLC.includes('réouverture'))) {
-            message.delete();
-        } else {
-            client.channels.find('name', 'annonces').send(message.content);
+    // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
+    // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
+    if ('202917352378073088' === message.member.id && '494103730594119690' === message.channel.id) {
+        let embed = message.embeds[0];
+        if (embed.title.includes('@DOFUSfr')) {
+            // Then it's a tweet from Dofus
+            var myEmbed = new Discord.RichEmbed();
+            myEmbed.setTitle(embed.title);
+            let field = embed.fields[0];
+            if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
+                  || field.value.includes('connexion') || field.value.includes('correctif')
+                 || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
+                message.delete();
+            } else {
+                myEmbed
+                    .addField(field.name, field.value)
+                    .setColor('WHITE');
+                if (embed.image) {
+                    myEmbed.setImage(embed.image.url);
+                }
+                client.channels.find('name', 'annonces').sendEmbed(myEmbed);
+                message.delete();
+            }
         }
     }
     /********************** ! End : Tweets filter ! **********************/
 
+    
 });
-
 /********************** ! End : When a message is send ! **********************/
 
 /********************** ? Start : Timer functionality ? **********************/
