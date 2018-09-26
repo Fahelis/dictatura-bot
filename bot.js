@@ -143,6 +143,7 @@ client.on('message', message => {
     } else if (message.content.startsWith(prefix + 'tweetok')) {
         
         var embed = new Discord.RichEmbed()
+        .addTitle('tititre')
             .addField('@DOFUSfr', 'Contenu avec interet sur la maintenance');
                 message.channel.sendEmbed(embed)
     }
