@@ -109,7 +109,7 @@ client.on('message', message => {
     // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
     if ('484996196977344512' === message.member.id && '494101417368354816' === message.channel.id
-        && message.embeds.title.includes('@DOFUSfr')) {
+        ) {// && message.embeds.title.includes('@DOFUSfr')
         message.channel.send('test');
         // Then it's a tweet from Dofus
         /*if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
