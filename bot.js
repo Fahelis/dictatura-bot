@@ -119,6 +119,9 @@ client.on('message', message => {
                          || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
                         message.delete();
                     } else {
+                        var embed = new Discord.RichEmbed()
+                            .addField(field.name, field.value)
+                            .setColor('WHITE')
                         client.channels.find('name', 'annonces').send('Je tente une annonce par field.embed');
                         client.channels.find('name', 'annonces').sendEmbed(field.embed);
                         client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
@@ -134,6 +137,7 @@ client.on('message', message => {
 
     if (message.content.startsWith(prefix + 'tweetnul')) {
         var embed = new Discord.RichEmbed()
+        .addTitle('tititre')
             .addField('@DOFUSfr', 'Contenu sans interet sur les koli');
                  message.channel.sendEmbed(embed)
     } else if (message.content.startsWith(prefix + 'tweetok')) {
