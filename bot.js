@@ -113,7 +113,8 @@ client.on('message', message => {
             
             //if (embed.includes('@DOFUSfr')) {
                 // Then it's a tweet from Dofus
-                messagE.channel.send('test');messagE.channel.send(embed.title);
+                message.channel.send('test');
+                message.channel.send(embed.title);
                 /*if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
                       || messageLC.includes('connexion') || messageLC.includes('correctif')
                      || messageLC.includes('redémarrage') || messageLC.includes('réouverture'))) {
