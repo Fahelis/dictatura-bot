@@ -137,13 +137,13 @@ client.on('message', message => {
 
     if (message.content.startsWith(prefix + 'tweetnul')) {
         var embed = new Discord.RichEmbed()
-        .addTitle('tititre')
+        .setTitle('tititre')
             .addField('@DOFUSfr', 'Contenu sans interet sur les koli');
                  message.channel.sendEmbed(embed)
     } else if (message.content.startsWith(prefix + 'tweetok')) {
         
         var embed = new Discord.RichEmbed()
-        .addTitle('tititre')
+        .setTitle('tititre')
             .addField('@DOFUSfr', 'Contenu avec interet sur la maintenance');
                 message.channel.sendEmbed(embed)
     }
