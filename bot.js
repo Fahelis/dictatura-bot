@@ -123,10 +123,10 @@ client.on('message', message => {
             } else {
                 myEmbed
                     .addField(field.name, field.value)
-                    .setColor(['WHITE'])
+                    .setColor('WHITE')
                 client.channels.find('name', 'annonces').sendEmbed(myEmbed);
-                //client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
-                //client.channels.find('name', 'annonces').sendEmbed(embed);
+                client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
+                client.channels.find('name', 'annonces').sendEmbed(embed);
             }
         }
     }
@@ -141,7 +141,7 @@ client.on('message', message => {
         
         var embed = new Discord.RichEmbed()
         .setTitle('@DOFUSfr')
-                    .setColor(['WHITE'])
+                    .setColor('0xFFFFFF')
             .addField('tweet', 'Contenu avec interet sur la maintenance');
                 message.channel.sendEmbed(embed)
     }
