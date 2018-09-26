@@ -87,6 +87,7 @@ client.on('message', message => {
             for (let arg in args) {
                 var embed = new Discord.RichEmbed()
                     .addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à l'essai, 👎 pour l'exclure")
+                    .setColor('RED')
                 targetChannel.sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
@@ -118,7 +119,10 @@ client.on('message', message => {
                          || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
                         message.delete();
                     } else {
+                        client.channels.find('name', 'annonces').send('Je tente une annonce par field.embed');
                         client.channels.find('name', 'annonces').sendEmbed(field.embed);
+                        client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
+                        client.channels.find('name', 'annonces').sendEmbed(embed);
                     }
                     return;
                 }
