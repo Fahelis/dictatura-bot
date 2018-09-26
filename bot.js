@@ -124,7 +124,7 @@ client.on('message', message => {
                 myEmbed
                     .addField(field.name, field.value)
                     .setColor('WHITE')
-                    .setImage(field.image.url)
+                    .setImage(embed.image.url)
                 client.channels.find('name', 'annonces').sendEmbed(myEmbed);
                 message.delete();
             }
