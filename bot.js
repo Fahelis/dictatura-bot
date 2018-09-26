@@ -110,16 +110,18 @@ client.on('message', message => {
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
     if ('484996196977344512' === message.member.id && '494101417368354816' === message.channel.id) {
         message.embeds.forEach((embed) => {
-            if (embed.title.includes('@DOFUSfr')) {
+            if (embed..includes('@DOFUSfr')) {
                 // Then it's a tweet from Dofus
-                if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
+                messagE.channel.send('test');
+                /*if (!(messageLC.includes('maintenance') || messageLC.includes('perturbations')
                       || messageLC.includes('connexion') || messageLC.includes('correctif')
                      || messageLC.includes('redémarrage') || messageLC.includes('réouverture'))) {
                     message.delete();
                 } else {
                     client.channels.find('name', 'annonces').send(message.content);
                 }
-                break;
+                return;
+                */
             }
         });    
     }
