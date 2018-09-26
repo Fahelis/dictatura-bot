@@ -18,8 +18,9 @@ client.on('message', message => {
     /********************** ? Start : Short responses to short messages ? **********************/
     
     let messageLC = message.content.toLowerCase().trim();
-    // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
-    if (messageLC.includes('ah') && 8 >= messageLC.length && '484996196977344512' !== message.member.id) {
+    // Iord's Id : 493768311260053514 | Dictatura_bot Id : 484996196977344512
+    if (messageLC.includes('ah') && 8 >= messageLC.length && '484996196977344512' !== message.member.id
+       && '493768311260053514' !== message.member.id) {
     	message.channel.send('Bah oui!');
   	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
                || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello'))
