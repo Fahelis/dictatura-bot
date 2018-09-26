@@ -116,18 +116,17 @@ client.on('message', message => {
                 var myEmbed = new Discord.RichEmbed();
                 myEmbed.setTitle(embed.title);
                 let field = embed.fields[0];
-                message.channel.send(field.name);
-                /*message.channel.send(field.name);
-                if (!(field.includes('maintenance') || field.includes('perturbations')
-                      || field.includes('connexion') || field.includes('correctif')
-                     || field.includes('redémarrage') || field.includes('réouverture'))) {
+                if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
+                      || field.value.includes('connexion') || field.value.includes('correctif')
+                     || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
                     message.delete();
                 } else {
-                    myEmbed.addField(field.name, field.value)
-                    .setColor(['WHITE'])
+                    myEmbed
+                        .addField(field.name, field.value)
+                        .setColor(['WHITE'])
                     client.channels.find('name', 'annonces').sendEmbed(myEmbed);
-                    client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
-                    client.channels.find('name', 'annonces').sendEmbed(embed);
+                    //client.channels.find('name', 'annonces').send('Je tente une annonce par embed');
+                    //client.channels.find('name', 'annonces').sendEmbed(embed);
                 }*/
             }
             return;
