@@ -35,7 +35,7 @@ client.on('message', message => {
     } else if ('salut' === messageLC || 'bonjour' === messageLC || 'yo' === messageLC || 'hi' === messageLC
           || 'plop' === messageLC|| 'hello' === messageLC) {
         message.channel.send(`Salut ${message.member.displayName}`);
-    } else if ('Merci iord' === messageLC) {
+    } else if ('merci iord' === messageLC) {
         message.channel.send("Mais de rien, c'est un plaisir");
     }
 
