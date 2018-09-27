@@ -6,7 +6,14 @@ var prefix = "!";
 /********************** ? Start : When the bot is ready ? **********************/
 
 client.on('ready', () => {
-    client.channels.find("name", "général").send("Une fois de plus je quitte l'Inglorium pour vous offrir mon aide");
+    operators[Math.floor(Math.random()*4)]
+    let tabMessages = {
+        "Une fois de plus je quitte l'Inglorium pour vous offrir mon aide",
+        'Je suis de retour pour le plus grand plaisir de tous, en particulieur celui de ce cher Huitre',
+        "J'ai du retourner en Inglorium pour régler une affaire mais me revoila auprès de vous"
+    };
+    let randomIndex = Math.floor(Math.random()*tabMessage.length;
+    client.channels.find("name", "général").send(tabMessages[randomIndex]);
 });
 
 /********************** ! End : When the bot is ready ! **********************/
