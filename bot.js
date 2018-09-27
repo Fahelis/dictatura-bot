@@ -6,7 +6,6 @@ var prefix = "!";
 /********************** ? Start : When the bot is ready ? **********************/
 
 client.on('ready', () => {
-    operators[Math.floor(Math.random()*4)]
     let tabMessages = [
         "Une fois de plus je quitte l'Inglorium pour vous offrir mon aide",
         'Je suis de retour pour le plus grand plaisir de tous, en particulieur celui de ce cher Huitre',
