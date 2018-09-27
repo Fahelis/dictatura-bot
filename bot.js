@@ -12,7 +12,7 @@ client.on('ready', () => {
         'Je suis de retour pour le plus grand plaisir de tous, en particulieur celui de ce cher Huitre',
         "J'ai du retourner en Inglorium pour régler une affaire mais me revoila auprès de vous"
     ];
-    let randomIndex = Math.floor(Math.random()*tabMessage.length;
+    let randomIndex = Math.floor(Math.random()*tabMessage.length);
     client.channels.find("name", "général").send(tabMessages[randomIndex]);
 });
 
