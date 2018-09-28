@@ -5,15 +5,15 @@ var prefix = "!";
 
 /********************** ? Start : When the bot is ready ? **********************/
 
-client.on('ready', () => {
+/* client.on('ready', () => {
     let tabMessages = [
         "Une fois de plus je quitte l'Inglorium pour vous offrir mon aide",
-        'Je suis de retour pour le plus grand plaisir de tous, en particulieur celui de ce cher Huitre',
+        'Je suis de retour pour le plus grand plaisir de tous, en particulier celui de ce cher Huitre',
         "J'ai du retourner en Inglorium pour régler une affaire mais me revoila auprès de vous"
     ];
     let randomIndex = Math.floor(Math.random()*tabMessages.length);
     client.channels.find("name", "général").send(tabMessages[randomIndex]);
-});
+}); */
 
 /********************** ! End : When the bot is ready ! **********************/
 
@@ -88,7 +88,7 @@ client.on('message', message => {
             targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
             let args = message.content.split(" ").slice(1);
             if (1 === message.content.split(" ").length) {
-                message.guild.roles.find("name", "Nouveaux").members.forEach(function(guildMember, guildMemberId) {
+                message.guild.roles.find("name", "A l'essai").members.forEach(function(guildMember, guildMemberId) {
                     args.push(guildMember.user.username);
                 });
             }
