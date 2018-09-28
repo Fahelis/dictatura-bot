@@ -6,7 +6,13 @@ var prefix = "!";
 /********************** ? Start : When the bot is ready ? **********************/
 
 client.on('ready', () => {
-    client.channels.find("name", "général").send("Une fois de plus je quitte l'Inglorium pour vous offrir mon aide");
+    let tabMessages = [
+        "Une fois de plus je quitte l'Inglorium pour vous offrir mon aide",
+        'Je suis de retour pour le plus grand plaisir de tous, en particulieur celui de ce cher Huitre',
+        "J'ai du retourner en Inglorium pour régler une affaire mais me revoila auprès de vous"
+    ];
+    let randomIndex = Math.floor(Math.random()*tabMessages.length);
+    client.channels.find("name", "général").send(tabMessages[randomIndex]);
 });
 
 /********************** ! End : When the bot is ready ! **********************/
@@ -18,7 +24,9 @@ client.on('message', message => {
     /********************** ? Start : Short responses to short messages ? **********************/
     
     let messageLC = message.content.toLowerCase().trim();
-    if ('ah!' === messageLC || 'ah...' === messageLC) {
+    // Iord's Id : 493768311260053514 | Dictatura_bot Id : 484996196977344512
+    if (messageLC.includes('ah') && 8 >= messageLC.length && '484996196977344512' !== message.member.id
+       && '493768311260053514' !== message.member.id) {
     	message.channel.send('Bah oui!');
   	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
                || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello'))
@@ -27,6 +35,8 @@ client.on('message', message => {
     } else if ('salut' === messageLC || 'bonjour' === messageLC || 'yo' === messageLC || 'hi' === messageLC
           || 'plop' === messageLC|| 'hello' === messageLC) {
         message.channel.send(`Salut ${message.member.displayName}`);
+    } else if ('merci iord' === messageLC) {
+        message.channel.send("Mais de rien, c'est un plaisir");
     }
 
     /********************** ! End : short responses to short messages ! **********************/
