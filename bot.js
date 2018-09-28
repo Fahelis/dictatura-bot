@@ -5,7 +5,7 @@ var prefix = "!";
 
 /********************** ? Start : When the bot is ready ? **********************/
 
-c/* lient.on('ready', () => {
+/* client.on('ready', () => {
     let tabMessages = [
         "Une fois de plus je quitte l'Inglorium pour vous offrir mon aide",
         'Je suis de retour pour le plus grand plaisir de tous, en particulier celui de ce cher Huitre',
