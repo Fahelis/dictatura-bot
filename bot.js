@@ -121,8 +121,38 @@ client.on('message', message => {
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
     if ('202917352378073088' === message.member.id && '494103730594119690' === message.channel.id) {
         let embed = message.embeds[0];
-        if (embed.title.includes('@DOFUSfr')) {
-			message.send('Tweet de Dofus');
+        if (embed.title.includes('DOFUSfr')) {
+			message.send('Tweet de Dofusfr');
+            // Then it's a tweet from Dofus
+            var myEmbed = new Discord.RichEmbed();
+            myEmbed.setTitle(embed.title);
+            let field = embed.fields[0];
+            if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
+                  || field.value.includes('connexion') || field.value.includes('correctif')
+                 || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
+				message.send('Pas interressant');
+                message.delete();
+            } else {
+				message.send('Interressant');
+                myEmbed
+                    .addField(field.name, field.value)
+                    .setColor('WHITE');
+                if (embed.image) {
+                    myEmbed.setImage(embed.image.url);
+                }
+                client.channels.find('name', 'annonces').sendEmbed(myEmbed);
+                message.delete();
+            }
+        }
+    }
+	
+	// DEV
+	// Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
+    // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
+    if ('202917352378073088' === message.member.id && '494101417368354816' === message.channel.id) {
+        let embed = message.embeds[0];
+        if (embed.title.includes('Tweet')) {
+			message.send('Tweet ');
             // Then it's a tweet from Dofus
             var myEmbed = new Discord.RichEmbed();
             myEmbed.setTitle(embed.title);
