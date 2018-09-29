@@ -152,7 +152,7 @@ client.on('message', message => {
     if ('202917352378073088' === message.member.id && '494101417368354816' === message.channel.id) {
         let embed = message.embeds[0];
         if (embed.title.includes('Tweet')) {
-			message.send('Tweet ');
+			message.channel.send('Tweet ');
             // Then it's a tweet from Dofus
             var myEmbed = new Discord.RichEmbed();
             myEmbed.setTitle(embed.title);
@@ -160,10 +160,10 @@ client.on('message', message => {
             if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
                   || field.value.includes('connexion') || field.value.includes('correctif')
                  || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
-				message.send('Pas interressant');
+				message.channel.send('Pas interressant');
                 message.delete();
             } else {
-				message.send('Interressant');
+				message.channel.send('Interressant');
                 myEmbed
                     .addField(field.name, field.value)
                     .setColor('WHITE');
