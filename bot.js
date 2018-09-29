@@ -5,7 +5,7 @@ var prefix = "!";
 
 /********************** ? Start : When the bot is ready ? **********************/
 
-c/* lient.on('ready', () => {
+/* client.on('ready', () => {
     let tabMessages = [
         "Une fois de plus je quitte l'Inglorium pour vous offrir mon aide",
         'Je suis de retour pour le plus grand plaisir de tous, en particulier celui de ce cher Huitre',
@@ -89,7 +89,7 @@ client.on('message', message => {
             let args = message.content.split(" ").slice(1);
             if (1 === message.content.split(" ").length) {
                 message.guild.roles.find("name", "A l'essai").members.forEach(function(guildMember, guildMemberId) {
-                    args.push(guildMember.user.username);
+                    args.push(guildMember.displayName);
                 });
             }
             let thingToEcho = args.join(" ");
@@ -122,6 +122,7 @@ client.on('message', message => {
     if ('202917352378073088' === message.member.id && '494103730594119690' === message.channel.id) {
         let embed = message.embeds[0];
         if (embed.title.includes('@DOFUSfr')) {
+			message.send('Tweet de Dofus');
             // Then it's a tweet from Dofus
             var myEmbed = new Discord.RichEmbed();
             myEmbed.setTitle(embed.title);
@@ -129,8 +130,10 @@ client.on('message', message => {
             if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
                   || field.value.includes('connexion') || field.value.includes('correctif')
                  || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
+				message.send('Pas interressant');
                 message.delete();
             } else {
+				message.send('Interressant');
                 myEmbed
                     .addField(field.name, field.value)
                     .setColor('WHITE');
