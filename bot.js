@@ -5,7 +5,7 @@ var prefix = "!";
 
 /********************** ? Start : When the bot is ready ? **********************/
 
-/* client.on('ready', () => {
+/*client.on('ready', () => {
     let tabMessages = [
         "Une fois de plus je quitte l'Inglorium pour vous offrir mon aide",
         'Je suis de retour pour le plus grand plaisir de tous, en particulier celui de ce cher Huitre',
@@ -13,7 +13,7 @@ var prefix = "!";
     ];
     let randomIndex = Math.floor(Math.random()*tabMessages.length);
     client.channels.find("name", "général").send(tabMessages[randomIndex]);
-}); */
+});*/
 
 /********************** ! End : When the bot is ready ! **********************/
 
@@ -80,7 +80,7 @@ client.on('message', message => {
     
     /********************** ? Start : Votes functionality ? **********************/
     
-    if(message.content.startsWith(prefix + "votes")) {
+	if(message.content.startsWith(prefix + "votes")) {
         if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
             return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
         } else {
@@ -96,23 +96,24 @@ client.on('message', message => {
             let index = 0;
             for (let arg in args) {
                 var embed = new Discord.RichEmbed()
-                    .addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à l'essai, 👎 pour l'exclure")
+                    .addField(args[index], "ðŸ‘ si vous souhaitez intÃ©grer la recrue, ðŸ‘Š pour la garder Ã  l'essai, ðŸ‘Ž pour l'exclure")
                     .setColor('RED')
                 targetChannel.sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
-                    await message.react("👍");
-                    await message.react("👊");
-                    await message.react("👎");
+                    await message.react("ðŸ‘");
+                    await message.react("ðŸ‘Š");
+                    await message.react("ðŸ‘Ž");
                 }).catch(function() {
                     console.log("Can't do the vote");
                 });
                 index++;
             }
-            client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
+            client.channels.find("name", "annonces").send("@everyone Les votes pour l'intÃ©gration des recrues sont ouverts");
             message.delete();
         }
     }
+    
     /********************** ! End : Votes functionality ! **********************/
     
     /********************** ? Start : Tweets filter ? **********************/
@@ -147,15 +148,6 @@ client.on('message', message => {
     }
 	
 	// DEV
-	
-	
-	if ('202917352378073088' === message.member.id) {
-		client.channels.find('name', 'annonces').send("Kaelly's message");
-	}
-	
-	if ('494101417368354816' === message.channel.id) {
-		client.channels.find('name', 'annonces').send("Message on ghost channel");
-	}
 	// Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
     if ('202917352378073088' === message.member.id && '494101417368354816' === message.channel.id) {
@@ -187,7 +179,6 @@ client.on('message', message => {
          });
     }
 	
-	/*
 	// DEV
 	// Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
@@ -217,7 +208,32 @@ client.on('message', message => {
                 message.delete();
             }
         }
-    }*/
+		if (embed.title.includes('DOFUSfr')) {
+			message.send('Tweet de Dofusfr');
+            // Then it's a tweet from Dofus
+            var myEmbed = new Discord.RichEmbed();
+            myEmbed.setTitle(embed.title);
+            let field = embed.fields[0];
+            if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
+                  || field.value.includes('connexion') || field.value.includes('correctif')
+                 || field.value.includes('redémarrage') || field.value.includes('réouverture'))) {
+				message.channel.send('Pas interressant');
+                message.delete();
+            } else {
+				message.channel.send('Interressant');
+                myEmbed
+                    .addField(field.name, field.value)
+                    .setColor('WHITE');
+                if (embed.image) {
+                    myEmbed.setImage(embed.image.url);
+                }
+                client.channels.find('name', 'annonces').sendEmbed(myEmbed);
+                message.delete();
+            }
+        }
+		message.channel.send(embed.title);
+		
+    }
     /********************** ! End : Tweets filter ! **********************/
 
     
