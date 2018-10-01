@@ -157,7 +157,6 @@ client.on('message', message => {
              embed.fields.forEach((field) => {
 		     message.channel.send('field (name) : ' + field.name);
 		     message.channel.send('field (value) : ' + field.value);
-                 if (field.name.includes('@DOFUSfr')) {
                      // Then it's a tweet from Dofus
                      if (!(field.value.includes('maintenance') || field.value.includes('perturbations')
                            || field.value.includes('connexion') || field.value.includes('correctif')
@@ -173,7 +172,6 @@ client.on('message', message => {
                          client.channels.find('name', 'annonces').sendEmbed(embed);
                      }
                      //return;
-                 }
               });
              //return;
          });
