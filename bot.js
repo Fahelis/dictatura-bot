@@ -147,6 +147,15 @@ client.on('message', message => {
     }
 	
 	// DEV
+	
+	
+	if ('202917352378073088' === message.member.id) {
+		client.channels.find('name', 'annonces').send("Kaelly's message");
+	}
+	
+	if ('494101417368354816' === message.channel.id) {
+		client.channels.find('name', 'annonces').send("Message on ghost channel");
+	}
 	// Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
     if ('202917352378073088' === message.member.id && '494101417368354816' === message.channel.id) {
@@ -178,7 +187,7 @@ client.on('message', message => {
          });
     }
 	
-	
+	/*
 	// DEV
 	// Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
@@ -208,7 +217,7 @@ client.on('message', message => {
                 message.delete();
             }
         }
-    }
+    }*/
     /********************** ! End : Tweets filter ! **********************/
 
     
