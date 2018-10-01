@@ -185,7 +185,7 @@ client.on('message', message => {
     if ('202917352378073088' === message.member.id && '494101417368354816' === message.channel.id) {
 	    message.channel.send('Kaelly posted on ghost channel on dev server no foreach');
         let embed = message.embeds[0];
-        if (embed.title.includes('Tweet')) {
+        /*if (embed.title.includes('Tweet')) {
 			message.channel.send('Tweet ');
             // Then it's a tweet from Dofus
             var myEmbed = new Discord.RichEmbed();
@@ -230,7 +230,7 @@ client.on('message', message => {
                 client.channels.find('name', 'annonces').sendEmbed(myEmbed);
                 message.delete();
             }
-        }
+        } */
 		message.channel.send(embed.title);
 		
     }
