@@ -135,14 +135,13 @@ client.on('message', message => {
             } else {
 				// DEBUG
 				message.channel.send('Interressant');
-            	var myEmbed = new Discord.RichEmbed();
-                myEmbed
+            	var myEmbed = new Discord.RichEmbed()
 					.setTitle('Information')
-					.addDescription(embed.description)
-                    .setColor('WHITE');
-                /* if (embed.image) {
+					.setDescription(embed.description)
+                    .setColor('WHITE'); */
+                if (embed.image) {
                     myEmbed.setImage(embed.image.url);
-                } */
+                }
                 client.channels.find('name', 'annonces').sendEmbed(myEmbed);
                 message.delete();
             }
