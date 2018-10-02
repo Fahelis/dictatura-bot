@@ -129,20 +129,20 @@ client.on('message', message => {
             if (!(messageContent.includes('maintenance') || messageContent.includes('perturbations')
                   || messageContent.includes('connexion') || messageContent.includes('correctif')
                  || messageContent.includes('redémarrage') || messageContent.includes('réouverture'))) {
-		// DEBUG
-	    	message.channel.send('Pas interressant');
+				// DEBUG
+				message.channel.send('Pas interressant');
                 message.delete();
             } else {
+				// DEBUG
+				message.channel.send('Interressant');
             	var myEmbed = new Discord.RichEmbed();
-            	myEmbed.setTitle('Information');
-		// DEBUG
-		message.channel.send('Interressant');
                 myEmbed
-		    .addDescription(embed.description)
+					.setTitle('Information')
+					.addDescription(embed.description)
                     .setColor('WHITE');
-                if (embed.image) {
+                /* if (embed.image) {
                     myEmbed.setImage(embed.image.url);
-                }
+                } */
                 client.channels.find('name', 'annonces').sendEmbed(myEmbed);
                 message.delete();
             }
