@@ -138,7 +138,7 @@ client.on('message', message => {
             	var myEmbed = new Discord.RichEmbed()
 					.setTitle('Information')
 					.setDescription(embed.description)
-                    .setColor('WHITE'); */
+                    .setColor('WHITE');
                 if (embed.image) {
                     myEmbed.setImage(embed.image.url);
                 }
