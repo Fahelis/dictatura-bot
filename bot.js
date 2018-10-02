@@ -229,7 +229,9 @@ client.on('message', message => {
                 message.delete();
             }
         } */
-		message.channel.send(embed.title);
+		message.channel.send('title' + embed.title);
+		message.channel.send('message' + embed.message);
+		message.channel.send('description' + embed.description);
 		
     }
     /********************** ! End : Tweets filter ! **********************/
