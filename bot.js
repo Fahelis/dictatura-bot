@@ -130,7 +130,7 @@ client.on('message', message => {
 	    let messageContent = embed.description.toLowerCase();
             if (!(messageContent.includes('maintenance') || messageContent.includes('perturbations')
                   || messageContent.includes('connexion') || messageContent.includes('correctif')
-                 || messageContent.includes('redémarrage') || messageContent.includes('réouverture'))
+                 || messageContent.includes('redémarrage') || messageContent.includes('réouverture')
                  || messageContent.includes('a'))) {
 				// DEBUG
 				message.channel.send('Pas intéressant');
@@ -140,12 +140,11 @@ client.on('message', message => {
 				message.channel.send('Faussement intéressant pour le test mais pas interressant en vrai');
             	var myEmbed = new Discord.RichEmbed()
 					.setTitle('Information')
-					//.setDescription(embed.description)
-					.setDescription('toto')
+					.setDescription(embed.description)
                     .setColor('WHITE');
-                /*if (embed.image) {
+                if (embed.image) {
                     myEmbed.setImage(embed.image.url);
-                }*/
+                }
                 client.channels.find('name', 'annonces').sendEmbed(myEmbed);
                 message.delete();
             }
