@@ -140,11 +140,12 @@ client.on('message', message => {
 				message.channel.send('Faussement intéressant pour le test mais pas interressant en vrai');
             	var myEmbed = new Discord.RichEmbed()
 					.setTitle('Information')
-					.setDescription(embed.description)
+					//.setDescription(embed.description)
+					.setDescription('toto')
                     .setColor('WHITE');
-                if (embed.image) {
+                /*if (embed.image) {
                     myEmbed.setImage(embed.image.url);
-                }
+                }*/
                 client.channels.find('name', 'annonces').sendEmbed(myEmbed);
                 message.delete();
             }
