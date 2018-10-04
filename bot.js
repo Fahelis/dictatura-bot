@@ -121,6 +121,8 @@ client.on('message', message => {
     // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
     if ('202917352378073088' === message.member.id && '494101417368354816' === message.channel.id) {
+	    //DEBUG
+	    //TODO. Change channel id and remove the 3 debug sentences
 	    message.channel.send('Kaelly posted on ghost channel on dev server no foreach');
         let embed = message.embeds[0];
         if (embed.title.includes('Tweet')) {
@@ -128,13 +130,14 @@ client.on('message', message => {
 	    let messageContent = embed.description.toLowerCase();
             if (!(messageContent.includes('maintenance') || messageContent.includes('perturbations')
                   || messageContent.includes('connexion') || messageContent.includes('correctif')
-                 || messageContent.includes('redémarrage') || messageContent.includes('réouverture'))) {
+                 || messageContent.includes('redémarrage') || messageContent.includes('réouverture'))
+                 || messageContent.includes('a'))) {
 				// DEBUG
-				message.channel.send('Pas interressant');
+				message.channel.send('Pas intéressant');
                 message.delete();
             } else {
 				// DEBUG
-				message.channel.send('Interressant');
+				message.channel.send('Faussement intéressant pour le test mais pas interressant en vrai');
             	var myEmbed = new Discord.RichEmbed()
 					.setTitle('Information')
 					.setDescription(embed.description)
