@@ -96,14 +96,14 @@ client.on('message', message => {
             let index = 0;
             for (let arg in args) {
                 var embed = new Discord.RichEmbed()
-                    .addField(args[index], "ðŸ‘ si vous souhaitez intÃ©grer la recrue, ðŸ‘Š pour la garder Ã  l'essai, ðŸ‘Ž pour l'exclure")
+                    .addField(args[index], "👍 si vous souhaitez intÃ©grer la recrue, 👊 pour la garder Ã  l'essai, 👎 pour l'exclure")
                     .setColor('RED')
                 targetChannel.sendEmbed(embed)
                 .then(async function (message) {
                     // To get the unicode send \emoji in the chat
-                    await message.react("ðŸ‘");
-                    await message.react("ðŸ‘Š");
-                    await message.react("ðŸ‘Ž");
+                    await message.react("👍");
+                    await message.react("👊");
+                    await message.react("👎");
                 }).catch(function() {
                     console.log("Can't do the vote");
                 });
@@ -120,28 +120,20 @@ client.on('message', message => {
 
     // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
-    if ('202917352378073088' === message.member.id && '494101417368354816' === message.channel.id) {
-	    //DEBUG
-	    //TODO. Change channel id and remove the 3 debug sentences
-	    message.channel.send('Kaelly posted on ghost channel on dev server no foreach');
+    if ('202917352378073088' === message.member.id && '494103730594119690' === message.channel.id) {
         let embed = message.embeds[0];
         if (embed.title.includes('Tweet')) {
             // Then it's a tweet from Dofus
-	    let messageContent = embed.description.toLowerCase();
+			let messageContent = embed.description.toLowerCase();
             if (!(messageContent.includes('maintenance') || messageContent.includes('perturbations')
                   || messageContent.includes('connexion') || messageContent.includes('correctif')
-                 || messageContent.includes('redémarrage') || messageContent.includes('réouverture')
-                 || messageContent.includes('a'))) {
-				// DEBUG
-				message.channel.send('Pas intéressant');
+                 || messageContent.includes('redémarrage') || messageContent.includes('réouverture'))) {
                 message.delete();
             } else {
-				// DEBUG
-				message.channel.send('Faussement intéressant pour le test mais pas interressant en vrai');
             	var myEmbed = new Discord.RichEmbed()
 					.setTitle('Information')
 					.setDescription(embed.description)
-                    .setColor('WHITE');
+                    .setColor('BLACK');
                 if (embed.image) {
                     myEmbed.setImage(embed.image.url);
                 }
@@ -152,7 +144,6 @@ client.on('message', message => {
     }
     /********************** ! End : Tweets filter ! **********************/
 
-    
 });
 /********************** ! End : When a message is send ! **********************/
 
