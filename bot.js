@@ -96,7 +96,7 @@ client.on('message', message => {
             let index = 0;
             for (let arg in args) {
                 var embed = new Discord.RichEmbed()
-                    .addField(args[index], "👍 si vous souhaitez intÃ©grer la recrue, 👊 pour la garder Ã  l'essai, 👎 pour l'exclure")
+                    .addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à  l'essai, 👎 pour l'exclure")
                     .setColor('RED')
                 targetChannel.sendEmbed(embed)
                 .then(async function (message) {
@@ -109,7 +109,7 @@ client.on('message', message => {
                 });
                 index++;
             }
-            client.channels.find("name", "annonces").send("@everyone Les votes pour l'intÃ©gration des recrues sont ouverts");
+            client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
             message.delete();
         }
     }
