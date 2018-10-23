@@ -90,29 +90,30 @@ client.on('message', message => {
 		    let recruits = message.guild.roles.find("name", "A l'essai").members;
 		    if (recruits.size == 0) {
 			    targetChannel.send('Je ne trouve pas la moindre recrue, il faut soit lancer un vote manuel soit clôturer les votes');
-		    }
-            recruits.forEach(function(guildMember, guildMemberId) {
-                    args.push(guildMember.displayName);
-                });
-            }
-			let thingToEcho = args.join(" ");
-			let index = 0;
-			for (let arg in args) {
-				var embed = new Discord.RichEmbed()
-					.addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à l'essai, 👎 pour l'exclure")
-					.setColor('RED')
-				targetChannel.sendEmbed(embed)
-				.then(async function (message) {
-					// To get the unicode send \emoji in the chat
-					await message.react("👍");
-					await message.react("👊");
-					await message.react("👎");
-				}).catch(function() {
-					console.log("Can't do the vote");
-				});
-				index++;
+		    } else {
+	            recruits.forEach(function(guildMember, guildMemberId) {
+	                    args.push(guildMember.displayName);
+	                });
+	            }
+				let thingToEcho = args.join(" ");
+				let index = 0;
+				for (let arg in args) {
+					var embed = new Discord.RichEmbed()
+						.addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à l'essai, 👎 pour l'exclure")
+						.setColor('RED')
+					targetChannel.sendEmbed(embed)
+					.then(async function (message) {
+						// To get the unicode send \emoji in the chat
+						await message.react("👍");
+						await message.react("👊");
+						await message.react("👎");
+					}).catch(function() {
+						console.log("Can't do the vote");
+					});
+					index++;
+				}
+				client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
 			}
-			client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
 			message.delete();
 		}
 	}
