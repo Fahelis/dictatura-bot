@@ -4,8 +4,8 @@ const client = new Discord.Client();
 var prefix = "!";
 
 /********************** ? Start : When the bot is ready ? **********************/
-
-/*client.on('ready', () => {
+/*
+client.on('ready', () => {
     let tabMessages = [
         "Une fois de plus je quitte l'Inglorium pour vous offrir mon aide",
         'Je suis de retour pour le plus grand plaisir de tous, en particulier celui de ce cher Huitre',
@@ -13,7 +13,8 @@ var prefix = "!";
     ];
     let randomIndex = Math.floor(Math.random()*tabMessages.length);
     client.channels.find("name", "général").send(tabMessages[randomIndex]);
-});*/
+});
+*/
 
 /********************** ! End : When the bot is ready ! **********************/
 
@@ -84,19 +85,35 @@ client.on('message', message => {
 			return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
 		} else {
 			targetChannel = client.channels.find("name", "les_nouveaux");
-            targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
             let args = message.content.split(" ").slice(1);
-            if (1 === message.content.split(" ").length) {
-		    let recruits = message.guild.roles.find("name", "A l'essai").members;
-		    if (recruits.size == 0) {
-			    targetChannel.send('Je ne trouve pas la moindre recrue, il faut soit lancer un vote manuel soit clôturer les votes');
+			let autoVote = 0 == args.length;
+			// Find all members who have the role "A l'essai"
+			let recruits = message.guild.roles.find("name", "A l'essai").members;
+		    let hasRecruits = false;
+			// TODO. Find a better way
+			recruits.forEach(function(guildMember, guildMemberId) {
+				hasRecruits = true;
+				});
+			if (!hasRecruits && autoVote) {
+			    let roleMeneur = message.guild.roles.find("name", "Meneur");
+			    let roleBD = message.guild.roles.find("name", "Bras droits");
+			    return targetChannel.send('Je ne trouve pas la moindre recrue.\n'
+			      + 'Pas de vote cette semaine sauf si des recrues ne sont pas présentes dans le repaire.\n'
+			      + 'Si tel est le cas le '+ roleMeneur +' ou un '+ roleBD +' doit '
+			      +'lancer le vote manuellement');
 		    } else {
-	            recruits.forEach(function(guildMember, guildMemberId) {
-	                    args.push(guildMember.displayName);
-	                });
-	            }
-				let thingToEcho = args.join(" ");
+			    let openningVote = (hasRecruits && autoVote) || (!hasRecruits && !autoVote);
+			    if (openningVote) {
+					targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
+			    }
+			    if (autoVote) {
+				    recruits.forEach(function(guildMember, guildMemberId) {
+					    // Add each member "A l'essai" to args of the command
+					    args.push(guildMember.displayName);
+					});
+			    }
 				let index = 0;
+		    		// Display a vote for each arg of the command
 				for (let arg in args) {
 					var embed = new Discord.RichEmbed()
 						.addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à l'essai, 👎 pour l'exclure")
@@ -112,7 +129,11 @@ client.on('message', message => {
 					});
 					index++;
 				}
-				client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
+				if (openningVote) {
+					client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
+				} else {
+					client.channels.find("name", "annonces").send("@everyone Les recrues manquantes ont été ajoutées aux votes");
+				}
 			}
 			message.delete();
 		}
@@ -167,6 +188,18 @@ setInterval(function() {
 
 /********************** ! End : Timer functionality ! **********************/
 
+
+/********************** ? Start : Handle new member ? **********************/
+
+client.on("guildMemberAdd", (member) => {
+    client.channels.find('name', 'annonces').send("Une nouvelle recrue a rejoint le repaire, faites lui un bon accueil !");
+    member.addRole(member.guild.roles.find("name", "A l'essai"));
+	member.send("Salutations nouvelle recrue\nMerci de rejoindre la Dictatura Dei, j'espère que tu t'y plairas\n"
+	+ "Afin que tout le monde puisse facilement t'identifier il te sera demandé de prendre ici le même nom que dans le Monde des Douze\n"
+	+ "William pourra t'aider si tu ne sais pas comment faire\nA très bientôt");
+});
+
+/********************** ! End : Handle new member ! **********************/
 
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
