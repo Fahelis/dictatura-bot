@@ -168,5 +168,13 @@ setInterval(function() {
 /********************** ! End : Timer functionality ! **********************/
 
 
+/********************** ? Start : Handle new member ? **********************/
+
+client.on("guildMemberAdd", (member) => {
+  member.addRole("A l'essai")
+});
+
+/********************** ! End : Handle new member ! **********************/
+
 // THIS  MUST  BE  THIS  WAY
 client.login(process.env.BOT_TOKEN);
