@@ -171,7 +171,8 @@ setInterval(function() {
 /********************** ? Start : Handle new member ? **********************/
 
 client.on("guildMemberAdd", (member) => {
-  member.addRole("A l'essai")
+	client.channels.find('name', 'annonces').send("Bienvenue " + member.nickName);
+  //member.addRole("A l'essai")
 });
 
 /********************** ! End : Handle new member ! **********************/
