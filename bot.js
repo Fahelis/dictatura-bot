@@ -85,19 +85,31 @@ client.on('message', message => {
 			return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
 		} else {
 			targetChannel = client.channels.find("name", "les_nouveaux");
-            targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
             let args = message.content.split(" ").slice(1);
-            if (1 === message.content.split(" ").length) {
-		    let recruits = message.guild.roles.find("name", "A l'essai").members;
-		    if (recruits.size == 0) {
-			    targetChannel.send('Je ne trouve pas la moindre recrue, il faut soit lancer un vote manuel soit clôturer les votes');
+			let autoVote = null == args;
+		    // Find all members who have the role "A l'essai"
+		let recruits = message.guild.roles.find("name", "A l'essai").members;
+		    if (0 == recruits.size && null == args) {
+			    let roleMeneur = message.guild.roles.find("name", "Meneur");
+			    let roleBD = message.guild.roles.find("name", "Bras droits");
+			    reutnr targetChannel.send('Je ne trouve pas la moindre recrue'
+			      + 'Pas de vote cette semaine sauf si des recrues ne sont pas présentes dans le repaire. '
+			      + 'Si tel est le cas le '+ roleMeneur.mention() +' ou un '+ roleBD.mention() +' est demandé '
+			      +'pour lancer le vote manuellement');
 		    } else {
-	            recruits.forEach(function(guildMember, guildMemberId) {
-	                    args.push(guildMember.displayName);
-	                });
+			    let openningVote = 0 != recruits.size || (0 == recruits.size && !autoVote);
+			    if (openningVote) {
+				targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
+			    }
+			    if (autoVote) {
+				    recruits.forEach(function(guildMember, guildMemberId) {
+					    // Add each member "A l'essai" to args of the command
+					    args.push(guildMember.displayName);
+					});
+			    }
 	            }
-				let thingToEcho = args.join(" ");
 				let index = 0;
+		    		// Display a vote for each arg of the command
 				for (let arg in args) {
 					var embed = new Discord.RichEmbed()
 						.addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à l'essai, 👎 pour l'exclure")
@@ -113,10 +125,13 @@ client.on('message', message => {
 					});
 					index++;
 				}
-				client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
+				if (openningVote) {
+					client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
+				} else {
+					client.channels.find("name", "annonces").send("@everyone Les recrues manquantes ont été ajoutées aux votes");
+				}
 			}
 			message.delete();
-		}
 	}
     
     /********************** ! End : Votes functionality ! **********************/
