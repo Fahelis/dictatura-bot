@@ -86,7 +86,7 @@ client.on('message', message => {
 		} else {
 			targetChannel = client.channels.find("name", "les_nouveaux");
             let args = message.content.split(" ").slice(1);
-			let autoVote = (null == args);
+			let autoVote = null == args;
 		    // Find all members who have the role "A l'essai"
 		let recruits = message.guild.roles.find("name", "A l'essai").members;
 		    if (0 == recruits.size && autoVote) {
@@ -97,7 +97,7 @@ client.on('message', message => {
 			      + 'Si tel est le cas le '+ roleMeneur.mention() +' ou un '+ roleBD.mention() +' est demandé '
 			      +'pour lancer le vote manuellement');
 		    } else {
-			    let openningVote = (0 != recruits.size || (0 == recruits.size && !autoVote));
+			    let openningVote = 0 != recruits.size || (0 == recruits.size && !autoVote);
 			    if (openningVote) {
 				targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
 			    }
@@ -107,7 +107,6 @@ client.on('message', message => {
 					    args.push(guildMember.displayName);
 					});
 			    }
-	            }
 				let index = 0;
 		    		// Display a vote for each arg of the command
 				for (let arg in args) {
@@ -132,6 +131,7 @@ client.on('message', message => {
 				}
 			}
 			message.delete();
+		}
 	}
     
     /********************** ! End : Votes functionality ! **********************/
