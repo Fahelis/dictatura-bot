@@ -5,15 +5,17 @@ var prefix = "!";
 
 /********************** ? Start : When the bot is ready ? **********************/
 
-/*client.on('ready', () => {
+client.on('ready', () => {
+	client.channels.find("name", "général").send("Go test :D");
+	/*
     let tabMessages = [
         "Une fois de plus je quitte l'Inglorium pour vous offrir mon aide",
         'Je suis de retour pour le plus grand plaisir de tous, en particulier celui de ce cher Huitre',
         "J'ai du retourner en Inglorium pour régler une affaire mais me revoila auprès de vous"
     ];
     let randomIndex = Math.floor(Math.random()*tabMessages.length);
-    client.channels.find("name", "général").send(tabMessages[randomIndex]);
-});*/
+    client.channels.find("name", "général").send(tabMessages[randomIndex]);*/
+});
 
 /********************** ! End : When the bot is ready ! **********************/
 
@@ -171,8 +173,9 @@ setInterval(function() {
 /********************** ? Start : Handle new member ? **********************/
 
 client.on("guildMemberAdd", (member) => {
-	client.channels.find('name', 'annonces').send("Général " + member.id);
-	member.send('coucou');
+	//FIXME remove on ready message
+	client.channels.find('name', 'général').send("Bienvenue " + member.nickname);
+	member.addRole(member.guild.roles.find("name", "A l'essai"));
   //member.addRole("A l'essai")
 });
 
