@@ -86,22 +86,25 @@ client.on('message', message => {
 		} else {
 			targetChannel = client.channels.find("name", "les_nouveaux");
             let args = message.content.split(" ").slice(1);
-			//let autoVote = null == args;
-			let autoVote = true;
-		    // Find all members who have the role "A l'essai"
-		let recruits = message.guild.roles.find("name", "A l'essai").members;
-		    if (0 == recruits.size && autoVote) {
+			let autoVote = 0 == args.length;
+			// Find all members who have the role "A l'essai"
+			let recruits = message.guild.roles.find("name", "A l'essai").members;
+		    let hasRecruits = false;
+			// TODO. Find a better way
+			recruits.forEach(function(guildMember, guildMemberId) {
+				hasRecruits = true;
+				});
+			if (!hasRecruits && autoVote) {
 			    let roleMeneur = message.guild.roles.find("name", "Meneur");
 			    let roleBD = message.guild.roles.find("name", "Bras droits");
-			    reutnr targetChannel.send('Je ne trouve pas la moindre recrue'
-			      + 'Pas de vote cette semaine sauf si des recrues ne sont pas présentes dans le repaire. '
-			      + 'Si tel est le cas le '+ roleMeneur.mention() +' ou un '+ roleBD.mention() +' est demandé '
-			      +'pour lancer le vote manuellement');
+			    return targetChannel.send('Je ne trouve pas la moindre recrue.\n'
+			      + 'Pas de vote cette semaine sauf si des recrues ne sont pas présentes dans le repaire.\n'
+			      + 'Si tel est le cas le '+ roleMeneur +' ou un '+ roleBD +' doit '
+			      +'lancer le vote manuellement');
 		    } else {
-			    //let openningVote = 0 != recruits.size || (0 == recruits.size && !autoVote);
-			    let openningVote = true;
+			    let openningVote = (hasRecruits && autoVote) || (!hasRecruits && !autoVote);
 			    if (openningVote) {
-				targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
+					targetChannel.send('* * * * * * * * * * * * * * * * * Ouverture des votes * * * * * * * * * * * * * * * * *');
 			    }
 			    if (autoVote) {
 				    recruits.forEach(function(guildMember, guildMemberId) {
