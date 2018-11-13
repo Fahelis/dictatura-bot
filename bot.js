@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 
-var prefix = "!";
+var prefix = '!';
+var kaellyId = '202917352378073088';
 
 /********************** ? Start : When the bot is ready ? **********************/
 /*
@@ -141,11 +142,31 @@ client.on('message', message => {
     
     /********************** ! End : Votes functionality ! **********************/
     
+
+    /********************** ? Start : Auto pinned for almanax and portals ? **********************/
+    
+	if ('services' == message.channel.name && kaellyId === message.member.id) {
+		newMessage = message;
+		message.channel.fetchPinnedMessages()
+			.then(function(messages) {
+				messages.forEach(function(message) {
+					if (message.embeds[0].title.startsWith('Almanax') && (newMessage.embeds[0].title !== message.embeds[0].title)) {
+						message.unpin();
+						newMessage.pin();
+					}
+					});
+			})
+			.catch(console.error);
+	}
+
+    /********************** ! End : Votes functionality ! **********************/
+    
+
     /********************** ? Start : Tweets filter ? **********************/
 
     // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
-    if ('202917352378073088' === message.member.id && '494103730594119690' === message.channel.id) {
+    if (kaellyId === message.member.id && '494103730594119690' === message.channel.id) {
         let embed = message.embeds[0];
         if (embed.title.includes('Tweet')) {
             // Then it's a tweet from Dofus
@@ -182,7 +203,7 @@ const CHECK_EVERY = 60; // In secondes
 setInterval(function() {
     var d = new Date();
     if (TARGET_DAY === d.getDay() && TARGET_HOUR === (d.getHours()+2) && TARGET_MINUTE === d.getMinutes()) {  
-        client.channels.find('name', 'les_nouveaux').send('!votes');
+        client.channels.find('name', 'les_nouveaux').send(prefix + 'votes');
     }
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
 
