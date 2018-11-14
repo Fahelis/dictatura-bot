@@ -150,16 +150,46 @@ client.on('message', message => {
 		message.channel.fetchPinnedMessages()
 			.then(function(messages) {
 				messages.forEach(function(message) {
-					if (message.embeds[0].title.startsWith('Almanax') && (newMessage.embeds[0].title !== message.embeds[0].title)) {
-						message.unpin();
-						newMessage.pin();
+					if (newMessage.embeds[0].title.startsWith('Almanax')) {
+						if (newMessage.embeds[0].title !== message.embeds[0].title) {
+							message.unpin();
+							newMessage.pin();
+							return;
+						}
+					} else if (newMessage.embeds[0].title.includes('Enutrosor')
+					|| newMessage.embeds[0].title.includes('Srambad')
+					|| newMessage.embeds[0].title.includes('Xélorium')
+					|| newMessage.embeds[0].title.includes('Ecaflipus')) {
+						if (newMessage.embeds[0].title.includes('new')) {
+							newMessageTitle = newMessage.embeds[0].title.substr(6);
+						} else {
+							newMessageTitle = newMessage.embeds[0].title;	
+						}
+						if (message.embeds[0].title.includes('new')) {
+							pinnedMessageTitle = message.embeds[0].title.substr(6);
+						} else {
+							pinnedMessageTitle = message.embeds[0].title;	
+						}
+						if (pinnedMessageTitle === newMessageTitle
+						&& newMessage.embeds[0].fields[0]['value'] !== message.embeds[0].fields[0]['value']) {
+							message.unpin();
+							newMessage.pin();
+							return;
+						}
 					}
-					});
+				});
 			})
 			.catch(console.error);
+		if (newMessage.embeds[0].title.startsWith('Almanax')
+		|| newMessage.embeds[0].title.includes('Enutrosor')
+		|| newMessage.embeds[0].title.includes('Srambad')
+		|| newMessage.embeds[0].title.includes('Xélorium')
+		|| newMessage.embeds[0].title.includes('Ecaflipus')) {
+			message.pin();
+		}
 	}
 
-    /********************** ! End : Votes functionality ! **********************/
+    /********************** ! End : Auto pinned for almanax and portals ! **********************/
     
 
     /********************** ? Start : Tweets filter ? **********************/
