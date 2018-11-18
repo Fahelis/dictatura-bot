@@ -3,6 +3,11 @@ const client = new Discord.Client();
 
 var prefix = '!';
 var kaellyId = '202917352378073088';
+var tabDictaturaBotId = [
+	'495567922639667201', // LocalBot
+	'484996196977344512', // DictaturaBot
+	'493768311260053514', // Iord
+]
 
 /********************** ? Start : When the bot is ready ? **********************/
 /*
@@ -147,23 +152,34 @@ client.on('message', message => {
     
 	if ('services' == message.channel.name && kaellyId === message.member.id) {
 		newMessage = message;
+		newMessageTitle = newMessage.embeds[0].title;
+		endFunction = false;
 		message.channel.fetchPinnedMessages()
 			.then(function(messages) {
 				messages.forEach(function(message) {
-					if (newMessage.embeds[0].title.startsWith('Almanax')) {
-						if (newMessage.embeds[0].title !== message.embeds[0].title) {
-							message.unpin();
-							newMessage.pin();
-							return;
+					if (newMessageTitle.startsWith('Almanax')) {
+						if (message.embeds[0].title.startsWith('Almanax')) {
+							if (newMessageTitle !== message.embeds[0].title) {
+								message.unpin();
+								newMessage.pin();
+								// Notifier le groupe Almanax
+								newMessage.channel.send(prefix + 'Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
+								endFunction = true;
+								return;
+							} else {
+								endFunction = true;
+								return;
+							}
+
 						}
-					} else if (newMessage.embeds[0].title.includes('Enutrosor')
-					|| newMessage.embeds[0].title.includes('Srambad')
-					|| newMessage.embeds[0].title.includes('Xélorium')
-					|| newMessage.embeds[0].title.includes('Ecaflipus')) {
-						if (newMessage.embeds[0].title.includes('new')) {
-							newMessageTitle = newMessage.embeds[0].title.substr(6);
+					} else if (newMessageTitle.includes('Enutrosor')
+					|| newMessageTitle.includes('Srambad')
+					|| newMessageTitle.includes('Xélorium')
+					|| newMessageTitle.includes('Ecaflipus')) {
+						if (newMessageTitle.includes('new')) {
+							newMessageTitle = newMessageTitle.substr(6);
 						} else {
-							newMessageTitle = newMessage.embeds[0].title;	
+							newMessageTitle = newMessageTitle;	
 						}
 						if (message.embeds[0].title.includes('new')) {
 							pinnedMessageTitle = message.embeds[0].title.substr(6);
@@ -174,23 +190,55 @@ client.on('message', message => {
 						&& newMessage.embeds[0].fields[0]['value'] !== message.embeds[0].fields[0]['value']) {
 							message.unpin();
 							newMessage.pin();
+							endFunction = true;
 							return;
 						}
 					}
 				});
+				if (endFunction) {
+					return;
+				}
+				if (endFunction) {
+					return;
+				}
+				if (newMessageTitle.startsWith('Almanax')
+				|| newMessageTitle.includes('Enutrosor')
+				|| newMessageTitle.includes('Srambad')
+				|| newMessageTitle.includes('Xélorium')
+				|| newMessageTitle.includes('Ecaflipus')) {
+					if (newMessageTitle.startsWith('Almanax')) {
+						// Notifier le groupe Almanax
+						newMessage.channel.send(prefix + 'Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
+					}
+					message.pin();
+				}
 			})
 			.catch(console.error);
-		if (newMessage.embeds[0].title.startsWith('Almanax')
-		|| newMessage.embeds[0].title.includes('Enutrosor')
-		|| newMessage.embeds[0].title.includes('Srambad')
-		|| newMessage.embeds[0].title.includes('Xélorium')
-		|| newMessage.embeds[0].title.includes('Ecaflipus')) {
-			message.pin();
-		}
+	}
+	if (prefix + 'notification almanax pour groupe <@&' + message.guild.roles.find("name", "Almanax").id + '>' === messageLC) {
+		message.delete();
 	}
 
     /********************** ! End : Auto pinned for almanax and portals ! **********************/
     
+    
+    /********************** ? Start : Subscribe Almanax ? **********************/
+
+    if (messageLC.startsWith(prefix + 'almanax_notif')) {
+    	roleAlmanax = message.guild.roles.find("name", "Almanax");
+    	console.log(message.member.roles.find("name", "Almanax"));
+    	role = message.member.roles.find("name", "Almanax");
+    	if (null === role) {
+    		message.member.addRole(roleAlmanax);
+    		message.reply('Les notifications d\'Almanax sont désormais actives pour toi')
+    	} else {
+    		message.member.removeRole(roleAlmanax);
+    		message.reply('Les notifications d\'Almanax sont désormais inactives pour toi')
+    	}
+    }
+
+    /********************** ! End : Subscribe Almanax ! **********************/
+
 
     /********************** ? Start : Tweets filter ? **********************/
 
