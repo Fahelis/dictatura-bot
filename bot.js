@@ -1,13 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-
-var prefix = '!';
-var kaellyId = '202917352378073088';
-var tabDictaturaBotId = [
-	'495567922639667201', // LocalBot
-	'484996196977344512', // DictaturaBot
-	'493768311260053514', // Iord
-]
+const config = require("./config.json");
 
 /********************** ? Start : When the bot is ready ? **********************/
 /*
@@ -27,13 +20,10 @@ client.on('ready', () => {
 /********************** ? Start : When a message is send ? **********************/
 
 client.on('message', message => {
+    let messageLC = message.content.toLowerCase().trim();
     
     /********************** ? Start : Short responses to short messages ? **********************/
-    
-    let messageLC = message.content.toLowerCase().trim();
-    // Iord's Id : 493768311260053514 | Dictatura_bot Id : 484996196977344512
-    if (messageLC.includes('ah') && 8 >= messageLC.length && '484996196977344512' !== message.member.id
-       && '493768311260053514' !== message.member.id) {
+    if (messageLC.includes('ah') && 8 >= messageLC.length && !config.tabDictaturaBotId.includes(message.member.id)) {
     	message.channel.send('Bah oui!');
   	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
                || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello'))
@@ -50,7 +40,7 @@ client.on('message', message => {
     
     /********************** ? Start : Reminder functionality ? **********************/
     
-    if(message.content.startsWith(prefix + "reminder")) {
+    if(message.content.startsWith(config.prefix + "reminder")) {
         if(message.channel.type === "dm") {
             return;
         }
@@ -64,7 +54,7 @@ client.on('message', message => {
 
             function reminder (remind, toRemind) {
                 if(!time) {
-                    message.channel.send("**:x: Erreur format, Correcte usage: `"+ prefix + "reminder <time en secondes !> <votre reminder>`**");
+                    message.channel.send("**:x: Erreur format, Correcte usage: `"+ config.prefix + "reminder <time en secondes !> <votre reminder>`**");
                 } else {
                 if(message.content.includes("reminder .")){
                     setInterval(function() {
@@ -75,7 +65,7 @@ client.on('message', message => {
                         setInterval(function() {
                             message.channel.send(message.content.slice(message.content.indexOf(message.content.split(" ")[2])));
                         }, (time * 1000));
-                        message.channel.send("** J'ai ajouter votre reminder avec succès ! Tapez `" + prefix + "reminder .` pour l'enlever :wink:**");
+                        message.channel.send("** J'ai ajouter votre reminder avec succès ! Tapez `" + config.prefix + "reminder .` pour l'enlever :wink:**");
                     }
                 }
             }
@@ -86,7 +76,7 @@ client.on('message', message => {
     /********************** ! End : Reminder functionality ! **********************/
     
     /********************** ? Start : Votes functionality ? **********************/
-	if(message.content.startsWith(prefix + "votes")) {
+	if(message.content.startsWith(config.prefix + "votes")) {
 		if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
 			return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
 		} else {
@@ -150,7 +140,7 @@ client.on('message', message => {
 
     /********************** ? Start : Auto pinned for almanax and portals ? **********************/
     
-	if ('services' == message.channel.name && kaellyId === message.member.id) {
+	if ('services' == message.channel.name && config.kaellyId === message.member.id) {
 		newMessage = message;
 		newMessageTitle = newMessage.embeds[0].title;
 		endFunction = false;
@@ -163,7 +153,7 @@ client.on('message', message => {
 								message.unpin();
 								newMessage.pin();
 								// Notifier le groupe Almanax
-								newMessage.channel.send(prefix + 'Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
+								newMessage.channel.send(config.prefix + 'Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
 								endFunction = true;
 								return;
 							} else {
@@ -208,14 +198,14 @@ client.on('message', message => {
 				|| newMessageTitle.includes('Ecaflipus')) {
 					if (newMessageTitle.startsWith('Almanax')) {
 						// Notifier le groupe Almanax
-						newMessage.channel.send(prefix + 'Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
+						newMessage.channel.send(config.prefix + 'Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
 					}
 					message.pin();
 				}
 			})
 			.catch(console.error);
 	}
-	if (prefix + 'notification almanax pour groupe <@&' + message.guild.roles.find("name", "Almanax").id + '>' === messageLC) {
+	if (config.prefix + 'notification almanax pour groupe <@&' + message.guild.roles.find("name", "Almanax").id + '>' === messageLC) {
 		message.delete();
 	}
 
@@ -224,7 +214,7 @@ client.on('message', message => {
     
     /********************** ? Start : Subscribe Almanax ? **********************/
 
-    if (messageLC.startsWith(prefix + 'almanax_notif')) {
+    if (messageLC.startsWith(config.prefix + 'almanax_notif')) {
     	roleAlmanax = message.guild.roles.find("name", "Almanax");
     	console.log(message.member.roles.find("name", "Almanax"));
     	role = message.member.roles.find("name", "Almanax");
@@ -242,9 +232,9 @@ client.on('message', message => {
 
     /********************** ? Start : Tweets filter ? **********************/
 
-    // Kaelly's Id : 202917352378073088 | Dictatura_bot Id : 484996196977344512
+
     // Ghost_channel dev : 494101417368354816, prod : 494103730594119690
-    if (kaellyId === message.member.id && '494103730594119690' === message.channel.id) {
+    if (config.kaellyId === message.member.id && '494103730594119690' === message.channel.id) {
         let embed = message.embeds[0];
         if (embed.title.includes('Tweet')) {
             // Then it's a tweet from Dofus
@@ -281,7 +271,7 @@ const CHECK_EVERY = 60; // In secondes
 setInterval(function() {
     var d = new Date();
     if (TARGET_DAY === d.getDay() && TARGET_HOUR === (d.getHours()+2) && TARGET_MINUTE === d.getMinutes()) {  
-        client.channels.find('name', 'les_nouveaux').send(prefix + 'votes');
+        client.channels.find('name', 'les_nouveaux').send(config.prefix + 'votes');
     }
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
 
