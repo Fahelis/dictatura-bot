@@ -14,8 +14,6 @@ client.on('message', message => {
     
     basics.simpleAnswers(messageLC, message, config);
     
-    commands.reminder(message, config);
-    
     commands.votes(message, config, client, Discord); 
 
 	usesKaelly.services(message, config, messageLC);
