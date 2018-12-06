@@ -14,13 +14,21 @@ client.on('message', message => {
     
     basics.simpleAnswers(messageLC, message, config);
     
-    commands.votes(message, config, client, Discord); 
-
 	usesKaelly.services(message, config, messageLC);
-    
-    commands.almanaxSubscriber(messageLC, config, message);
 
     usesKaelly.tweetsFilter(config, message, Discord);
+
+    let handledCommand = false;
+    if (messageLC.startsWith(config.prefix)) {
+	    handledCommand = commands.votes(message, config, client, Discord); 
+	    
+	    handledCommand = commands.almanaxSubscriber(messageLC, config, message);
+
+	    handledCommand = commands.help(messageLC, config, message);
+	    if (false === handledCommand) {
+    		message.channel.send('**Je suis désolée mais je ne connais pas la commande ' + message.content.substr(2) + '**');
+	    }
+    }
 });
 
 /********************** ? Start : Timer votes functionality ? **********************/
