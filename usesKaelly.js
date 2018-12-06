@@ -83,6 +83,9 @@ module.exports = {
 	{
 	    if (config.kaellyId === message.member.id && 'ghost_channel' === message.channel.name) {
 	        let embed = message.embeds[0];
+	        if (undefined === embed) {
+	        	return;s
+	        }
 	        if (embed.title.includes('Tweet')) {
 	            // Then it's a tweet from Dofus
 				let messageContent = embed.description.toLowerCase();
