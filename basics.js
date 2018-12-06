@@ -15,8 +15,9 @@ module.exports = {
 		if (messageLC.includes('ah') && 8 >= messageLC.length && !config.tabDictaturaBotId.includes(message.member.id)) {
 	    	message.channel.send('Bah oui!');
 	  	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
-	               || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello'))
-	               && messageLC.includes('iord')) {
+       || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello')
+       || messageLC.startsWith('coucou'))
+       && messageLC.includes('iord')) {
 	        message.channel.send(`Bonjour à toi ${message.member.displayName}`);
 	    } else if ('salut' === messageLC || 'bonjour' === messageLC || 'yo' === messageLC || 'hi' === messageLC
 	          || 'plop' === messageLC|| 'hello' === messageLC) {
