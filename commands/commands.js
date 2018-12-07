@@ -18,7 +18,7 @@ module.exports = {
 				if (!hasRecruits && autoVote) {
 				    let roleMeneur = message.guild.roles.find("name", "Meneur");
 				    let roleBD = message.guild.roles.find("name", "Bras droits");
-				    return targetChannel.send('Je ne trouve pas la moindre recrue.\n'
+				    targetChannel.send('Je ne trouve pas la moindre recrue.\n'
 				      + 'Pas de vote cette semaine sauf si des recrues ne sont pas présentes dans le repaire.\n'
 				      + 'Si tel est le cas le '+ roleMeneur +' ou un '+ roleBD +' doit '
 				      +'lancer le vote manuellement');
@@ -85,12 +85,15 @@ module.exports = {
 		if (messageLC.startsWith(config.prefix + 'help')) {
             let args = message.content.split(" ").slice(1);
 			if ('almanax_notif' === args[0]) {
-				message.channel.send('Active ou désactive (si elle est déjà active) la notification du canal "services" lorsque l\'Almanax est publié, ' +
+				message.channel.send('**' + config.prefix + 'almanax_notif**\n' +
+					'Active ou désactive (si elle est déjà active) la notification du canal "services" lorsque l\'Almanax est publié, ' +
 					'même si le canal est muet');
 			} else if ('help' === args[0]) {
-				message.channel.send('Affiche la liste des commandes et leur utilité');
+				message.channel.send('**' + config.prefix + 'help**\n' +
+					'Affiche la liste des commandes et leur utilité');
 			} else if ('votes' === args[0]) {
-				message.channel.send('Démarre un vote\n' +
+				message.channel.send('**' + config.prefix + 'votes**\n' +
+					'Démarre un vote\n' +
 					'Si la commande est lancée sans argument (' + config.prefix + 'votes), un vote se lance pour chaque membre du groupe "A l\'essai"\n' +
 					'Si la commande est lancé avec des arguments (' + config.prefix + 'votes nom1 nom2...), un vote se lance pour chaque nom passé en argument');
 			} else if (0 === args.length) {
