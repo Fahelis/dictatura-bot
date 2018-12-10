@@ -7,22 +7,31 @@ module.exports = {
 				return;
 			}
 			newMessageTitle = newMessage.embeds[0].title;
-			endFunction = false;
-			alreadyPinned = false;
+			tabPinnedMessages = [];
+			tabPinnedMessages['almanax'] = false;
+			config.dimensions.forEach(function(dimension) {
+				tabPinnedMessages[dimension] = false;
+			});
 			message.channel.fetchPinnedMessages()
 				.then(function(messages) {
 					messages.forEach(function(message) {
+						// Check what pinned message it is and check in in tab
+						for (var key in tabPinnedMessages){
+						    if (tabPinnedMessages.hasOwnProperty(key)) {
+								if (message.embeds[0].title.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(key)) {
+									tabPinnedMessages[key] = true;
+								}
+						    }
+						}
 						if (newMessageTitle.startsWith('Almanax')) {
 							if (message.embeds[0].title.startsWith('Almanax')) {
 								if (newMessageTitle !== message.embeds[0].title) {
 									message.unpin();
 									newMessage.pin();
 									// Notifier le groupe Almanax
-									newMessage.channel.send(config.prefix + 'Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
-									endFunction = true;
+									newMessage.channel.send('Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
 									return;
 								} else {
-									endFunction = true;
 									return;
 								}
 
@@ -45,31 +54,23 @@ module.exports = {
 							&& newMessage.embeds[0].fields[0]['value'] !== message.embeds[0].fields[0]['value']) {
 								message.unpin();
 								newMessage.pin();
-								endFunction = true;
 								return;
 							} else if (pinnedMessageTitle === newMessageTitle
 							&& newMessage.embeds[0].fields[0]['value'] === message.embeds[0].fields[0]['value']) {
-								aleradyPinned = true;
+								return;
 							}
 						}
 					});
-					if (endFunction) {
-						return;
-					}
-					if (endFunction) {
-						return;
-					}
-					if (true === alreadyPinned && 
-					(newMessageTitle.startsWith('Almanax')
-					|| newMessageTitle.includes('Enutrosor')
-					|| newMessageTitle.includes('Srambad')
-					|| newMessageTitle.includes('Xélorium')
-					|| newMessageTitle.includes('Ecaflipus'))) {
-						if (newMessageTitle.startsWith('Almanax')) {
-							// Notifier le groupe Almanax
-							newMessage.channel.send(config.prefix + 'Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
+
+					for (var key in tabPinnedMessages){
+						if (false === tabPinnedMessages[key] &&
+							newMessageTitle.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(key)) {
+							if (newMessageTitle.startsWith('Almanax')) {
+								// Notifier le groupe Almanax
+								newMessage.channel.send('Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
+							}
+							message.pin();
 						}
-						message.pin();
 					}
 				})
 				.catch(console.error);
