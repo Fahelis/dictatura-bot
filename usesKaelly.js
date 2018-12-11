@@ -31,7 +31,7 @@ module.exports = {
 									// Notifier le groupe Almanax
 									let roleAlmanax = message.guild.roles.find("name", "Almanax");
                                                                 	roleAlmanax.members.forEach(function(member) {
-                                                                        	newMessage.channel.send('Notification almanax pour ' + member);    
+                                                                        	newMessage.channel.send(config.prefix + 'Notification almanax pour ' + member);    
                                                                 });
                                                                         return;
 								} else {
@@ -70,9 +70,10 @@ module.exports = {
 							newMessageTitle.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(key)) {
 							if (newMessageTitle.startsWith('Almanax')) {
 								// Notifier le groupe Almanax
+								// TODO. Create a methode for that
 								let roleAlmanax = message.guild.roles.find("name", "Almanax");
 								roleAlmanax.members.forEach(function(member) {
-									newMessage.channel.send('Notification almanax pour ' + member);	
+									newMessage.channel.send(config.prefix + 'Notification almanax pour ' + member);	
 								});
 							}
 							message.pin();
