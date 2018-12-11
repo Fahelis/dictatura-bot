@@ -114,6 +114,8 @@ module.exports = {
 		// TODO. Add message in config
 		if (messageLC.startsWith(config.prefix + 'Notification almanax pour ')) {
 			message.delete();
+			return true;
 		}
+		return false;
 	}
 }
