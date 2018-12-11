@@ -52,7 +52,7 @@ module.exports = {
 							}
 							if (pinnedMessageTitle === newMessageTitle
 							&& newMessage.embeds[0].fields[0]['value'] !== message.embeds[0].fields[0]['value']) {
-								message.unpin();
+								message.delete();
 								newMessage.pin();
 								return;
 							} else if (pinnedMessageTitle === newMessageTitle
