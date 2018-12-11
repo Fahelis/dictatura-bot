@@ -107,5 +107,13 @@ module.exports = {
 			return true; 
 		}
 		return false;
+	},
+	
+	notifications: function(config, message)
+	{
+		// TODO. Add message in config
+		if (messageLC.startsWith(config.prefix + 'Notification almanax pour ')) {
+			message.delete();
+		}
 	}
 }
