@@ -67,7 +67,8 @@ module.exports = {
 							newMessageTitle.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(key)) {
 							if (newMessageTitle.startsWith('Almanax')) {
 								// Notifier le groupe Almanax
-								newMessage.channel.send('Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
+								let roleAlmanax = message.guild.roles.find("name", "Almanax");
+								newMessage.channel.send('Notification almanax pour groupe ' + roleAlmanax);
 							}
 							message.pin();
 						}
