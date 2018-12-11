@@ -31,7 +31,7 @@ module.exports = {
 									// Notifier le groupe Almanax
 									let roleAlmanax = message.guild.roles.find("name", "Almanax");
                                                                 	roleAlmanax.members.forEach(function(member) {
-                                                                        	newMessage.channel.send('Notification almanax pour ' + roleAlmanax);    
+                                                                        	newMessage.channel.send('Notification almanax pour ' + member);    
                                                                 });
                                                                         return;
 								} else {
@@ -72,7 +72,7 @@ module.exports = {
 								// Notifier le groupe Almanax
 								let roleAlmanax = message.guild.roles.find("name", "Almanax");
 								roleAlmanax.members.forEach(function(member) {
-									newMessage.channel.send('Notification almanax pour ' + roleAlmanax);	
+									newMessage.channel.send('Notification almanax pour ' + member);	
 								});
 							}
 							message.pin();
