@@ -29,8 +29,11 @@ module.exports = {
 									message.unpin();
 									newMessage.pin();
 									// Notifier le groupe Almanax
-									newMessage.channel.send('Notification almanax pour groupe ' + message.guild.roles.find("name", "Almanax"));
-									return;
+									let roleAlmanax = message.guild.roles.find("name", "Almanax");
+                                                                	roleAlmanax.members.forEach(function(member) {
+                                                                        	newMessage.channel.send('Notification almanax pour ' + roleAlmanax);    
+                                                                });
+                                                                        return;
 								} else {
 									return;
 								}
@@ -68,7 +71,9 @@ module.exports = {
 							if (newMessageTitle.startsWith('Almanax')) {
 								// Notifier le groupe Almanax
 								let roleAlmanax = message.guild.roles.find("name", "Almanax");
-								newMessage.channel.send('Notification almanax pour groupe ' + roleAlmanax);
+								roleAlmanax.members.forEach(function(member) {
+									newMessage.channel.send('Notification almanax pour ' + roleAlmanax);	
+								});
 							}
 							message.pin();
 						}
