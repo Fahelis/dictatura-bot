@@ -34,5 +34,18 @@ module.exports = {
 		member.send("Salutations nouvelle recrue\nMerci de rejoindre la Dictatura Dei, j'espère que tu t'y plairas\n"
 		+ "Afin que tout le monde puisse facilement t'identifier il te sera demandé de prendre ici le même nom que dans le Monde des Douze\n"
 		+ "William pourra t'aider si tu ne sais pas comment faire\nA très bientôt");
+	},
+
+	cleanUp: function(message, config)
+	{
+		if ('PINS_ADD' === message.type) {
+			if ("services" === message.channel.name && config.tabDictaturaBotId.includes(message.author.id)) {
+				message.delete();
+			}
+		} else {
+			if (message.content.startsWith(config.notificationAlmanax)) {
+				message.delete();
+			}
+		}
 	}
 }

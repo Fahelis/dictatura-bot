@@ -26,14 +26,11 @@ module.exports = {
 						if (newMessageTitle.startsWith('Almanax')) {
 							if (message.embeds[0].title.startsWith('Almanax')) {
 								if (newMessageTitle !== message.embeds[0].title) {
-									message.unpin();
+									message.delete();
 									newMessage.pin();
-									// Notifier le groupe Almanax
-									let roleAlmanax = message.guild.roles.find("name", "Almanax");
-                                                                	roleAlmanax.members.forEach(function(member) {
-                                                                        	newMessage.channel.send(config.prefix + 'Notification almanax pour ' + member);    
-                                                                });
-                                                                        return;
+									// Notifier chaque membre du groupe Almanax
+									notifyAlmanaxGroup(config, message, newMessage);
+                                    return;
 								} else {
 									return;
 								}
@@ -70,20 +67,13 @@ module.exports = {
 							newMessageTitle.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, "").includes(key)) {
 							if (newMessageTitle.startsWith('Almanax')) {
 								// Notifier le groupe Almanax
-								// TODO. Create a methode for that
-								let roleAlmanax = message.guild.roles.find("name", "Almanax");
-								roleAlmanax.members.forEach(function(member) {
-									newMessage.channel.send(config.prefix + 'Notification almanax pour ' + member);	
-								});
+								notifyAlmanaxGroup(config, message, newMessage);
 							}
 							message.pin();
 						}
 					}
 				})
 				.catch(console.error);
-		}
-		if (config.prefix + 'notification almanax pour groupe <@&' + message.guild.roles.find("name", "Almanax").id + '>' === messageLC) {
-			message.delete();
 		}
 	},
 
@@ -115,4 +105,12 @@ module.exports = {
 	        }
     	}
 	}
+}
+
+function notifyAlmanaxGroup(config, message, newMessage)
+{
+	let roleAlmanax = message.guild.roles.find("name", "Almanax");
+	roleAlmanax.members.forEach(function(member) {
+		newMessage.channel.send(config.notificationAlmanax + member);	
+	});
 }

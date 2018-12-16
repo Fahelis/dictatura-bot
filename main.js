@@ -29,15 +29,13 @@ client.on('message', message => {
 	    if (false === handledCommand) {
 	    	handledCommand = commands.help(messageLC, config, message);
 	    }
-	    
-	    if (false === handleCommand) {
-	    	handleCommand = commands.notifications(config, message);
-	    }
 
 	    if (false === handledCommand) {
     		message.channel.send('**Je suis désolée mais je ne connais pas la commande ' + message.content.substr(2) + '**');
 	    }
     }
+
+    basics.cleanUp(message, config, messageLC);
 });
 
 /********************** ? Start : Timer votes functionality ? **********************/
