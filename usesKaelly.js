@@ -88,8 +88,9 @@ module.exports = {
 	            // Then it's a tweet from Dofus
 				let messageContent = embed.description.toLowerCase();
 	            if (!(messageContent.includes('maintenance') || messageContent.includes('perturbations')
-	                  || messageContent.includes('connexion') || messageContent.includes('correctif')
-	                 || messageContent.includes('redémarrage') || messageContent.includes('réouverture'))) {
+					|| messageContent.includes('connexion') || messageContent.includes('correctif')
+                	|| messageContent.includes('redémarrage') || messageContent.includes('réouverture')
+                	|| messageContent.includes('déploiement') || messageContent.includes('mise à jour'))) {
 	                message.delete();
 	            } else {
 	            	var myEmbed = new Discord.RichEmbed()
