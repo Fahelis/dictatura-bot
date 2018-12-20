@@ -67,6 +67,10 @@ module.exports = {
 	{
 		if (messageLC.startsWith(config.prefix + 'almanax_notif')) {
 	    	roleAlmanax = message.guild.roles.find("name", "Almanax");
+	    	if (null === roleAlmanax) {
+	    		message.channel.send('Je suis désolée, je ne parviens pas à trouver le role Almanax');
+	    		return true;
+	    	}
 	    	role = message.member.roles.find("name", "Almanax");
 	    	if (null === role) {
 	    		message.member.addRole(roleAlmanax);
@@ -80,24 +84,32 @@ module.exports = {
 		return false;
 	},
 
-	gameVote: function(messageLC,config, message)
+	gameVote: function(messageLC, config, message)
 	{
-		// TODO. Add help command
-		if (messageLC.startsWith(config.prefix + 'game_vote')) {
-			message.channel.fetchPinnedMessages()
-			.then(async function (messages) {
-				message = messages.first();
-				// To get the unicode send \emoji in the chat
-				await message.react("💩");
-				await message.react("👎");
-				await message.react("👊");
-				await message.react("👍");
-				await message.react("😍");
-			})
-			.catch(console.error);
-			return true;
+		if(!message.guild.member(message.author).hasPermission("ADMINISTRATOR")) {
+			return message.reply("**:x: Vous n'avez pas la permission Administrateur").catch(console.error);
+		} else {
+			let currentChannel = message.channel;
+			if (messageLC.startsWith(config.prefix + 'game_vote')) {
+				message.channel.fetchPinnedMessages()
+				.then(async function (messages) {
+					message = messages.first();
+					if (undefined === message) {
+						currentChannel.send('Je suis désolée, je ne trouve aucun message épinglé')
+						return true;
+					}
+					// To get the unicode send \emoji in the chat
+					await message.react("💩");
+					await message.react("👎");
+					await message.react("👊");
+					await message.react("👍");
+					await message.react("😍");
+				})
+				.catch(console.error);
+				return true;
+			}
+			return false;
 		}
-		return false;
 	},
 
 	help: function(messageLC, config, message)
