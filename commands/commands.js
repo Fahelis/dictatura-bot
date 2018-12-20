@@ -67,6 +67,10 @@ module.exports = {
 	{
 		if (messageLC.startsWith(config.prefix + 'almanax_notif')) {
 	    	roleAlmanax = message.guild.roles.find("name", "Almanax");
+	    	if (null === roleAlmanax) {
+	    		message.channel.send('Je suis désolée, je ne parviens pas à trouver le role Almanax');
+	    		return true;
+	    	}
 	    	role = message.member.roles.find("name", "Almanax");
 	    	if (null === role) {
 	    		message.member.addRole(roleAlmanax);
