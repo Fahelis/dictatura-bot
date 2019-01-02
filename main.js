@@ -14,29 +14,43 @@ client.on('message', message => {
     
     basics.simpleAnswers(messageLC, message, config);
     
-	usesKaelly.services(message, config, messageLC);
-
-    usesKaelly.tweetsFilter(config, message, Discord);
-
     let handledCommand = false;
+    if ('services' == message.channel.name) {
+		handledCommand = usesKaelly.services(message, config, messageLC);
+		if (true === handledCommand) {
+	    	return;
+	    }
+    }
+
+	if ('ghost_channel' === message.channel.name) {
+    	handledCommand = usesKaelly.tweetsFilter(config, message, Discord);
+    	if (true === handledCommand) {
+	    	return;
+	    }
+	}
+
     if (messageLC.startsWith(config.prefix)) {
-	    handledCommand = commands.votes(message, config, client, Discord); 
+	    handledCommand = commands.votes(message, config, client, Discord);
+	    if (true === handledCommand) {
+	    	return;
+	    }
 	    
-	    if (false === handledCommand) {
-	    	handledCommand = commands.almanaxSubscriber(messageLC, config, message);
+    	handledCommand = commands.almanaxSubscriber(messageLC, config, message);
+		if (true === handledCommand) {
+	    	return;
+	    }
+    	
+    	handledCommand = commands.help(messageLC, config, message);
+	    if (true === handledCommand) {
+	    	return;
+	    }
+	    
+	    handledCommand = commands.gameVote(messageLC,config, message);
+	    if (true === handledCommand) {
+	    	return;
 	    }
 
-	    if (false === handledCommand) {
-	    	handledCommand = commands.help(messageLC, config, message);
-	    }
-
-	    if (false === handledCommand) {
-	    	handledCommand = commands.gameVote(messageLC,config, message);
-	    }
-
-	    if (false === handledCommand) {
-    		message.channel.send('**Je suis désolée mais je ne connais pas la commande ' + message.content.substr(2) + '**');
-	    }
+		message.channel.send('**Je suis désolée mais je ne connais pas la commande ' + message.content.substr(2) + '**');
     }
 
     basics.cleanUp(message, config, messageLC);

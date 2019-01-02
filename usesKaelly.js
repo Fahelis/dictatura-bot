@@ -1,10 +1,10 @@
 module.exports = {
 	services: function(message, config, messageLC)
 	{
-		if ('services' == message.channel.name && config.kaellyId === message.member.id) {
+		if (config.kaellyId === message.member.id) {
 			newMessage = message;
 			if (undefined === newMessage.embeds[0]) {
-				return;
+				return true;
 			}
 			newMessageTitle = newMessage.embeds[0].title;
 			tabPinnedMessages = [];
@@ -23,16 +23,16 @@ module.exports = {
 								}
 						    }
 						}
-						if (newMessageTitle.startsWith('Almanax')) {
+						if (newMessageTitle.startsWith('Almanax') && !newMessageTitle.includes('au')) {
 							if (message.embeds[0].title.startsWith('Almanax')) {
 								if (newMessageTitle !== message.embeds[0].title) {
 									message.delete();
 									newMessage.pin();
 									// Notifier chaque membre du groupe Almanax
 									notifyAlmanaxGroup(config, message, newMessage);
-                                    return;
+                                    return true;
 								} else {
-									return;
+									return true;
 								}
 
 							}
@@ -54,10 +54,10 @@ module.exports = {
 							&& newMessage.embeds[0].fields[0]['value'] !== message.embeds[0].fields[0]['value']) {
 								message.delete();
 								newMessage.pin();
-								return;
+								return; true
 							} else if (pinnedMessageTitle === newMessageTitle
 							&& newMessage.embeds[0].fields[0]['value'] === message.embeds[0].fields[0]['value']) {
-								return;
+								return true;
 							}
 						}
 					});
@@ -74,12 +74,13 @@ module.exports = {
 					}
 				})
 				.catch(console.error);
+			return true;
 		}
 	},
 
 	tweetsFilter: function(config, message, Discord)
 	{
-	    if (config.kaellyId === message.member.id && 'ghost_channel' === message.channel.name) {
+	    if (config.kaellyId === message.member.id) {
 	        let embed = message.embeds[0];
 	        if (undefined === embed) {
 	        	return;s
@@ -104,6 +105,7 @@ module.exports = {
 	                message.delete();
 	            }
 	        }
+	        return true;
     	}
 	}
 }
