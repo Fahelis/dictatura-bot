@@ -13,6 +13,8 @@ client.on('message', message => {
     let messageLC = message.content.toLowerCase().trim();
     
     basics.simpleAnswers(messageLC, message, config);
+    
+    let handledCommand = false;
     if ('services' == message.channel.name) {
 		handledCommand = usesKaelly.services(message, config, messageLC);
 		if (true === handledCommand) {
@@ -27,7 +29,6 @@ client.on('message', message => {
 	    }
 	}
 
-    let handledCommand = false;
     if (messageLC.startsWith(config.prefix)) {
 	    handledCommand = commands.votes(message, config, client, Discord);
 	    if (true === handledCommand) {
