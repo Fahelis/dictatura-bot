@@ -23,7 +23,7 @@ module.exports = {
 								}
 						    }
 						}
-						if (newMessageTitle.startsWith('Almanax')) {
+						if (newMessageTitle.startsWith('Almanax') && !newMessageTitle.includes('au')) {
 							if (message.embeds[0].title.startsWith('Almanax')) {
 								if (newMessageTitle !== message.embeds[0].title) {
 									message.delete();
