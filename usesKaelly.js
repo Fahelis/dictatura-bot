@@ -83,7 +83,7 @@ module.exports = {
 	    if (config.kaellyId === message.member.id) {
 	        let embed = message.embeds[0];
 	        if (undefined === embed) {
-	        	return;s
+	        	return;
 	        }
 	        if (embed.title.includes('Tweet')) {
 	            // Then it's a tweet from Dofus
