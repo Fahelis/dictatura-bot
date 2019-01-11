@@ -45,7 +45,12 @@ client.on('message', message => {
 	    	return;
 	    }
 	    
-	    handledCommand = commands.gameVote(messageLC,config, message);
+	    handledCommand = commands.gameVote(messageLC, config, message);
+	    if (true === handledCommand) {
+	    	return;
+	    }
+
+	    handledCommand = commands.officialMember(messageLC, config, message, client);
 	    if (true === handledCommand) {
 	    	return;
 	    }
