@@ -171,14 +171,14 @@ module.exports = {
 					'Si la commande est lancé avec des arguments (' + config.prefix + 'votes nom1 nom2...), un vote se lance pour chaque nom passé en argument');
 			} else if (0 === args.length) {
 				message.channel.send(
-					'**Voici la liste de mes pouvoirs (Ce symbole ⚠ signifie "Accessible uniquement aux administrateurs")**\n\n' +
+					'**Voici la liste de mes pouvoirs (Ce symbole ⚠ signifie "Accessible uniquement aux dirigeants")**\n\n' +
 					'**' + config.prefix + 'almanax_notif** : Permet de s\'inscrire pour recevoir chaque jour la notification du service Almanax\n' +
-					'**' + config.prefix + 'game_vote** : ⚠ Créé un vote pour le canal courant (À utiliser pour les jeux)\n' +
+					'**' + config.prefix + 'game_vote** : ⚠ Crée un vote pour le canal courant (À utiliser pour les jeux)\n' +
 					'**' + config.prefix + 'help** : Affiche cette liste\n' +
 					'**' + config.prefix + 'votes** : ⚠ Lance les votes de fin de semaine pour recrues'
 					);
 			} else {
-				message.channel.send('**Je suis désolée mais je ne trouve pas d\'aide pour la commande "' + args[0] + '"**');
+				message.channel.send('Je suis désolée mais je ne trouve pas d\'aide pour la commande **' + args[0] + '**');
 			}
 			return true; 
 		}

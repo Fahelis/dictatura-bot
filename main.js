@@ -55,7 +55,7 @@ client.on('message', message => {
 	    	return;
 	    }
 
-		message.channel.send('**Je suis désolée mais je ne connais pas la commande ' + message.content.substr(2) + '**');
+		message.channel.send('Je suis désolée mais je ne connais pas la commande **' + message.content.substr(2).split(" ").slice(0) + '**');
     }
 
     basics.cleanUp(message, config, messageLC);

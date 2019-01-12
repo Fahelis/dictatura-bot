@@ -33,7 +33,7 @@ module.exports = {
 	    member.addRole(member.guild.roles.find("name", "A l'essai"));
 		member.send("Salutations nouvelle recrue\nMerci de rejoindre la Dictatura Dei, j'espère que tu t'y plairas\n"
 		+ "Afin que tout le monde puisse facilement t'identifier il te sera demandé de prendre ici le même nom que dans le Monde des Douze\n"
-		+ "William pourra t'aider si tu ne sais pas comment faire\nA très bientôt");
+		+ "Le meneur ou un bras droit pourra t'aider si tu ne sais pas comment faire\nÀ très bientôt");
 	},
 
 	cleanUp: function(message, config)
