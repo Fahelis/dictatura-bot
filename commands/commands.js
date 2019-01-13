@@ -148,6 +148,9 @@ module.exports = {
 		} else if ('help' === args[0]) {
 			message.channel.send('**' + config.prefix + 'help**\n' +
 				'Affiche la liste des commandes et leur utilité');
+		} else if ('official_member' === args[0]) {
+			message.channel.send('**' + config.prefix + 'official_member**\n' +
+				'Permet de faire évoluer une recrue en membre officiel. Changement de rôle, annonce et message privé');
 		} else if ('votes' === args[0]) {
 			message.channel.send('**' + config.prefix + 'votes**\n' +
 				'Démarre un vote pour l\'intégration de recrues\n' +
@@ -159,6 +162,7 @@ module.exports = {
 				'**' + config.prefix + 'almanax_notif** : Permet de s\'inscrire pour recevoir chaque jour la notification du service Almanax\n' +
 				'**' + config.prefix + 'game_vote** : ⚠ Crée un vote pour le canal courant (À utiliser pour les jeux)\n' +
 				'**' + config.prefix + 'help** : Affiche cette liste\n' +
+				'**' + config.prefix + 'official_member** : ⚠ Passe une recrue en membre officiel\n' +
 				'**' + config.prefix + 'votes** : ⚠ Lance les votes de fin de semaine pour recrues'
 				);
 		} else {
