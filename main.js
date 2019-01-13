@@ -15,42 +15,48 @@ client.on('message', message => {
     basics.simpleAnswers(messageLC, message, config);
     
     let handledCommand = false;
-    if ('services' == message.channel.name) {
+    if ('services' === message.channel.name && message.member.id === config.kaellyId) {
 		handledCommand = usesKaelly.services(message, config, messageLC);
 		if (true === handledCommand) {
 	    	return;
 	    }
     }
 
-	if ('ghost_channel' === message.channel.name) {
-    	handledCommand = usesKaelly.tweetsFilter(config, message, Discord, client);
+	if ('ghost_channel' === message.channel.name && message.member.id === config.kaellyId) {
+    	handledCommand = usesKaelly.tweetsFilter(message, Discord, client);
     	if (true === handledCommand) {
 	    	return;
 	    }
 	}
 
     if (messageLC.startsWith(config.prefix)) {
-	    handledCommand = commands.votes(message, config, client, Discord);
-	    if (true === handledCommand) {
+	    if(message.content.startsWith(config.prefix + "votes")) {
+	    	commands.votes(message, config, client, Discord);
 	    	return;
 	    }
 	    
-    	handledCommand = commands.almanaxSubscriber(messageLC, config, message);
-		if (true === handledCommand) {
+	    if (messageLC.startsWith(config.prefix + 'almanax_notif')) {
+    		commands.almanaxSubscriber(config, message);
 	    	return;
 	    }
     	
-    	handledCommand = commands.help(messageLC, config, message);
-	    if (true === handledCommand) {
+    	if (messageLC.startsWith(config.prefix + 'help')) {
+    		commands.help(config, message);
 	    	return;
 	    }
 	    
-	    handledCommand = commands.gameVote(messageLC,config, message);
-	    if (true === handledCommand) {
+	    if (messageLC.startsWith(config.prefix + 'game_vote')) {
+	    	commands.gameVote(config, message);
 	    	return;
 	    }
 
-		message.channel.send('**Je suis désolée mais je ne connais pas la commande ' + message.content.substr(2) + '**');
+	    //Vérifie que le message commence par !!officialmember
+		if (messageLC.startsWith(config.prefix + "official_member")) {
+			commands.officialMember(config, message, client);
+	    	return;
+	    }
+
+		message.channel.send('Je suis désolée mais je ne connais pas la commande **' + message.content.substr(2).split(" ").slice(0) + '**');
     }
 
     basics.cleanUp(message, config, messageLC);
