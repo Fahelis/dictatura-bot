@@ -23,7 +23,7 @@ client.on('message', message => {
     }
 
 	if ('ghost_channel' === message.channel.name && message.member.id === config.kaellyId) {
-    	handledCommand = usesKaelly.tweetsFilter(message, Discord);
+    	handledCommand = usesKaelly.tweetsFilter(message, Discord, client);
     	if (true === handledCommand) {
 	    	return;
 	    }

@@ -76,7 +76,7 @@ module.exports = {
 		return true;
 	},
 
-	tweetsFilter: function(message, Discord)
+	tweetsFilter: function(message, Discord, client)
 	{
 	        let embed = message.embeds[0];
 	        if (undefined === embed) {
