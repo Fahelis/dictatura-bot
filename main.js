@@ -23,7 +23,7 @@ client.on('message', message => {
     }
 
 	if ('ghost_channel' === message.channel.name) {
-    	handledCommand = usesKaelly.tweetsFilter(config, message, Discord);
+    	handledCommand = usesKaelly.tweetsFilter(config, message, Discord, client);
     	if (true === handledCommand) {
 	    	return;
 	    }
