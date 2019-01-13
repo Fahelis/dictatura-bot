@@ -78,7 +78,7 @@ module.exports = {
 		}
 	},
 
-	tweetsFilter: function(config, message, Discord)
+	tweetsFilter: function(config, message, Discord, client)
 	{
 	    if (config.kaellyId === message.member.id) {
 	        let embed = message.embeds[0];
