@@ -146,8 +146,9 @@ module.exports = {
 				+ "Si tu es de niveau 199 ou 200 tu obtiens aussi :\n"
 				+ "- Être prioritaire en défense de percepteur\n\n"
 				+ "Bienvenue pour de bon au sein de la guilde 😃\n"); 
-			 
+			 return true;
 		}
+		return false;
 	},
 
 
