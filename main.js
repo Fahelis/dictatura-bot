@@ -12,7 +12,7 @@ client.on('ready', () => {
 client.on('message', message => {
     let messageLC = message.content.toLowerCase().trim();
     
-    basics.simpleAnswers(messageLC, message, config);
+    //basics.simpleAnswers(messageLC, message, config);
     
     let handledCommand = false;
     if ('services' === message.channel.name && message.member.id === config.kaellyId) {
