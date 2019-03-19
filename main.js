@@ -7,6 +7,8 @@ const usesKaelly = require('./usesKaelly');
 
 client.on('ready', () => {
     //basics.startMessages(client);
+	let channel = client.channels.find("name", "ghost_channel");
+	channel.send('Je suis de retour en ligne');
 });
 
 client.on('message', message => {
