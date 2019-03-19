@@ -79,7 +79,7 @@ setInterval(function() {
 /********************** ! End : Timer votes functionality ! **********************/
 
 client.on("guildMemberAdd", (member) => {
-    basics.handleNewMember(client, member);
+    commands.newMember(client, member);
 });
 
 client.login(process.env.BOT_TOKEN);
