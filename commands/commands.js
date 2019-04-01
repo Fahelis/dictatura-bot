@@ -59,7 +59,7 @@ module.exports = {
 		message.delete();
 	},
 
-	almanaxSubscriber: function(messageLC, config, message)
+	almanaxSubscriber: function(config, message)
 	{
     	roleAlmanax = message.guild.roles.find("name", "Almanax");
     	if (null === roleAlmanax) {
