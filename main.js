@@ -63,6 +63,7 @@ client.on("guildMemberAdd", (member) => {
 client.on('ready', () => {
     //basics.startMessages(client);
 	let channel = client.channels.find("name", "ghost_channel");
+	console.log('De retour en ligne');
 	channel.send('Je suis de retour en ligne');
 });
 
