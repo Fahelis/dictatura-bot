@@ -12,7 +12,7 @@ module.exports = {
 
 	simpleAnswers: function (message, config)
 	{
-		let message LC = message.toLowerCase().trim(), 
+		let messageLC = message.toLowerCase().trim();
 		if (messageLC.includes('ah') && 8 >= messageLC.length && !config.tabDictaturaBotId.includes(message.member.id)) {
 	    	message.channel.send('Bah oui!');
 	  	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
