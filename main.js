@@ -36,11 +36,11 @@ client.on('message', message => {
                 console.error(e);
                 return
             }
-            if (config.tabCommands[cmd]['hasArgs'] && config.tabCommands[cmd]['needsClient']) {
+            if (true === config.tabCommands[cmd]['hasArgs'] && true === config.tabCommands[cmd]['needsClient']) {
                commandFile.run(client, message, args);
-            } else if (config.tabCommands[cmd]['hasArgs']){
+            } else if (true === config.tabCommands[cmd]['hasArgs']){
                commandFile.run(message, args);
-            } else if (config.tabCommands[cmd]['needsClient']){
+            } else if (true === config.tabCommands[cmd]['needsClient']){
                commandFile.run(client, message);
             } else {
                 commandFile.run(message);

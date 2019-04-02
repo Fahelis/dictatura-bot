@@ -46,7 +46,7 @@
     "votes": {
     "location": "commands/",
     "hasArgs": true,
-    "client": true
+    "needsClient": true
     }
   }
 }
