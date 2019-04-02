@@ -4,8 +4,6 @@ const utils = require('../utils');
 
 exports.run = function(client, message, args)
 {
-	console.log(message);
-	console.log(message.member);
 	if (!utils.isDirector(message.member))
 	{
 		return message.reply(config.permissionDeniedMessage);
