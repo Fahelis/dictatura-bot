@@ -10,8 +10,9 @@ module.exports = {
 	    client.channels.find("name", "général").send(tabMessages[randomIndex]);
 	},
 
-	simpleAnswers: function (messageLC, message, config)
+	simpleAnswers: function (message, config)
 	{
+		let message LC = message.toLowerCase().trim(), 
 		if (messageLC.includes('ah') && 8 >= messageLC.length && !config.tabDictaturaBotId.includes(message.member.id)) {
 	    	message.channel.send('Bah oui!');
 	  	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')

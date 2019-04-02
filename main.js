@@ -8,11 +8,11 @@ client.on('message', message => {
     let args = message.content.slice(prefix.length).trim().split(' ');
     let cmd = args.shift().toLowerCase();
     
-    //basics.simpleAnswers(messageLC, message, config);
+    //basics.simpleAnswers(message, config);
     
     let handledCommand = false;
     if ('services' === message.channel.name && message.member.id === config.kaellyId) {
-		handledCommand = usesKaelly.services(message, config, messageLC);
+		handledCommand = usesKaelly.services(message, config);
 		if (true === handledCommand) {
 	    	return;
 	    }
@@ -34,7 +34,7 @@ client.on('message', message => {
     	}
     }
 
-    basics.cleanUp(message, config, messageLC);
+    basics.cleanUp(message, config);
 });
 
 /********************** ? Start : Timer votes functionality ? **********************/
