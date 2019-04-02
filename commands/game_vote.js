@@ -3,7 +3,7 @@ const utils = require('../utils');
 
 exports.run = function(message)
 {
-	if (!utils.isDirector(message.member(message.author)))
+	if (!utils.isDirector(message.member))
 	{
 		return message.reply(config.permissionDeniedMessage);
 	}

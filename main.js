@@ -46,7 +46,7 @@ client.on('message', message => {
                 commandFile.run(message);
            }
         } catch (e) {
-            message.channel.send(`Je suis désolée mais je n'ai pas pu traiter la commande **${cmd}**. Vérifie ta saisie, il y a peut-être une erreur, sinon parles en à Willam.`);
+            message.channel.send(`Je suis désolée mais je n'ai pas pu traiter la commande **${cmd}**. Vérifie ta saisie, il y a peut-être une erreur. Si ce n'est pas le cas, parles en à Willam.`);
             console.error(e);
         }
     }
