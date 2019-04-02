@@ -30,7 +30,7 @@ client.on('message', message => {
 			let commandFile = require(`./commands/${cmd}.js`);
 	        commandFile.run(client, message, args);
     	} catch (e) {
-			message.channel.send('Je suis désolée mais je ne connais pas la commande **' + message.content.substr(2).split(" ").slice(0) + '**');
+			message.channel.send('Je suis désolée mais je ne connais pas la commande **$cmd**');
     	}
     }
 
@@ -54,7 +54,8 @@ setInterval(function() {
 /********************** ! End : Timer votes functionality ! **********************/
 
 client.on("guildMemberAdd", (member) => {
-    commands.newMember(client, member);
+    let commandFile = require(`./commands/new_member.js`); 
+    commandFile.run(client, message, args);
 });
 
 client.on('ready', () => {
