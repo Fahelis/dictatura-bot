@@ -26,13 +26,20 @@ client.on('message', message => {
 	}
 
     if (message.content.startsWith(config.prefix)) {
-        console.log(`handle command ${cmd}`);
     	try {
-			let commandFile = require(`./commands/${cmd}.js`);
-	        commandFile.run(client, message, args);
+            let locationFile = config.tabCommands[cmd]['location'];
+			let commandFile = require(`./${locationFile}${cmd}.js`);
+            if (config.tabCommands[cmd]['hasArgs'] && config.tabCommands[cmd]['needsClient']) {
+               commandFile.run(client, message, args);
+            } else if (config.tabCommands[cmd]['hasArgs']){
+               commandFile.run(message, args);
+            } else if (config.tabCommands[cmd]['needsClient']){
+               commandFile.run(client, message);
+            } else {
+                commandFile.run(message);
+           }
     	} catch (e) {
 			message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
-            console.error(`Invalid command ${cmd}`);
             console.error(e);
     	}
     }
@@ -58,7 +65,7 @@ setInterval(function() {
 
 client.on("guildMemberAdd", (member) => {
     let commandFile = require(`./commands/new_member.js`); 
-    commandFile.run(client, message, args);
+    commandFile.run(client, message, args, member);
 });
 
 client.on('ready', () => {

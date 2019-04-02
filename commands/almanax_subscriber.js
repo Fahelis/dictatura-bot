@@ -1,6 +1,6 @@
 const config = require('../config.json');
 
-exports.run = function(client, message, args)
+exports.run = function(message)
 {
 	roleAlmanax = message.guild.roles.find("name", "Almanax");
 	if (null === roleAlmanax) {

@@ -1,6 +1,6 @@
 const config = require('../config.json');
 
-exports.run = function(client, message, args)
+exports.run = function(message, args)
 {
 	if ('almanax_notif' === args[0]) {
 		message.channel.send('**' + config.prefix + 'almanax_notif**\n' +
@@ -27,7 +27,7 @@ exports.run = function(client, message, args)
 			'**' + config.prefix + 'game_vote** : ⚠ Crée un vote pour le canal courant (À utiliser pour les jeux)\n' +
 			'**' + config.prefix + 'help** : Affiche cette liste\n' +
 			'**' + config.prefix + 'official_member** : ⚠ Passe une recrue en membre officiel\n' +
-			'**' + config.prefix + 'votes** : ⚠ Lance les votes de fin de semaine pour recrues'
+			'**' + config.prefix + 'votes** : ⚠ Lance les votes de fin de semaine pour les recrues'
 			);
 	} else {
 		message.channel.send('Je suis désolée mais je ne trouve pas d\'aide pour la commande **' + args[0] + '**');

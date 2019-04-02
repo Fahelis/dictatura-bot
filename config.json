@@ -16,5 +16,37 @@
   "ecaflipus"
   ],
   "notificationAlmanax": "Notification Almanax pour ",
-  "permissionDeniedMessage": "**:x: Vous n'avez pas la permission nécessaire à l'exection de cette commande**"
+  "permissionDeniedMessage": "**:x: Vous n'avez pas la permission nécessaire à l'exection de cette commande**",
+  "tabCommands": {
+    "almanax_subscriber": {
+    "location": "commands/",
+    "hasArgs": false,
+    "needsClient": false
+    },
+    "game_vote": {
+    "location": "commands/",
+    "hasArgs": false,
+    "needsClient": false
+    },
+    "help": {
+    "location": "commands/",
+    "hasArgs": true,
+    "needsClient": false
+    },
+    "new_member": {
+    "location": "commands/",
+    "hasArgs": true,
+    "needsClient": true
+    },
+    "official_member": {
+    "location": "commands/",
+    "hasArgs": true,
+    "needsClient": true
+    },
+    "votes": {
+    "location": "commands/",
+    "hasArgs": true,
+    "client": true
+    }
+  }
 }
