@@ -26,14 +26,15 @@ client.on('message', message => {
 	}
 
     if (message.content.startsWith(config.prefix)) {
-    	try {
-            let locationFile = config.tabCommands[cmd]['location'];
-			let commandFile = require(`./${locationFile}${cmd}.js`);
-        } catch (e) {
-            message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
-            console.error(e);
-        }
         try {
+        	try {
+                let locationFile = config.tabCommands[cmd]['location'];
+    			let commandFile = require(`./${locationFile}${cmd}.js`);
+            } catch (e) {
+                message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
+                console.error(e);
+                return
+            }
             if (config.tabCommands[cmd]['hasArgs'] && config.tabCommands[cmd]['needsClient']) {
                commandFile.run(client, message, args);
             } else if (config.tabCommands[cmd]['hasArgs']){
