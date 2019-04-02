@@ -5,7 +5,7 @@ const basics = require('./basics');
 const usesKaelly = require('./usesKaelly');
 
 client.on('message', message => {
-    let args = message.content.slice(prefix.length).trim().split(' ');
+    let args = message.content.slice(config.prefix.length).trim().split(' ');
     let cmd = args.shift().toLowerCase();
     
     //basics.simpleAnswers(message, config);
