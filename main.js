@@ -30,7 +30,7 @@ client.on('message', message => {
 			let commandFile = require(`./commands/${cmd}.js`);
 	        commandFile.run(client, message, args);
     	} catch (e) {
-			message.channel.send('Je suis désolée mais je ne connais pas la commande **$cmd**');
+			message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
     	}
     }
 
