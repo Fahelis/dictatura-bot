@@ -2,7 +2,6 @@ const config = require('../config.json');
 
 exports.run = function(client, message, args)
 {
-	let args = message.content.split(" ").slice(1);
 	if ('almanax_notif' === args[0]) {
 		message.channel.send('**' + config.prefix + 'almanax_notif**\n' +
 			'Active ou désactive (si elle est déjà active) la notification du canal "services" lorsque l\'Almanax est publié, ' +

@@ -10,7 +10,6 @@ exports.run = function(client, message, args)
 		return message.reply(config.permissionDeniedMessage);
 	}
 	targetChannel = client.channels.find("name", "les_nouveaux");
-            let args = message.content.split(" ").slice(1);
 	let autoVote = 0 == args.length;
 	// Find all members who have the role "A l'essai"
 	let recruits = message.guild.roles.find("name", "A l'essai").members;
