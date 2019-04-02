@@ -4,7 +4,7 @@ const utils = require('../utils');
 exports.run = function(client, message, args)
 {	 
 	//Vérifie que le lanceur de la commande a bien les droits pour le faire
-	if (!utils.isDirector(message.guild.member(message.author)))
+	if (!utils.isDirector(message.member(message.author)))
 	{
 		return message.reply(config.permissionDeniedMessage);
 	}

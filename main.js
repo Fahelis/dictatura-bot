@@ -29,6 +29,11 @@ client.on('message', message => {
     	try {
             let locationFile = config.tabCommands[cmd]['location'];
 			let commandFile = require(`./${locationFile}${cmd}.js`);
+        } catch (e) {
+            message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
+            console.error(e);
+        }
+        try {
             if (config.tabCommands[cmd]['hasArgs'] && config.tabCommands[cmd]['needsClient']) {
                commandFile.run(client, message, args);
             } else if (config.tabCommands[cmd]['hasArgs']){
@@ -38,10 +43,10 @@ client.on('message', message => {
             } else {
                 commandFile.run(message);
            }
-    	} catch (e) {
-			message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
+        } catch (e) {
+            message.channel.send(`Je suis désolée mais je n'ai pas pu traiter la commande **${cmd}**. Vérifie ta saisie, il y a peut-être une erreur, sinon parles en à Willam.`);
             console.error(e);
-    	}
+        }
     }
 
     basics.cleanUp(message, config);

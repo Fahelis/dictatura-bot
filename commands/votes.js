@@ -1,11 +1,10 @@
 const Discord = require('discord.js');
 const config = require('../config.json');
-
 const utils = require('../utils');
 
 exports.run = function(client, message, args)
 {
-	if (!utils.isDirector(message.guild.member(message.author)))
+	if (!utils.isDirector(message.member(message.author)))
 	{
 		return message.reply(config.permissionDeniedMessage);
 	}
