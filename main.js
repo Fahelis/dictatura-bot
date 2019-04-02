@@ -27,9 +27,10 @@ client.on('message', message => {
 
     if (message.content.startsWith(config.prefix)) {
         try {
+            let commandFile;
         	try {
                 let locationFile = config.tabCommands[cmd]['location'];
-    			let commandFile = require(`./${locationFile}${cmd}.js`);
+    			commandFile = require(`./${locationFile}${cmd}.js`);
             } catch (e) {
                 message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
                 console.error(e);
