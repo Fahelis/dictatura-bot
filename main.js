@@ -33,6 +33,7 @@ client.on('message', message => {
     	} catch (e) {
 			message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
             console.error(`Invalid command ${cmd}`);
+            console.error(e);
     	}
     }
 
