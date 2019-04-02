@@ -26,11 +26,13 @@ client.on('message', message => {
 	}
 
     if (message.content.startsWith(config.prefix)) {
+        console.log(`handle command ${cmd}`);
     	try {
 			let commandFile = require(`./commands/${cmd}.js`);
 	        commandFile.run(client, message, args);
     	} catch (e) {
 			message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
+            console.error(`Invalid command ${cmd}`);
     	}
     }
 
