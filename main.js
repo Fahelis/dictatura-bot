@@ -2,17 +2,11 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require("./config.json");
 const basics = require('./basics');
-const commands = require('./commands/commands');
 const usesKaelly = require('./usesKaelly');
 
-client.on('ready', () => {
-    //basics.startMessages(client);
-	let channel = client.channels.find("name", "ghost_channel");
-	channel.send('Je suis de retour en ligne');
-});
-
 client.on('message', message => {
-    let messageLC = message.content.toLowerCase().trim();
+    let args = message.content.slice(prefix.length).trim().split(' ');
+    let cmd = args.shift().toLowerCase();
     
     //basics.simpleAnswers(messageLC, message, config);
     
@@ -31,34 +25,13 @@ client.on('message', message => {
 	    }
 	}
 
-    if (messageLC.startsWith(config.prefix)) {
-	    if(message.content.startsWith(config.prefix + "votes")) {
-	    	commands.votes(message, config, client, Discord);
-	    	return;
-	    }
-	    
-	    if (messageLC.startsWith(config.prefix + 'almanax_notif')) {
-    		commands.almanaxSubscriber(config, message);
-	    	return;
-	    }
-    	
-    	if (messageLC.startsWith(config.prefix + 'help')) {
-    		commands.help(config, message);
-	    	return;
-	    }
-	    
-	    if (messageLC.startsWith(config.prefix + 'game_vote')) {
-	    	commands.gameVote(config, message);
-	    	return;
-	    }
-
-	    //Vérifie que le message commence par !!officialmember
-		if (messageLC.startsWith(config.prefix + "official_member")) {
-			commands.officialMember(config, message, client);
-	    	return;
-	    }
-
-		message.channel.send('Je suis désolée mais je ne connais pas la commande **' + message.content.substr(2).split(" ").slice(0) + '**');
+    if (message.content.startsWith(config.prefix)) {
+    	try {
+			let commandFile = require(`./commands/${cmd}.js`);
+	        commandFile.run(client, message, args);
+    	} catch (e) {
+			message.channel.send('Je suis désolée mais je ne connais pas la commande **' + message.content.substr(2).split(" ").slice(0) + '**');
+    	}
     }
 
     basics.cleanUp(message, config, messageLC);
@@ -82,6 +55,12 @@ setInterval(function() {
 
 client.on("guildMemberAdd", (member) => {
     commands.newMember(client, member);
+});
+
+client.on('ready', () => {
+    //basics.startMessages(client);
+	let channel = client.channels.find("name", "ghost_channel");
+	channel.send('Je suis de retour en ligne');
 });
 
 client.login(process.env.BOT_TOKEN);
