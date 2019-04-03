@@ -12,7 +12,7 @@ exports.run = function(message, args)
 	} else if ('help' === args[0]) {
 		message.channel.send('**' + config.prefix + 'help**\n' +
 			'Affiche la liste des commandes et leur utilité');
-	} else if ('official_member' === args[0]) {
+	} else if ('new_member' === args[0]) {
 		message.channel.send('**' + config.prefix + 'new_member**\n' +
 			'Permet de faire évoluer une personne en recrue. Changement de rôle, annonce et message privé.\n' +
 			'À utiliser si le déclenchement automatique a échoué à l\'arrivée de la recrue');
