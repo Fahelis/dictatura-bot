@@ -3,10 +3,12 @@ const Discord = require('discord.js');
 // Param can be a guildMember (when function is called on guildMemberAdd event) or a Message (command)
 exports.run = function(client, param, args = null)
 {
+	let member;
 	if (param instanceof Discord.GuildMember) {
 		member = param;
 	} else {
-		member = args[0];
+		let message = param;
+		member = message.mentions.members.first(); ;
 	}
 
 	client.channels.find('name', 'annonces').send("Une nouvelle recrue a rejoint le repaire, faites lui un bon accueil !");
