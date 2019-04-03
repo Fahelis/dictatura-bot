@@ -33,12 +33,12 @@ exports.run = function(message, args)
 	} else if (0 === args.length) {
 		message.channel.send(
 			'**Voici la liste de mes pouvoirs (Ce symbole ⚠ signifie "Accessible uniquement aux dirigeants")**\n\n' +
-			'**' + config.prefix + 'almanax_notif** : Permet de s\'inscrire pour recevoir chaque jour la notification du service Almanax\n' +
-			'**' + config.prefix + 'game_vote** : ⚠ Crée un vote pour le canal courant (À utiliser pour les jeux)\n' +
-			'**' + config.prefix + 'help** : Affiche cette liste\n' +
-			'**' + config.prefix + 'new_member** : ⚠ Passe une personne en recrue\n' +
-			'**' + config.prefix + 'official_member** : ⚠ Passe une recrue en membre officiel\n' +
-			'**' + config.prefix + 'votes** : ⚠ Lance les votes de fin de semaine pour les recrues'
+			'**' + config.prefix + 'almanax_notif** : Permet de s\'inscrire pour recevoir chaque jour la notification du service Almanax.\n' +
+			'**' + config.prefix + 'game_vote** : ⚠ Crée un vote pour le canal courant (À utiliser pour les jeux).\n' +
+			'**' + config.prefix + 'help** : Affiche cette liste ou l\'aide d\'une commande spécifique passée en paramètre.\n' +
+			'**' + config.prefix + 'new_member** : ⚠ Passe une personne en recrue.\n' +
+			'**' + config.prefix + 'official_member** : ⚠ Passe une recrue en membre officiel.\n' +
+			'**' + config.prefix + 'votes** : ⚠ Lance les votes de fin de semaine pour les recrues.'
 			);
 	} else {
 		message.channel.send('Je suis désolée mais je ne trouve pas d\'aide pour la commande **' + args[0] + '**');
