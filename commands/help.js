@@ -5,25 +5,31 @@ exports.run = function(message, args)
 	if ('almanax_notif' === args[0]) {
 		message.channel.send('**' + config.prefix + 'almanax_notif**\n' +
 			'Active ou désactive (si elle est déjà active) la notification du canal "services" lorsque l\'Almanax est publié, ' +
-			'même si le canal est muet');
+			'même si le canal est muet\n' +
+			'~~Aucun paramètre~~');
 	} else if ('game_vote' === args[0]) {
 		message.channel.send('**' + config.prefix + 'game_vote**\n' +
-			'Ajoute un vote sur le sujet épinglé (commande prévue pour les jeux)');
+			'Ajoute un vote sur le sujet épinglé (commande prévue pour les jeux)\n' +
+			'~~Aucun paramètre~~');
 	} else if ('help' === args[0]) {
 		message.channel.send('**' + config.prefix + 'help**\n' +
-			'Affiche la liste des commandes et leur utilité');
+			'Affiche la liste des commandes et leur utilité. Peut également afficher plus de détail sur une commande spécifique\n' +
+			'__Paramètre optionnel :__ nom_de_commande');
 	} else if ('new_member' === args[0]) {
 		message.channel.send('**' + config.prefix + 'new_member**\n' +
-			'Permet de faire évoluer une personne en recrue. Changement de rôle, annonce et message privé.\n' +
-			'À utiliser si le déclenchement automatique a échoué à l\'arrivée de la recrue');
+			'Permet de faire évoluer une personne en recrue. Changement de rôle, annonce et message privé\n' +
+			'À utiliser si le déclenchement automatique a échoué à l\'arrivée de la recrue.\n' +
+			'__Paramètre obligatoire :__ @mention_personne');
 	} else if ('official_member' === args[0]) {
 		message.channel.send('**' + config.prefix + 'official_member**\n' +
-			'Permet de faire évoluer une recrue en membre officiel. Changement de rôle, annonce et message privé');
+			'Permet de faire évoluer une recrue en membre officiel. Changement de rôle, annonce et message privé\n' +
+			'__Paramètre obligatoire :__ @mention_recrue');
 	} else if ('votes' === args[0]) {
 		message.channel.send('**' + config.prefix + 'votes**\n' +
 			'Démarre un vote pour l\'intégration de recrues\n' +
 			'Si la commande est lancée sans argument (' + config.prefix + 'votes), un vote se lance pour chaque membre du groupe "A l\'essai"\n' +
-			'Si la commande est lancé avec des arguments (' + config.prefix + 'votes nom1 nom2...), un vote se lance pour chaque nom passé en argument');
+			'Si la commande est lancé avec des arguments (' + config.prefix + 'votes nom1 nom2...), un vote se lance pour chaque nom passé en argument\n' +
+			'__Paramètres optionnels :__ nom_de_recrue1 nom_de_recrue2 ... nom_de_recrueN');
 	} else if (0 === args.length) {
 		message.channel.send(
 			'**Voici la liste de mes pouvoirs (Ce symbole ⚠ signifie "Accessible uniquement aux dirigeants")**\n\n' +
