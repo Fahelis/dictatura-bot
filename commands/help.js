@@ -12,6 +12,10 @@ exports.run = function(message, args)
 	} else if ('help' === args[0]) {
 		message.channel.send('**' + config.prefix + 'help**\n' +
 			'Affiche la liste des commandes et leur utilité');
+	} else if ('new_member' === args[0]) {
+		message.channel.send('**' + config.prefix + 'new_member**\n' +
+			'Permet de faire évoluer une personne en recrue. Changement de rôle, annonce et message privé.\n' +
+			'À utiliser si le déclenchement automatique a échoué à l\'arrivée de la recrue');
 	} else if ('official_member' === args[0]) {
 		message.channel.send('**' + config.prefix + 'official_member**\n' +
 			'Permet de faire évoluer une recrue en membre officiel. Changement de rôle, annonce et message privé');
@@ -26,6 +30,7 @@ exports.run = function(message, args)
 			'**' + config.prefix + 'almanax_notif** : Permet de s\'inscrire pour recevoir chaque jour la notification du service Almanax\n' +
 			'**' + config.prefix + 'game_vote** : ⚠ Crée un vote pour le canal courant (À utiliser pour les jeux)\n' +
 			'**' + config.prefix + 'help** : Affiche cette liste\n' +
+			'**' + config.prefix + 'new_member** : ⚠ Passe une personne en recrue\n' +
 			'**' + config.prefix + 'official_member** : ⚠ Passe une recrue en membre officiel\n' +
 			'**' + config.prefix + 'votes** : ⚠ Lance les votes de fin de semaine pour les recrues'
 			);

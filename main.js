@@ -72,7 +72,7 @@ setInterval(function() {
 
 client.on("guildMemberAdd", (member) => {
     let commandFile = require(`./commands/new_member.js`); 
-    commandFile.run(client, message, args, member);
+    commandFile.run(client, member);
 });
 
 client.on('ready', () => {
