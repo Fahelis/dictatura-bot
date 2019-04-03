@@ -1,4 +1,6 @@
 const Discord = require('discord.js');
+const config = require('../config.json');
+const utils = require('../utils');
 
 // Param can be a guildMember (when function is called on guildMemberAdd event) or a Message (command)
 exports.run = function(client, param, args = null)
@@ -7,6 +9,10 @@ exports.run = function(client, param, args = null)
 	if (param instanceof Discord.GuildMember) {
 		member = param;
 	} else {
+		if (!utils.isDirector(message.member))
+			{
+				return message.reply(config.permissionDeniedMessage);
+			}
 		let message = param;
 		member = message.mentions.members.first(); ;
 	}
