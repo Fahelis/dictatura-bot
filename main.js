@@ -1,24 +1,18 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const config = require("./config.json");
+const config = require('./config.json');
 const basics = require('./basics');
-const commands = require('./commands/commands');
 const usesKaelly = require('./usesKaelly');
 
-client.on('ready', () => {
-    //basics.startMessages(client);
-	let channel = client.channels.find("name", "ghost_channel");
-	channel.send('Je suis de retour en ligne');
-});
-
 client.on('message', message => {
-    let messageLC = message.content.toLowerCase().trim();
+    let args = message.content.slice(config.prefix.length).trim().split(' ');
+    let cmd = args.shift().toLowerCase();
     
-    //basics.simpleAnswers(messageLC, message, config);
+    //basics.simpleAnswers(message, config);
     
     let handledCommand = false;
     if ('services' === message.channel.name && message.member.id === config.kaellyId) {
-		handledCommand = usesKaelly.services(message, config, messageLC);
+		handledCommand = usesKaelly.services(message, config);
 		if (true === handledCommand) {
 	    	return;
 	    }
@@ -31,37 +25,33 @@ client.on('message', message => {
 	    }
 	}
 
-    if (messageLC.startsWith(config.prefix)) {
-	    if(message.content.startsWith(config.prefix + "votes")) {
-	    	commands.votes(message, config, client, Discord);
-	    	return;
-	    }
-	    
-	    if (messageLC.startsWith(config.prefix + 'almanax_notif')) {
-    		commands.almanaxSubscriber(config, message);
-	    	return;
-	    }
-    	
-    	if (messageLC.startsWith(config.prefix + 'help')) {
-    		commands.help(config, message);
-	    	return;
-	    }
-	    
-	    if (messageLC.startsWith(config.prefix + 'game_vote')) {
-	    	commands.gameVote(config, message);
-	    	return;
-	    }
-
-	    //Vérifie que le message commence par !!officialmember
-		if (messageLC.startsWith(config.prefix + "official_member")) {
-			commands.officialMember(config, message, client);
-	    	return;
-	    }
-
-		message.channel.send('Je suis désolée mais je ne connais pas la commande **' + message.content.substr(2).split(" ").slice(0) + '**');
+    if (message.content.startsWith(config.prefix)) {
+        try {
+            let commandFile;
+        	try {
+                let locationFile = config.tabCommands[cmd]['location'];
+    			commandFile = require(`./${locationFile}${cmd}.js`);
+            } catch (e) {
+                message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
+                console.error(e);
+                return
+            }
+            if (true === config.tabCommands[cmd]['hasArgs'] && true === config.tabCommands[cmd]['needsClient']) {
+               commandFile.run(client, message, args);
+            } else if (true === config.tabCommands[cmd]['hasArgs']){
+               commandFile.run(message, args);
+            } else if (true === config.tabCommands[cmd]['needsClient']){
+               commandFile.run(client, message);
+            } else {
+                commandFile.run(message);
+           }
+        } catch (e) {
+            message.channel.send(`Je suis désolée mais je n'ai pas pu traiter la commande **${cmd}**. Vérifie ta saisie, il y a peut-être une erreur. Si ce n'est pas le cas, parles en à Willam.`);
+            console.error(e);
+        }
     }
 
-    basics.cleanUp(message, config, messageLC);
+    basics.cleanUp(message, config);
 });
 
 /********************** ? Start : Timer votes functionality ? **********************/
@@ -81,7 +71,15 @@ setInterval(function() {
 /********************** ! End : Timer votes functionality ! **********************/
 
 client.on("guildMemberAdd", (member) => {
-    commands.newMember(client, member);
+    let commandFile = require(`./commands/new_member.js`); 
+    commandFile.run(client, member);
+});
+
+client.on('ready', () => {
+    //basics.startMessages(client);
+	let channel = client.channels.find("name", "ghost_channel");
+	console.log('De retour en ligne');
+	channel.send('Je suis de retour en ligne');
 });
 
 client.login(process.env.BOT_TOKEN);

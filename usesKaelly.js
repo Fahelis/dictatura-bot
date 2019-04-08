@@ -1,5 +1,5 @@
 module.exports = {
-	services: function(message, config, messageLC)
+	services: function(message, config)
 	{
 		newMessage = message;
 		if (undefined === newMessage.embeds[0]) {
