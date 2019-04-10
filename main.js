@@ -62,8 +62,9 @@ const TARGET_MINUTE = 0; // Minute of the hour from 0 to 59
 const CHECK_EVERY = 60; // In secondes
 
 setInterval(function() {
-    var d = new Date();
-    if (TARGET_DAY === d.getDay() && TARGET_HOUR === (d.getHours()+2) && TARGET_MINUTE === d.getMinutes()) {  
+    // CET for normal / CEST for the fucking summer time
+    var currentDate = new Date('NOW (CEST)');
+    if (TARGET_DAY === currentDate.getDay() && TARGET_HOUR === (currentDate.getHours()) && TARGET_MINUTE === currentDate.getMinutes()) {  
         client.channels.find('name', 'les_nouveaux').send(config.prefix + 'votes');
     }
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
