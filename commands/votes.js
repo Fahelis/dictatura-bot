@@ -20,10 +20,10 @@ exports.run = function(client, message, args)
 	if (!hasRecruits && autoVote) {
 	    let roleMeneur = message.guild.roles.find("name", "Meneur");
 	    let roleBD = message.guild.roles.find("name", "Bras droits");
-	    targetChannel.send('Je ne trouve pas la moindre recrue.\n'
-	      + 'Pas de vote cette semaine sauf si des recrues ne sont pas présentes dans le repaire.\n'
-	      + 'Si tel est le cas le '+ roleMeneur +' ou un '+ roleBD +' doit '
-	      +'lancer le vote manuellement');
+	    targetChannel = client.channels.find("name", "le_bureau_de_la_direction");
+	    targetChannel.send('Je ne trouve pas la moindre recrue\n'
+	      + 'Aucune recrue présente dans le repaire. Il faudrait que l\'un de vous '+ roleMeneur +' ou '+ roleBD +
+	      'lance le(s) vote(s) manuellement si besoin');
     } else {
 	    let openningVote = (hasRecruits && autoVote) || (!hasRecruits && !autoVote);
 	    if (openningVote) {
