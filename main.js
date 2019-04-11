@@ -64,7 +64,7 @@ const CHECK_EVERY = 60; // In secondes
 
 setInterval(function() {
     // CET for normal / CEST for the fucking summer time
-    let currentDate = new Date('NOW (CEST)');
+    let currentDate = new Date();
     let isVoteTime = VOTE_HOUR === (currentDate.getHours()) && VOTE_MINUTE === currentDate.getMinutes();
     if (OPEN_VOTE_DAY === currentDate.getDay() && isVoteTime) {  
         client.channels.find('name', 'les_nouveaux').send(config.prefix + 'votes');
@@ -84,7 +84,7 @@ client.on("guildMemberAdd", (member) => {
 client.on('ready', () => {
     //basics.startMessages(client);
 	let channel = client.channels.find("name", "ghost_channel");
-    var currentDate = new Date('NOW (CEST)');
+    var currentDate = new Date();
     message = 'De retour en ligne le ' + currentDate.toDateString() + ' à ' + currentDate.toTimeString();
 	console.log(message);
 	channel.send(message);
