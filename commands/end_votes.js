@@ -27,7 +27,7 @@ exports.run = function(client, message)
 
 				let user = message.guild.members.find('displayName', userName);
 				switch (voteResult) {
-					case 👍:
+					case '👍':
 						if (null === user) {
 							annoncesChannel.send(userName + ' fait maintenant partie des membres officiels');
 						} else {
@@ -37,14 +37,14 @@ exports.run = function(client, message)
 								});
 						}
 						break;
-					case 👊:
+					case '👊':
 						if (null === user) {
 							annoncesChannel.send(userName + ' voit sa période d\'essai prolongée d\'une semaine');
 						} else {
 							annoncesChannel.send(`${memberToFind.displayName} voit sa période d\'essai prolongée d\'une semaine`);
 						}
 						break;
-					case 👎:
+					case '👎':
 						if (null === user) {
 							annoncesChannel.send(userName + ' nous quitte');
 						} else {
@@ -71,13 +71,13 @@ function voteCount(message)
 
 	message.reactions.forEach(function(reaction)) {
 		switch (reaction) {
-			case 👍:
+			case '👍':
 				results['nbUp']++;
 				break;
-			case 👊:
+			case '👊':
 				results['nbNeutral']++;
 				break;
-			case 👎:
+			case '👎':
 				results['nbDown']++;
 				break;
 			default:
@@ -87,11 +87,11 @@ function voteCount(message)
 
 	message.channel.send(userName + ' a recueilli ' + results['nbUp'] + '👍, ' +
 		results['nbNeutral'] + '👊 et ' + results['nbDown'] + '👎');
-	result = 👊;
+	result = '👊';
 	if (results['nbUp'] > results['nbNeutral'] && results['nbUp'] > results['nbDown']) {
-		result = 👍;
+		result = '👍';
 	} esle if (results['nbDown'] > results['nbUp'] && results['nbDown'] > results['nbNeutral']) {
-		result = 👎;
+		result = '👎';
 	}
 
 	return result;
