@@ -67,8 +67,9 @@ function voteCount(message, userName)
 	let nbUp = -1
 	let nbNeutral = -1
 	let nbDown = -1
-
 	message.reactions.forEach(function(reaction) {
+		console.log(reaction);
+		console.log('👍');
 		switch (reaction) {
 			case '👍':
 				nbUp++;
