@@ -67,30 +67,29 @@ function voteCount(message, userName)
 	let nbUp = -1
 	let nbNeutral = -1
 	let nbDown = -1
-	let results = { 'nbUp' : -1, 'nbNeutral' : -1, 'nbDown': -1 };
 
 	message.reactions.forEach(function(reaction) {
 		switch (reaction) {
 			case '👍':
-				results['nbUp']++;
+				nbUp++;
 				break;
 			case '👊':
-				results['nbNeutral']++;
+				nbNeutral++;
 				break;
 			case '👎':
-				results['nbDown']++;
+				nbDown++;
 				break;
 			default:
 				console.log('Emote non utilisée pour les votes ' + reaction)
 		}
 	});
 
-	message.channel.send(userName + ' a recueilli ' + results['nbUp'] + '👍, ' +
-		results['nbNeutral'] + '👊 et ' + results['nbDown'] + '👎');
+	message.channel.send(userName + ' a recueilli ' + nbUp + '👍, ' +
+		nbNeutral + '👊 et ' + nbDown + '👎');
 	result = '👊';
-	if (results['nbUp'] > results['nbNeutral'] && results['nbUp'] > results['nbDown']) {
+	if (nbUp > nbNeutral && nbUp > nbDown) {
 		result = '👍';
-	} else if (results['nbDown'] > results['nbUp'] && results['nbDown'] > results['nbNeutral']) {
+	} else if (nbDown > nbUp && nbDown > nbNeutral) {
 		result = '👎';
 	}
 
