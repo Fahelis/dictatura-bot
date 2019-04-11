@@ -90,7 +90,7 @@ function voteCount(message)
 	result = '👊';
 	if (results['nbUp'] > results['nbNeutral'] && results['nbUp'] > results['nbDown']) {
 		result = '👍';
-	} esle if (results['nbDown'] > results['nbUp'] && results['nbDown'] > results['nbNeutral']) {
+	} else if (results['nbDown'] > results['nbUp'] && results['nbDown'] > results['nbNeutral']) {
 		result = '👎';
 	}
 
