@@ -69,7 +69,7 @@ function voteCount(message)
 	let nbDown = -1
 	let results = { 'nbUp' : -1, 'nbNeutral' : -1, 'nbDown': -1 };
 
-	message.reactions.forEach(function(reaction)) {
+	message.reactions.forEach(function(reaction) {
 		switch (reaction) {
 			case '👍':
 				results['nbUp']++;
@@ -83,7 +83,7 @@ function voteCount(message)
 			default:
 				console.log('Emote non utilisée pour les votes ' + reaction)
 		}
-	}
+	});
 
 	message.channel.send(userName + ' a recueilli ' + results['nbUp'] + '👍, ' +
 		results['nbNeutral'] + '👊 et ' + results['nbDown'] + '👎');
