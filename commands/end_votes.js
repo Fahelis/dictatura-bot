@@ -58,8 +58,8 @@ exports.run = function(client, message)
 					default:
 						console.log('Emote non utilisée pour les votes ' + reaction)
 				}
-			}
-		}
+			});
+		});
 }
 
 function voteCount(message)
