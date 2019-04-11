@@ -67,8 +67,7 @@ function voteCount(message, userName)
 	let nbUp = -1
 	let nbNeutral = -1
 	let nbDown = -1
-	console.log(message);
-	console.log(message.reactions);
+	console.log(message.embeds[0].reactions);
 	message.reactions.forEach(function(reaction) {
 		console.log(reaction);
 		console.log('👍');
