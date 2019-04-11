@@ -28,6 +28,11 @@
     "hasArgs": false,
     "needsClient": false
     },
+    "end_votes": {
+    "location": "commands/",
+    "hasArgs": false,
+    "needsClient": true
+    },
     "help": {
     "location": "commands/",
     "hasArgs": true,

@@ -56,16 +56,21 @@ client.on('message', message => {
 
 /********************** ? Start : Timer votes functionality ? **********************/
 
-const TARGET_DAY = 5; // Days go from 0 (sunday) to 6 (saturday)
-const TARGET_HOUR = 17; // Hours go from 0 to 23
-const TARGET_MINUTE = 0; // Minute of the hour from 0 to 59
+const OPEN_VOTE_DAY = 5; // Days go from 0 (sunday) to 6 (saturday)
+const CLOSE_VOTE_DAY = 1; // Days go from 0 (sunday) to 6 (saturday)
+const VOTE_HOUR = 17; // Hours go from 0 to 23
+const VOTE_MINUTE = 0; // Minute of the hour from 0 to 59
 const CHECK_EVERY = 60; // In secondes
 
 setInterval(function() {
     // CET for normal / CEST for the fucking summer time
-    var currentDate = new Date('NOW (CEST)');
-    if (TARGET_DAY === currentDate.getDay() && TARGET_HOUR === (currentDate.getHours()) && TARGET_MINUTE === currentDate.getMinutes()) {  
+    let currentDate = new Date('NOW (CEST)');
+    let isVoteTime = VOTE_HOUR === (currentDate.getHours()) && VOTE_MINUTE === currentDate.getMinutes();
+    if (OPEN_VOTE_DAY === currentDate.getDay() && isVoteTime) {  
         client.channels.find('name', 'les_nouveaux').send(config.prefix + 'votes');
+    } else if (CLOSE_VOTE_DAY === currentDate.getDay() && isVoteTime) {
+        client.channels.find('name', 'les_nouveaux').send(config.prefix + 'end_votes');
+
     }
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
 
