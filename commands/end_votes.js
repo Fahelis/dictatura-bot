@@ -23,7 +23,7 @@ exports.run = function(client, message)
 					annoncesChannel.send('**Résultat des votes hebdomadaires**');
 				}
 				let userName = message.embeds[0].fields[0].name;
-				let voteResult = voteCount(message);
+				let voteResult = voteCount(message, userName);
 
 				let user = message.guild.members.find('displayName', userName);
 				switch (voteResult) {
@@ -62,7 +62,7 @@ exports.run = function(client, message)
 		});
 }
 
-function voteCount(message)
+function voteCount(message, userName)
 {
 	let nbUp = -1
 	let nbNeutral = -1
