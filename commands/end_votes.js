@@ -19,7 +19,38 @@ exports.run = function(client, message)
 					annoncesChannel.send('**Résultat des votes hebdomadaires**');
 				}
 				let userName = message.embeds[0].fields[0].name;
-				let voteResult = voteCount(message);
+				
+				// function
+				let nbUp = -1
+				let nbNeutral = -1
+				let nbDown = -1
+				let results = { 'nbUp' : -1, 'nbNeutral' : -1, 'nbDown': -1 };
+
+				message.reactions.forEach(function(reaction)) {
+					switch (reaction) {
+						case 👍:
+							results['nbUp']++;
+							break;
+						case 👊:
+							results['nbNeutral']++;
+							break;
+						case 👎:
+							results['nbDown']++;
+							break;
+						default:
+							console.log('Emote non utilisée pour les votes ' + reaction)
+					}
+				}
+
+				message.channel.send(userName + ' a recueilli ' + results['nbUp'] + '👍, ' +
+					results['nbNeutral'] + '👊 et ' + results['nbDown'] + '👎');
+				result = 👊;
+				if (results['nbUp'] > results['nbNeutral'] && results['nbUp'] > results['nbDown']) {
+					result = 👍;
+				} esle if (results['nbDown'] > results['nbUp'] && results['nbDown'] > results['nbNeutral']) {
+					result = 👎;
+				}
+				// end function
 
 				let user = message.guild.members.find('displayName', userName);
 				switch (voteResult) {
@@ -57,38 +88,8 @@ exports.run = function(client, message)
 			}
 		}
 }
-
+/*
 function voteCount(message)
 {
-	let nbUp = -1
-	let nbNeutral = -1
-	let nbDown = -1
-	let results = { 'nbUp' : -1, 'nbNeutral' : -1, 'nbDown': -1 };
-
-	message.reactions.forEach(function(reaction)) {
-		switch (reaction) {
-			case 👍:
-				results['nbUp']++;
-				break;
-			case 👊:
-				results['nbNeutral']++;
-				break;
-			case 👎:
-				results['nbDown']++;
-				break;
-			default:
-				console.log('Emote non utilisée pour les votes ' + reaction)
-		}
-	}
-
-	message.channel.send(userName + ' a recueilli ' + results['nbUp'] + '👍, ' +
-		results['nbNeutral'] + '👊 et ' + results['nbDown'] + '👎');
-	result = 👊;
-	if (results['nbUp'] > results['nbNeutral'] && results['nbUp'] > results['nbDown']) {
-		result = 👍;
-	} esle if (results['nbDown'] > results['nbUp'] && results['nbDown'] > results['nbNeutral']) {
-		result = 👎;
-	}
-
-	return result;
-}
+	
+}*/
