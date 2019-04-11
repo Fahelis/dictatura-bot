@@ -35,7 +35,7 @@ exports.run = function(client, message, args)
 			});
 	    }
 		// Display a vote for each arg of the command
-		for (let arg in args) {
+		args.forEach (function (arg) {
 			var embed = new Discord.RichEmbed()
 				.addField(arg, "👍 intégrer la recrue, 👊 prolonger l'essai, 👎 exclure")
 				.setColor('RED')
@@ -49,7 +49,7 @@ exports.run = function(client, message, args)
 			}).catch(function() {
 				console.log("Can't do the vote");
 			});
-		}
+		});
 		if (openningVote) {
 			client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
 		} else {
