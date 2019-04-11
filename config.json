@@ -38,6 +38,11 @@
     "hasArgs": true,
     "needsClient": true
     },
+    "kick_recruit": {
+    "location": "commands/",
+    "hasArgs": true,
+    "needsClient": true
+    },
     "official_member": {
     "location": "commands/",
     "hasArgs": true,
