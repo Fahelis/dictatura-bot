@@ -88,7 +88,7 @@ client.on('ready', () => {
     message = 'De retour en ligne le ' + currentDate.toDateString() + ' à ' + currentDate.toTimeString();
 	console.log(message);
 	channel.send(message);
-    let general = client.channels.find('name', 'général'):
+    let general = client.channels.find('name', 'général');
     general.fetchMessage(566299906717909033)
         .then(message => console.log(message.reactions))
         .catch(console.error);
