@@ -28,7 +28,7 @@ exports.run = function(client, message)
 				let voteResult = voteCount(pinnedMessage, userName);
 
 				currentChannel.fetchMessage(pinnedMessage.id)
-        			.then(message => console.log(message.reactions))
+        			.then(message => console.log('reactions :' + message.reactions))
         			.catch(console.error);
 
 				let user = pinnedMessage.guild.members.find('displayName', userName);
@@ -47,7 +47,7 @@ exports.run = function(client, message)
 						if (null === user) {
 							annoncesChannel.send(userName + ' voit sa période d\'essai prolongée d\'une semaine');
 						} else {
-							annoncesChannel.send(`${memberToFind.displayName} voit sa période d\'essai prolongée d\'une semaine`);
+							annoncesChannel.send(`${userName} voit sa période d\'essai prolongée d\'une semaine`);
 						}
 						break;
 					case '👎':
