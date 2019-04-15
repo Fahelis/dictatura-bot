@@ -11,7 +11,7 @@ exports.run = function(client, message)
 	let currentChannel = message.channel;
 	let generalChannel = client.channels.find('name', 'général');
 	let annoncesChannel = client.channels.find('name', 'annonces');
-	currentChannel.fetchPinnedMessages()
+	currentChannel.fetchPinnedMessages(false)
 		.then(function(pinnedMessages) {
 			let hasVote = false;
 			pinnedMessages.forEach(function(pinnedMessage) {
@@ -26,10 +26,8 @@ exports.run = function(client, message)
 				let userName = pinnedMessage.embeds[0].fields[0].name;
 				let realMessage;
 				// Delete the cache
-				currentChannel.fetchMessages()
-					.then((allMessages) => {
-						allMessages.sweep(message => pinnedMessages.has(pinnedMessage.id));
-					});
+				/*currentChannel.fetchMessages()
+					.then(allMessages => allMessages.sweep(message => pinnedMessages.has(pinnedMessage.id)));*/
 
 				currentChannel.fetchMessage(pinnedMessage.id)
         			.then(message => console.log('reactions :' + message.reactions))
