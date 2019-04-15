@@ -89,7 +89,7 @@ client.on('ready', () => {
 	console.log(message);
 	channel.send(message);
     let general = client.channels.find('name', 'général');
-    general.fetchMessage(566299906717909033)
+    general.fetchMessage('566299906717909033')
         .then(message => console.log(message.reactions))
         .catch(console.error);
 });
