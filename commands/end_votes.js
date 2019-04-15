@@ -27,7 +27,7 @@ exports.run = function(client, message)
 				let realMessage;
 				// Delete the cache
 				currentChannel.fetchMessages()
-					.the((allMessages) => {
+					.then((allMessages) => {
 						allMessages.sweep(message => pinnedMessages.has(pinnedMessage.id));
 					});
 
