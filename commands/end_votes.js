@@ -13,7 +13,6 @@ exports.run = function(client, message)
 	let annoncesChannel = client.channels.find('name', 'annonces');
 	currentChannel.fetchPinnedMessages()
 		.then(function(pinnedMessages) {
-			client.sweepMessages();
 			let hasVote = false;
 			pinnedMessages.forEach(function(pinnedMessage) {
 				if (undefined === pinnedMessage.embeds[0]) {
@@ -29,6 +28,7 @@ exports.run = function(client, message)
 				// Delete the cache
 				/*currentChannel.messages.sweep(message => fetchedMessages.has(pinnedMessage.id));*/
 
+				client.sweepMessages();
 				currentChannel.fetchMessage(pinnedMessage.id)
         			.then(message => console.log('reactions :' + message.reactions))
         			.catch(console.error);
