@@ -26,7 +26,10 @@ exports.run = function(client, message)
 				let userName = pinnedMessage.embeds[0].fields[0].name;
 				let realMessage;
 				// Delete the cache
-				currentChannel.fetchMessages().sweep(message => pinnedMessages.has(pinnedMessage.id));
+				currentChannel.fetchMessages()
+					.the((allMessages) => {
+						allMessages.sweep(message => pinnedMessages.has(pinnedMessage.id));
+					});
 
 				currentChannel.fetchMessage(pinnedMessage.id)
         			.then(message => console.log('reactions :' + message.reactions))
