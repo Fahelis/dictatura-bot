@@ -24,12 +24,16 @@ exports.run = function(client, message)
 					annoncesChannel.send('**Résultat des votes hebdomadaires**');
 				}
 				let userName = pinnedMessage.embeds[0].fields[0].name;
-/*				let realMessage = */
-				let voteResult = voteCount(pinnedMessage, userName);
-
+				let realMessage;
+				// Delete the cache
+				currentChannel.messages.sweep(message => fetchedMessages.has(pinnedMessage.id));
+				
 				currentChannel.fetchMessage(pinnedMessage.id)
         			.then(message => console.log('reactions :' + message.reactions))
         			.catch(console.error);
+
+				let voteResult = voteCount(pinnedMessage, userName);
+
 
 				let user = pinnedMessage.guild.members.find('displayName', userName);
 				switch (voteResult) {
