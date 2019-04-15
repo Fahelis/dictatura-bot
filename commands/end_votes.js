@@ -8,32 +8,38 @@ exports.run = function(client, message)
 		return message.reply(config.permissionDeniedMessage);
 	}
 
+	let currentChannel = message.channel;
 	let generalChannel = client.channels.find('name', 'général');
 	let annoncesChannel = client.channels.find('name', 'annonces');
-	message.channel.fetchPinnedMessages()
-		.then(function(messages) {
+	currentChannel.fetchPinnedMessages()
+		.then(function(pinnedMessages) {
 			let hasVote = false;
-			messages.forEach(function(message) {
-				if (undefined === message.embeds[0]) {
+			pinnedMessages.forEach(function(pinnedMessage) {
+				if (undefined === pinnedMessage.embeds[0]) {
 					return;
 				}
 				if (!hasVote) {
 					hasVote = true;
-					message.channel.send('* * * * * * * * * * * * * * * * * Fermeture des votes * * * * * * * * * * * * * * * * *');
+					currentChannel.send('* * * * * * * * * * * * * * * * * Fermeture des votes * * * * * * * * * * * * * * * * *');
 					annoncesChannel.send('**Résultat des votes hebdomadaires**');
 				}
-				let userName = message.embeds[0].fields[0].name;
-				let voteResult = voteCount(message, userName);
+				let userName = pinnedMessage.embeds[0].fields[0].name;
+				let realMessage = 
+				let voteResult = voteCount(pinnedMessage, userName);
 
-				let user = message.guild.members.find('displayName', userName);
+				currentChannel.fetchMessage(pinnedMessage.id)
+        			.then(message => console.log(message.reactions))
+        			.catch(console.error);
+
+				let user = pinnedMessage.guild.members.find('displayName', userName);
 				switch (voteResult) {
 					case '👍':
 						if (null === user) {
 							annoncesChannel.send(userName + ' fait maintenant partie des membres officiels');
 						} else {
 							generalChannel.send('!!official_member ' + user)
-								.then(function(message) {
-									message.delete();
+								.then(function(pinnedMessage) {
+									pinnedMessage.delete();
 								});
 						}
 						break;
@@ -49,8 +55,8 @@ exports.run = function(client, message)
 							annoncesChannel.send(userName + ' nous quitte');
 						} else {
 							generalChannel.send('!!kick_recruit ' + user)
-								.then(function(message) {
-									message.delete();
+								.then(function(pinnedMessage) {
+									pinnedMessage.delete();
 								});
 						}
 
