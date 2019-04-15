@@ -24,7 +24,7 @@ exports.run = function(client, message)
 					annoncesChannel.send('**Résultat des votes hebdomadaires**');
 				}
 				let userName = pinnedMessage.embeds[0].fields[0].name;
-				let realMessage = 
+/*				let realMessage = */
 				let voteResult = voteCount(pinnedMessage, userName);
 
 				currentChannel.fetchMessage(pinnedMessage.id)
