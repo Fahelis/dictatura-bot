@@ -28,11 +28,11 @@ exports.run = function(client, message)
 			});
 		})
 		.finally(function() {
-			showResult(currentChannel, generalChannel, annoncesChannel, ids);
+			showResult(currentChannel, generalChannel, annoncesChannel, ids, message);
 		});
 }
 
-function showResult(currentChannel, generalChannel, annoncesChannel, ids)
+function showResult(currentChannel, generalChannel, annoncesChannel, ids, message)
 {
 	ids.forEach (function (id) {
 		currentChannel.fetchMessage(id)
@@ -71,7 +71,7 @@ function showResult(currentChannel, generalChannel, annoncesChannel, ids)
 
 						break;
 					default:
-						console.log('Emote non utilisée pour les votes ' + reaction)
+						console.log('This code should not be reached')
 				}
 
 			});
