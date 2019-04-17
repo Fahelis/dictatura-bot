@@ -80,16 +80,19 @@ function showResult(currentChannel, generalChannel, annoncesChannel, ids, messag
 
 function voteCount(message, userName)
 {
+	let nbUp;
+	let nbNeutral;
+	let nbDown;
 	for (let reaction in message.reactions) {
 		switch (reaction) {
 			case '👍':
-				nbUp = reaction.count;
+				nbUp = reaction.count-1;
 				break;
 			case '👊':
-				nbNeutral = reaction.count;
+				nbNeutral = reaction.count-1;
 				break;
 			case '👎':
-				nbDown = reaction.count;
+				nbDown = reaction.count-1;
 				break;
 			default:
 				console.log('Emote non utilisée pour les votes ' + reaction)
