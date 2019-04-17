@@ -25,12 +25,11 @@ exports.run = function(client, message)
 					currentChannel.send('* * * * * * * * * * * * * * * * * Fermeture des votes * * * * * * * * * * * * * * * * *');
 					annoncesChannel.send('**Résultat des votes hebdomadaires**');
 				}
-			})
+			});
+		})
 		.finally(function() {
 			showResult(currentChannel, generalChannel, annoncesChannel);
-			});
 		});
-		
 }
 
 function showResult(currentChannel, generalChannel, annoncesChannel)
