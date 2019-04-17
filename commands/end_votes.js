@@ -28,11 +28,11 @@ exports.run = function(client, message)
 			});
 		})
 		.finally(function() {
-			showResult(currentChannel, generalChannel, annoncesChannel);
+			showResult(currentChannel, generalChannel, annoncesChannel, ids);
 		});
 }
 
-function showResult(currentChannel, generalChannel, annoncesChannel)
+function showResult(currentChannel, generalChannel, annoncesChannel, ids)
 {
 	for (id in ids) {
 		currentChannel.fetchMessage(id)
