@@ -25,52 +25,58 @@ exports.run = function(client, message)
 					currentChannel.send('* * * * * * * * * * * * * * * * * Fermeture des votes * * * * * * * * * * * * * * * * *');
 					annoncesChannel.send('**Résultat des votes hebdomadaires**');
 				}
+			})
+		.finally(function() {
+			showResult(currentChannel, generalChannel, annoncesChannel);
 			});
-			resolve();
-			// resolve(ids);
 		});
-		for (id in ids) {
-			currentChannel.fetchMessage(id)
-				.then(function (voteMessage) {
-					let userName = voteMessage.embeds[0].fields[0].name;
-					let user = message.guild.members.find('displayName', userName);
-					let voteResult = voteCount(voteMessage, userName);
-					console.log(voteResult);
-					switch (voteResult) {
-						case '👍':
-							if (null === user) {
-								annoncesChannel.send(userName + ' fait maintenant partie des membres officiels');
-							} else {
-								generalChannel.send('!!official_member ' + user)
-									.then(function(cmdMessage) {
-										cmdMessage.delete();
-									});
-							}
-							break;
-						case '👊':
-							if (null === user) {
-								annoncesChannel.send(userName + ' voit sa période d\'essai prolongée d\'une semaine');
-							} else {
-								annoncesChannel.send(`${memberToFind.displayName} voit sa période d\'essai prolongée d\'une semaine`);
-							}
-							break;
-						case '👎':
-							if (null === user) {
-								annoncesChannel.send(userName + ' nous quitte');
-							} else {
-								generalChannel.send('!!kick_recruit ' + user)
-									.then(function(cmdMessage) {
-										cmdMessage.delete();
-									});
-							}
+		
+}
 
-							break;
-						default:
-							console.log('Emote non utilisée pour les votes ' + reaction)
-					}
+function showResult(currentChannel, generalChannel, annoncesChannel)
+{
+	for (id in ids) {
+		currentChannel.fetchMessage(id)
+			.then(function (voteMessage) {
+				let userName = voteMessage.embeds[0].fields[0].name;
+				let user = message.guild.members.find('displayName', userName);
+				let voteResult = voteCount(voteMessage, userName);
+				console.log(voteResult);
+				switch (voteResult) {
+					case '👍':
+						if (null === user) {
+							annoncesChannel.send(userName + ' fait maintenant partie des membres officiels');
+						} else {
+							generalChannel.send('!!official_member ' + user)
+								.then(function(cmdMessage) {
+									cmdMessage.delete();
+								});
+						}
+						break;
+					case '👊':
+						if (null === user) {
+							annoncesChannel.send(userName + ' voit sa période d\'essai prolongée d\'une semaine');
+						} else {
+							annoncesChannel.send(`${memberToFind.displayName} voit sa période d\'essai prolongée d\'une semaine`);
+						}
+						break;
+					case '👎':
+						if (null === user) {
+							annoncesChannel.send(userName + ' nous quitte');
+						} else {
+							generalChannel.send('!!kick_recruit ' + user)
+								.then(function(cmdMessage) {
+									cmdMessage.delete();
+								});
+						}
 
-				});
-		}
+						break;
+					default:
+						console.log('Emote non utilisée pour les votes ' + reaction)
+				}
+
+			});
+	}
 }
 
 function voteCount(message, userName)
