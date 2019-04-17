@@ -34,7 +34,7 @@ exports.run = function(client, message)
 
 function showResult(currentChannel, generalChannel, annoncesChannel, ids)
 {
-	for (id in ids) {
+	ids.forEach (function (id) {
 		currentChannel.fetchMessage(id)
 			.then(function (voteMessage) {
 				let userName = voteMessage.embeds[0].fields[0].name;
@@ -75,7 +75,7 @@ function showResult(currentChannel, generalChannel, annoncesChannel, ids)
 				}
 
 			});
-	}
+	});
 }
 
 function voteCount(message, userName)
