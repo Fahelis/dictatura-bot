@@ -37,6 +37,7 @@ function showResult(currentChannel, generalChannel, annoncesChannel, ids, messag
 	ids.forEach (function (id) {
 		currentChannel.fetchMessage(id)
 			.then(function (voteMessage) {
+				console.log(voteMessage);
 				let userName = voteMessage.embeds[0].fields[0].name;
 				let user = message.guild.members.find('displayName', userName);
 				let voteResult = voteCount(voteMessage, userName);
@@ -56,7 +57,7 @@ function showResult(currentChannel, generalChannel, annoncesChannel, ids, messag
 						if (null === user) {
 							annoncesChannel.send(userName + ' voit sa période d\'essai prolongée d\'une semaine');
 						} else {
-							annoncesChannel.send(`${memberToFind.displayName} voit sa période d\'essai prolongée d\'une semaine`);
+							annoncesChannel.send(`${userName} voit sa période d\'essai prolongée d\'une semaine`);
 						}
 						break;
 					case '👎':
