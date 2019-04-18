@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const config = require('../config.json');
 const utils = require('../utils');
+const mysql = require('mysql');
 
 exports.run = function(client, message, args)
 {
@@ -46,6 +47,22 @@ exports.run = function(client, message, args)
 				await message.react("👊");
 				await message.react("👎");
 				await message.pin();
+
+				let dbm = mysql.createConnection({
+					host: process.env.DB_HOST,
+					user: process.env.DB_USER,
+					password: process.env.DB_PASSWORD,
+					database: process.env.DB_NAME
+				});
+
+				dbm.connect(function(err) {
+					if (err) {
+						client.channels.find("name", "général").send(err);
+						// throw err;
+					}
+				});
+				dbm.query('INSERT INTO `recruit_vote` (`id`) VALUES (`' + message.id + '`');
+				dbm.close();
 			}).catch(function() {
 				console.log("Can't do the vote");
 			});
