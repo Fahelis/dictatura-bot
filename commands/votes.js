@@ -60,9 +60,18 @@ let mysql = require('mysql');
 						client.channels.find("name", "général").send(err);
 						// throw err;
 					}
-				});
-				dbm.query('INSERT INTO `recruit_vote` (`id`) VALUES (`' + message.id + '`');
-				dbm.close();
+				
+				let sql = 'INSERT INTO `recruit_vote` (`id`) VALUES (`' + message.id + '`';
+				dbm.query(sql, function (err, result) {
+				 if (err) {
+					 console.log("Impossible d'insérer l'entrée");
+				  
+					 //throw err;
+				 }
+				    console.log("1 record inserted");
+				  });
+				}); 
+				
 			}).catch(function() {
 				console.log("Can't do the vote");
 			});
