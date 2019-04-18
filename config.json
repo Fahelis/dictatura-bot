@@ -23,6 +23,11 @@
     "hasArgs": false,
     "needsClient": false
     },
+    "clear_messages": {
+    "location": "commands/",
+    "hasArgs": true,
+    "needsClient": false
+    },
     "game_vote": {
     "location": "commands/",
     "hasArgs": false,
