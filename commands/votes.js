@@ -1,7 +1,6 @@
 const Discord = require('discord.js');
 const config = require('../config.json');
 const utils = require('../utils');
-const mysql = require('mysql');
 
 exports.run = function(client, message, args)
 {
@@ -47,6 +46,7 @@ exports.run = function(client, message, args)
 				await message.react("👊");
 				await message.react("👎");
 				await message.pin();
+let mysql = require('mysql');
 
 				let dbm = mysql.createConnection({
 					host: process.env.DB_HOST,
