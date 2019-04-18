@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const utils = require('../utils');
 
-exports.run = async (client, message, args) => {
+exports.run = async (message, args) => {
   if (!utils.isDirector(message.member))
 		{
 			return message.reply(config.permissionDeniedMessage);
