@@ -7,7 +7,6 @@ exports.run = function(message)
 	{
 		return message.reply(config.permissionDeniedMessage);
 	}
-	console.log("gamevote after if");
 	let currentChannel = message.channel;
 	message.channel.fetchPinnedMessages()
 	.then(async function (messages) {
