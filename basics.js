@@ -13,7 +13,7 @@ module.exports = {
 	simpleAnswers: function (message, config)
 	{
 		let messageLC = message.toLowerCase().trim();
-		if (messageLC.includes('ah') && 8 >= messageLC.length && !config.tabDictaturaBotId.includes(message.member.id)) {
+		if (messageLC.includes('ah') && 8 >= messageLC.length && !message.author.bot) {
 	    	message.channel.send('Bah oui!');
 	  	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
        || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello')
@@ -31,8 +31,8 @@ module.exports = {
 	cleanUp: function(message, config)
 	{
 		if ('PINS_ADD' === message.type) {
-			if ("services" === message.channel.name && config.tabDictaturaBotId.includes(message.author.id)) {
-				message.delete();
+			if ("services" === message.channel.name && message.author.bot) {
+				message.delete(2000);
 			}
 		} else {
 			if (message.content.startsWith(config.notificationAlmanax)) {
