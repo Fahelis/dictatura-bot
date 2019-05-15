@@ -21,9 +21,8 @@ exports.run = function(client, message, args)
 	    let roleMeneur = message.guild.roles.find("name", "Meneur");
 	    let roleBD = message.guild.roles.find("name", "Bras droits");
 	    targetChannel = client.channels.find("name", "le_bureau_de_la_direction");
-	    targetChannel.send('Je ne trouve pas la moindre recrue\n'
-	      + 'Aucune recrue présente dans le repaire. Il faudrait que l\'un de vous '+ roleMeneur +' ou '+ roleBD +
-	      'lance le(s) vote(s) manuellement si besoin');
+	    targetChannel.send('Aucune recrue présente dans le repaire\n Il faudrait que l\'un de vous '+
+			roleMeneur +' ou '+ roleBD + 'lance le(s) vote(s) manuellement si besoin');
     } else {
 	    let openningVote = (hasRecruits && autoVote) || (!hasRecruits && !autoVote);
 	    if (openningVote) {
@@ -35,11 +34,10 @@ exports.run = function(client, message, args)
 			    args.push(guildMember.displayName);
 			});
 	    }
-		let index = 0;
-    		// Display a vote for each arg of the command
-		for (let arg in args) {
+		// Display a vote for each arg of the command
+		args.forEach (function (arg) {
 			var embed = new Discord.RichEmbed()
-				.addField(args[index], "👍 si vous souhaitez intégrer la recrue, 👊 pour la garder à l'essai, 👎 pour l'exclure")
+				.addField(arg, "👍 intégrer la recrue, 👊 prolonger l'essai, 👎 exclure")
 				.setColor('RED')
 			targetChannel.sendEmbed(embed)
 			.then(async function (message) {
@@ -47,11 +45,12 @@ exports.run = function(client, message, args)
 				await message.react("👍");
 				await message.react("👊");
 				await message.react("👎");
+				await message.pin();
 			}).catch(function() {
 				console.log("Can't do the vote");
+				client.channels.find("name", "iord_logs").send("Can't do the vote");
 			});
-			index++;
-		}
+		});
 		if (openningVote) {
 			client.channels.find("name", "annonces").send("@everyone Les votes pour l'intégration des recrues sont ouverts");
 		} else {
