@@ -78,7 +78,7 @@ client.on("guildMemberAdd", (member) => {
 client.on('ready', () => {
     //basics.startMessages(client);
 	let logChannel = client.channels.find("name", "iord_logs");
-    	var currentDate = new Date('NOW (CEST)');
+    	let currentDate = new Date();
     	message = 'De retour en ligne le ' + currentDate.toDateString() + ' à ' + currentDate.toTimeString();
 	console.log(message);
 	logChannel.send(message);
