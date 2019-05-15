@@ -34,6 +34,7 @@ client.on('message', message => {
             } catch (e) {
                 message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
                 console.error(e);
+                message.delete(5000);
                 return
             }
             if (true === config.tabCommands[cmd]['hasArgs'] && true === config.tabCommands[cmd]['needsClient']) {
@@ -45,8 +46,10 @@ client.on('message', message => {
             } else {
                 commandFile.run(message);
            }
+            message.delete(5000);
         } catch (e) {
             message.channel.send(`Je suis désolée mais je n'ai pas pu traiter la commande **${cmd}**. Vérifie ta saisie, il y a peut-être une erreur. Si ce n'est pas le cas, parles en à Willam.`);
+            message.delete(5000);
             console.error(e);
         }
     }
