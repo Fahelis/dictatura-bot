@@ -77,9 +77,11 @@ client.on("guildMemberAdd", (member) => {
 
 client.on('ready', () => {
     //basics.startMessages(client);
-	let channel = client.channels.find("name", "ghost_channel");
-	console.log('De retour en ligne');
-	channel.send('Je suis de retour en ligne');
+	let logChannel = client.channels.find("name", "iord_logs");
+    	var currentDate = new Date('NOW (CEST)');
+    	message = 'De retour en ligne le ' + currentDate.toDateString() + ' à ' + currentDate.toTimeString();
+	console.log(message);
+	logChannel.send(message);
 });
 
 client.login(process.env.BOT_TOKEN);
