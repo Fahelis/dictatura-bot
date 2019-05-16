@@ -48,5 +48,33 @@
     "hasArgs": true,
     "needsClient": true
     }
-  }
+  },
+  "kaellyCommands": [
+    "!about",
+    "!align",
+    "!alliance",
+    "!almanax",
+    "!almanax-auto",
+    "!cmd",
+    "!dist",
+    "!guild",
+    "!help",
+    "!item",
+    "!job",
+    "!lang",
+    "!map",
+    "!monster",
+    "!pos",
+    "!pos-auto",
+    "!prefix",
+    "!rdm",
+    "!resource",
+    "!rss",
+    "!server",
+    "!set",
+    "!sound",
+    "!tuto",
+    "!twitter",
+    "!whois"
+  ]
 }
