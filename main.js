@@ -14,6 +14,7 @@ client.on('message', message => {
     if ('services' === message.channel.name && message.member.id === config.kaellyId) {
 		handledCommand = usesKaelly.services(message, config);
 		if (true === handledCommand) {
+            basics.cleanUp(message, config);
 	    	return;
 	    }
     }
@@ -34,6 +35,7 @@ client.on('message', message => {
             } catch (e) {
                 message.channel.send(`Je suis désolée mais je ne connais pas la commande **${cmd}**`);
                 console.error(e);
+                message.delete(5000);
                 return
             }
             if (true === config.tabCommands[cmd]['hasArgs'] && true === config.tabCommands[cmd]['needsClient']) {
@@ -45,8 +47,10 @@ client.on('message', message => {
             } else {
                 commandFile.run(message);
            }
+            message.delete(5000);
         } catch (e) {
             message.channel.send(`Je suis désolée mais je n'ai pas pu traiter la commande **${cmd}**. Vérifie ta saisie, il y a peut-être une erreur. Si ce n'est pas le cas, parles en à Willam.`);
+            message.delete(5000);
             console.error(e);
         }
     }
@@ -56,15 +60,21 @@ client.on('message', message => {
 
 /********************** ? Start : Timer votes functionality ? **********************/
 
-const TARGET_DAY = 5; // Days go from 0 (sunday) to 6 (saturday)
-const TARGET_HOUR = 17; // Hours go from 0 to 23
-const TARGET_MINUTE = 0; // Minute of the hour from 0 to 59
+const OPEN_VOTE_DAY = 5; // Days go from 0 (sunday) to 6 (saturday)
+const CLOSE_VOTE_DAY = 1; // Days go from 0 (sunday) to 6 (saturday)
+const VOTE_HOUR = 17; // Hours go from 0 to 23
+const VOTE_MINUTE = 0; // Minute of the hour from 0 to 59
 const CHECK_EVERY = 60; // In secondes
 
 setInterval(function() {
-    var d = new Date();
-    if (TARGET_DAY === d.getDay() && TARGET_HOUR === (d.getHours()+2) && TARGET_MINUTE === d.getMinutes()) {  
+    let currentDate = new Date();
+    let isVoteTime = VOTE_HOUR === (currentDate.getHours()) && VOTE_MINUTE === currentDate.getMinutes();
+    if (OPEN_VOTE_DAY === currentDate.getDay() && isVoteTime) {  
         client.channels.find('name', 'les_nouveaux').send(config.prefix + 'votes');
+    } else if (CLOSE_VOTE_DAY === currentDate.getDay() && isVoteTime) {
+		// TODO. Trigger only if there was some votes
+	    client.channels.find("name", "le_bureau_de_la_direction").send("Fin des votes");
+
     }
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
 
@@ -77,9 +87,10 @@ client.on("guildMemberAdd", (member) => {
 
 client.on('ready', () => {
     //basics.startMessages(client);
-	let channel = client.channels.find("name", "ghost_channel");
-	console.log('De retour en ligne');
-	channel.send('Je suis de retour en ligne');
+	let currentDate = new Date();
+	message = 'De retour en ligne le ' + currentDate.toDateString() + ' à ' + currentDate.toTimeString();
+	console.log(message);
+	client.channels.find("name", "iord_logs").send(message);
 });
 
 client.login(process.env.BOT_TOKEN);

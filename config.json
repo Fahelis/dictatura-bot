@@ -4,11 +4,6 @@
   "iordId": "493768311260053514",
   "dictaturaBotId": "484996196977344512",
   "localDictaturaBotId": "495567922639667201",
-  "tabDictaturaBotId": [
-	"495567922639667201",
-	"484996196977344512",
-	"493768311260053514"
-  ],
   "dimensions": [
   "enutrosor",
   "srambad",
@@ -18,7 +13,7 @@
   "notificationAlmanax": "Notification Almanax pour ",
   "permissionDeniedMessage": "**:x: Vous n'avez pas la permission nécessaire à l'exection de cette commande**",
   "tabCommands": {
-    "almanax_subscriber": {
+    "almanax_notif": {
     "location": "commands/",
     "hasArgs": false,
     "needsClient": false
@@ -38,6 +33,11 @@
     "hasArgs": true,
     "needsClient": true
     },
+    "kick_recruit": {
+    "location": "commands/",
+    "hasArgs": true,
+    "needsClient": true
+    },
     "official_member": {
     "location": "commands/",
     "hasArgs": true,
@@ -48,5 +48,33 @@
     "hasArgs": true,
     "needsClient": true
     }
-  }
+  },
+  "kaellyCommands": [
+    "!about",
+    "!align",
+    "!alliance",
+    "!almanax",
+    "!almanax-auto",
+    "!cmd",
+    "!dist",
+    "!guild",
+    "!help",
+    "!item",
+    "!job",
+    "!lang",
+    "!map",
+    "!monster",
+    "!pos",
+    "!pos-auto",
+    "!prefix",
+    "!rdm",
+    "!resource",
+    "!rss",
+    "!server",
+    "!set",
+    "!sound",
+    "!tuto",
+    "!twitter",
+    "!whois"
+  ]
 }
