@@ -14,6 +14,7 @@ client.on('message', message => {
     if ('services' === message.channel.name && message.member.id === config.kaellyId) {
 		handledCommand = usesKaelly.services(message, config);
 		if (true === handledCommand) {
+            basics.cleanUp(message, config);
 	    	return;
 	    }
     }

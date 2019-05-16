@@ -45,7 +45,9 @@ module.exports = {
 			// Delete daily almanax notifications (for subscribers)
 			if (message.content.startsWith(config.notificationAlmanax)
 				// Delete Kaelly's commands
-				|| config.kaellyCommands.includes(cmd)) {
+				|| config.kaellyCommands.includes(cmd)
+				|| (message.content.startsWith('Les métiers suivants ont été ajouté') && message.author.bot)
+				) {
 				message.delete(5000);
 			}
 		}
