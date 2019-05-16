@@ -13,7 +13,7 @@
   "notificationAlmanax": "Notification Almanax pour ",
   "permissionDeniedMessage": "**:x: Vous n'avez pas la permission nécessaire à l'exection de cette commande**",
   "tabCommands": {
-    "almanax_subscriber": {
+    "almanax_notif": {
     "location": "commands/",
     "hasArgs": false,
     "needsClient": false
