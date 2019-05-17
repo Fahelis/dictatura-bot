@@ -10,9 +10,10 @@ module.exports = {
 	    client.channels.find("name", "général").send(tabMessages[randomIndex]);
 	},
 
-	simpleAnswers: function (messageLC, message, config)
+	simpleAnswers: function (message, config)
 	{
-		if (messageLC.includes('ah') && 8 >= messageLC.length && !config.tabDictaturaBotId.includes(message.member.id)) {
+		let messageLC = message.toLowerCase().trim();
+		if (messageLC.includes('ah') && 8 >= messageLC.length && !message.author.bot) {
 	    	message.channel.send('Bah oui!');
 	  	} else if ((messageLC.startsWith('salut') || messageLC.startsWith('bonjour') || messageLC.startsWith('yo')
        || messageLC.startsWith('hi') || messageLC.startsWith('plop') || messageLC.startsWith('hello')
@@ -27,24 +28,27 @@ module.exports = {
 	    }
 	},
 
-	handleNewMember: function(client, member)
-	{
-		client.channels.find('name', 'annonces').send("Une nouvelle recrue a rejoint le repaire, faites lui un bon accueil !");
-	    member.addRole(member.guild.roles.find("name", "A l'essai"));
-		member.send("Salutations nouvelle recrue\nMerci de rejoindre la Dictatura Dei, j'espère que tu t'y plairas\n"
-		+ "Afin que tout le monde puisse facilement t'identifier il te sera demandé de prendre ici le même nom que dans le Monde des Douze\n"
-		+ "Le meneur ou un bras droit pourra t'aider si tu ne sais pas comment faire\nÀ très bientôt");
-	},
-
-	cleanUp: function(message, config)
+	cleanUp: function(message, config, cmd)
 	{
 		if ('PINS_ADD' === message.type) {
-			if ("services" === message.channel.name && config.tabDictaturaBotId.includes(message.author.id)) {
-				message.delete();
+			if ("services" === message.channel.name && message.author.bot) {
+				message.delete(2000);
 			}
 		} else {
-			if (message.content.startsWith(config.notificationAlmanax)) {
-				message.delete();
+			spaceIndex = message.content.indexOf(' ');
+			let cmd;
+			if (-1 !== spaceIndex) {
+				cmd = message.content.slice(0, spaceIndex);
+			} else {
+				cmd = message.content;
+			}
+			// Delete daily almanax notifications (for subscribers)
+			if (message.content.startsWith(config.notificationAlmanax)
+				// Delete Kaelly's commands
+				|| config.kaellyCommands.includes(cmd)
+				|| (message.content.startsWith('Les métiers suivants ont été ajouté') && message.author.bot)
+				) {
+				message.delete(5000);
 			}
 		}
 	}
