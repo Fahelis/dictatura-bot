@@ -15,6 +15,10 @@ exports.run = function(message, args)
 		message.channel.send('**' + config.prefix + 'help**\n' +
 			'Affiche la liste des commandes et leur utilité. Peut également afficher plus de détail sur une commande spécifique\n' +
 			'__Paramètre optionnel :__ nom_de_commande');
+	} else if ('kick_recruit' === args[0]) {
+		message.channel.send('**' + config.prefix + 'kick_recruit**\n' +
+			'Permet d\'expulser une recrue dont le vote hebdomadaire a été négatif\n' +
+			'__Paramètre obligatoire :__ @mention_personne');
 	} else if ('new_member' === args[0]) {
 		message.channel.send('**' + config.prefix + 'new_member**\n' +
 			'Permet de faire évoluer une personne en recrue. Changement de rôle, annonce et message privé\n' +
@@ -36,6 +40,7 @@ exports.run = function(message, args)
 			'**' + config.prefix + 'almanax_notif** : Permet de s\'inscrire pour recevoir chaque jour la notification du service Almanax.\n' +
 			'**' + config.prefix + 'game_vote** : ⚠ Crée un vote pour le canal courant (À utiliser pour les jeux).\n' +
 			'**' + config.prefix + 'help** : Affiche cette liste ou l\'aide d\'une commande spécifique passée en paramètre.\n' +
+			'**' + config.prefix + 'kick_recruit** : ⚠ Expulse une recrue.\n' +
 			'**' + config.prefix + 'new_member** : ⚠ Passe une personne en recrue.\n' +
 			'**' + config.prefix + 'official_member** : ⚠ Passe une recrue en membre officiel.\n' +
 			'**' + config.prefix + 'votes** : ⚠ Lance les votes de fin de semaine pour les recrues.'
