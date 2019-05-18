@@ -70,7 +70,7 @@ setInterval(function() {
     let currentDate = new Date();
     let isVoteTime = VOTE_HOUR === (currentDate.getHours()) && VOTE_MINUTE === currentDate.getMinutes();
     if (OPEN_VOTE_DAY === currentDate.getDay() && isVoteTime) {  
-        client.channels.find('name', 'les_nouveaux').send(config.prefix + 'votes');
+        client.channels.find('name', 'ghost_channel').send(config.prefix + 'votes');
     } else if (CLOSE_VOTE_DAY === currentDate.getDay() && isVoteTime) {
 		// TODO. Trigger only if there was some votes
 	    client.channels.find("name", "le_bureau_de_la_direction").send("Fin des votes");
