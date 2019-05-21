@@ -37,6 +37,7 @@ module.exports = {
 
 		message.channel.fetchPinnedMessages()
 			.then(function(messages) {
+				let handled = false;
 				messages.forEach(function(message) {
 					// If daily almanax message and pinned message is almanax
 					if ('Almanax' === typeMessage && message.embeds[0].title.startsWith('Almanax')) {
@@ -45,9 +46,11 @@ module.exports = {
 							newMessage.pin();
 							// Notifier chaque membre du groupe Almanax
 							notifyAlmanaxGroup(config, message, newMessage);
-                            return true;
+							handled = true;
+                            return;
 						} else {
-							return true;
+							handled = true;
+                            return;
 						}
 					} else if ('Enutrosor' === typeMessage && message.embeds[0].title.includes('Enutrosor')
 						|| ('Srambad' === typeMessage && message.embeds[0].title.includes('Srambad'))
@@ -56,14 +59,19 @@ module.exports = {
 						) {
 						message.delete();
 						newMessage.pin();
-						return true;
+						handled = true;
+                        return;
 					}
 				});
-				if (newMessageTitle.startsWith('Almanax')) {
-					// Notifier le groupe Almanax
-					notifyAlmanaxGroup(config, message, newMessage);
+
+				// Just in case if there is no pinned message to replace (not should append)
+				if (false === handled) {
+					if (newMessageTitle.startsWith('Almanax')) {
+						// Notifier le groupe Almanax
+						notifyAlmanaxGroup(config, message, newMessage);
+					}
+					message.pin();
 				}
-				message.pin();
 			})
 			.catch(console.error);
 		return true;
