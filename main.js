@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
-const basics = require('./basics');
+// const basics = require('./basics');
+const utils = require('./utils');
 const usesKaelly = require('./usesKaelly');
 
 client.on('message', message => {
@@ -14,7 +15,7 @@ client.on('message', message => {
     if ('services' === message.channel.name && message.member.id === config.kaellyId) {
 		handledCommand = usesKaelly.services(message, config);
 		if (true === handledCommand) {
-            basics.cleanUp(message, config);
+            utils.cleanUp(message, config);
 	    	return;
 	    }
     }
@@ -55,7 +56,7 @@ client.on('message', message => {
         }
     }
 
-    basics.cleanUp(message, config);
+    utils.cleanUp(message, config);
 });
 
 /********************** ? Start : Timer votes functionality ? **********************/
@@ -64,17 +65,21 @@ const OPEN_VOTE_DAY = 5; // Days go from 0 (sunday) to 6 (saturday)
 const CLOSE_VOTE_DAY = 1; // Days go from 0 (sunday) to 6 (saturday)
 const VOTE_HOUR = 17; // Hours go from 0 to 23
 const VOTE_MINUTE = 0; // Minute of the hour from 0 to 59
+const CLEAN_LOGS_DAY = 1;
+const CLEAN_LOGS_HOUR = 0;
+const CLEAN_LOGS_MINUTE = 0;
 const CHECK_EVERY = 60; // In secondes
 
 setInterval(function() {
     let currentDate = new Date();
-    let isVoteTime = VOTE_HOUR === (currentDate.getHours()) && VOTE_MINUTE === currentDate.getMinutes();
+    let isVoteTime = VOTE_HOUR === currentDate.getHours() && VOTE_MINUTE === currentDate.getMinutes();
     if (OPEN_VOTE_DAY === currentDate.getDay() && isVoteTime) {  
         client.channels.find('name', 'ghost_channel').send(config.prefix + 'votes');
     } else if (CLOSE_VOTE_DAY === currentDate.getDay() && isVoteTime) {
 		// TODO. Trigger only if there was some votes
 	    client.channels.find("name", "le_bureau_de_la_direction").send("Fin des votes");
-
+    } else if (CLEAN_LOGS_DAY === currentDate.getDay() && CLEAN_LOGS_HOUR === currentDate.getHours() && CLEAN_LOGS_MINUTE === currentDate.getMinutes()) {
+    	utils.cleanLogs(client);
     }
 }, CHECK_EVERY * 1000); // Check every CHECK_EVERY secondes
 
