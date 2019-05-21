@@ -26,30 +26,5 @@ module.exports = {
 	    } else if (messageLC.includes('merci iord')) {
 	        message.channel.send("Mais de rien, c'est un plaisir");
 	    }
-	},
-
-	cleanUp: function(message, config, cmd)
-	{
-		if ('PINS_ADD' === message.type) {
-			if ("services" === message.channel.name && message.author.bot) {
-				message.delete(2000);
-			}
-		} else {
-			spaceIndex = message.content.indexOf(' ');
-			let cmd;
-			if (-1 !== spaceIndex) {
-				cmd = message.content.slice(0, spaceIndex);
-			} else {
-				cmd = message.content;
-			}
-			// Delete daily almanax notifications (for subscribers)
-			if (message.content.startsWith(config.notificationAlmanax)
-				// Delete Kaelly's commands
-				|| config.kaellyCommands.includes(cmd)
-				|| (message.content.startsWith('Les métiers suivants ont été ajouté') && message.author.bot)
-				) {
-				message.delete(5000);
-			}
-		}
 	}
 }
