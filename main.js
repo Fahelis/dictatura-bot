@@ -1,7 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
-const basics = require('./basics');
+// const basics = require('./basics');
+const utils = require('./utils');
 const usesKaelly = require('./usesKaelly');
 
 client.on('message', message => {
@@ -14,7 +15,7 @@ client.on('message', message => {
     if ('services' === message.channel.name && message.member.id === config.kaellyId) {
 		handledCommand = usesKaelly.services(message, config);
 		if (true === handledCommand) {
-            basics.cleanUp(message, config);
+            utils.cleanUp(message, config);
 	    	return;
 	    }
     }
@@ -55,7 +56,7 @@ client.on('message', message => {
         }
     }
 
-    basics.cleanUp(message, config);
+    utils.cleanUp(message, config);
 });
 
 /********************** ? Start : Timer votes functionality ? **********************/
