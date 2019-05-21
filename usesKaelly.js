@@ -1,19 +1,6 @@
 module.exports = {
 	services: function(message, config)
 	{
-		//message incomming
-		// Check if it's almanax or portal
-		// if yes
-		// if almanax
-		// check pinned message for almanx
-		// delete it
-		// add the new
-		// send the notif
-		// else (portal)
-		// check for the same name
-		// delte the old
-		// pin the new
-
 		let newMessage = message;
 		if (undefined === newMessage.embeds[0]) {
 			return true;
