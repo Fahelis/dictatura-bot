@@ -47,7 +47,7 @@ exports.run = function(client, message, args)
 				await message.react("👎");
 				await message.pin();
 			}).catch(function() {
-				console.log("Can't do the vote");
+				utils.log(client, 'Can\'t do the vote');
 				client.channels.find("name", "iord_logs").send("Can't do the vote");
 			});
 		});
