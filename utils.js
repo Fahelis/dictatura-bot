@@ -33,10 +33,8 @@ module.exports = {
 
 	cleanUp: function(message, config, cmd)
 	{
-		if ('PINS_ADD' === message.type) {
-			if ("services" === message.channel.name && message.author.bot) {
+		if ('PINS_ADD' === message.type && message.author.bot) {
 				message.delete(2000);
-			}
 		} else {
 			spaceIndex = message.content.indexOf(' ');
 			let cmd;
