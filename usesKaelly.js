@@ -29,16 +29,13 @@ module.exports = {
 					// If daily almanax message and pinned message is almanax
 					if ('Almanax' === typeMessage && message.embeds[0].title.startsWith('Almanax')) {
 						if (newMessageTitle !== message.embeds[0].title) {
-							message.delete();
-							newMessage.pin();
 							// Notifier chaque membre du groupe Almanax
 							notifyAlmanaxGroup(config, message, newMessage);
-							handled = true;
-                            return;
-						} else {
-							handled = true;
-                            return;
 						}
+						message.delete();
+						newMessage.pin();
+						handled = true;
+                        return;
 					} else if ('Enutrosor' === typeMessage && message.embeds[0].title.includes('Enutrosor')
 						|| ('Srambad' === typeMessage && message.embeds[0].title.includes('Srambad'))
 						|| ('Xélorium' === typeMessage && message.embeds[0].title.includes('Xélorium'))
