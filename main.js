@@ -86,8 +86,13 @@ setInterval(function() {
 /********************** ! End : Timer votes functionality ! **********************/
 
 client.on("guildMemberAdd", (member) => {
-    let commandFile = require(`./commands/new_member.js`); 
-    commandFile.run(client, member);
+    member.send("Bonjour et bienvenue dans la repaire de la Dictatura Dei\n" +
+	"En tant qu'invité, tu démarres avec des droits très restreints\n" +
+	"Le canal accueil te permettra d'en apprendre plus sur notre guilde et son fonctionnement\n" +
+	"Le canal général te permettra de communiquer avec nos membres\n" +
+	"Le canal vocal Groupe lambda te permettra de communiquer en vocal avec les gens présents dessus\n" +
+	"Si tu es là en tant que nouvelle recrue, un dirigeant va prochainement faire évoluer ton statut\n" +
+	"Dans tous les cas profite bien de ton passage chez nous :slight_smile:");
 });
 
 client.on('ready', () => {
