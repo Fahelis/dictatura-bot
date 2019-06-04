@@ -3,20 +3,23 @@ const config = require('../config.json');
 const utils = require('../utils');
 
 // Param can be a guildMember (when function is called on guildMemberAdd event) or a Message (command)
-exports.run = function(client, message, args)
+exports.run = function(client, param, args = null)
 {
-	if (!utils.isDirector(message.member))
-	{
-	    return message.reply(config.permissionDeniedMessage);
+	let member;
+	if (param instanceof Discord.GuildMember) {
+		member = param;
+	} else {
+		if (!utils.isDirector(message.member))
+			{
+				return message.reply(config.permissionDeniedMessage);
+			}
+		let message = param;
+		member = message.mentions.members.first(); ;
 	}
-	let member = message.mentions.members.first(); ;
-	const name = args[1];
 
-	member.setNickname(name);
-    	member.addRole(member.guild.roles.find("name", "A l'essai"));
-	client.channels.find('name', 'annonces').send(`Une nouvelle recrue a rejoint le repaire, faites un bon accueil à ${member.nickName} !`);
-	member.send("Salutations nouvelle recrue, merci de rejoindre la Dictatura Dei"
-	    + "Si ce n'est pas déjà fait, je t'invite à lire le contenu du canal accueil qui t'en apprendra plus sur notre fonctionnement\n"
-	    + "Je t'invite également à laisser un petit message de présentation sur le canal général\n"
-	    + "J'espère que tu te plairas parmi nous :wink:");
+	client.channels.find('name', 'annonces').send("Une nouvelle recrue a rejoint le repaire, faites lui un bon accueil !");
+    member.addRole(member.guild.roles.find("name", "A l'essai"));
+	member.send("Salutations nouvelle recrue\nMerci de rejoindre la Dictatura Dei, j'espère que tu t'y plairas\n"
+	+ "Afin que tout le monde puisse facilement t'identifier il te sera demandé de prendre ici le même nom que dans le Monde des Douze\n"
+	+ "Le meneur ou un bras droit pourra t'aider si tu ne sais pas comment faire\nÀ très bientôt");
 }
