@@ -73,9 +73,9 @@ const CHECK_EVERY = 60; // In secondes
 setInterval(function() {
     let currentDate = new Date();
     let isVoteTime = VOTE_HOUR === currentDate.getHours() && VOTE_MINUTE === currentDate.getMinutes();
-    if (OPEN_VOTE_DAY === currentDate.getDay() && isVoteTime) {  
+    if (OPEN_VOTE_DAY === currentDate.getDay() && isVoteTime && 'TRUE' === process.env.AUTO_VOTE) {  
         client.channels.find('name', 'ghost_channel').send(config.prefix + 'votes');
-    } else if (CLOSE_VOTE_DAY === currentDate.getDay() && isVoteTime) {
+    } else if (CLOSE_VOTE_DAY === currentDate.getDay() && isVoteTime && 'TRUE' === process.env.AUTO_VOTE) {
 		// TODO. Trigger only if there was some votes
 	    client.channels.find("name", "le_bureau_de_la_direction").send("Fin des votes");
     } else if (CLEAN_LOGS_DAY === currentDate.getDay() && CLEAN_LOGS_HOUR === currentDate.getHours() && CLEAN_LOGS_MINUTE === currentDate.getMinutes()) {
