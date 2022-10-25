@@ -11,8 +11,8 @@ module.exports = {
 	log: function(client, logMessage)
 	{
 		console.log(logMessage);
-		client.channels.find('name', 'iord_logs').send(logMessage);
-		client.channels.find('name', 'iord_logs_archives').send(logMessage);
+		client.channels.cache.find(channel => 'iord_logs' === channel.name).send(logMessage);
+		client.channels.cache.find(channel => 'iord_logs_archives' === channel.name).send(logMessage);
 	},
 
 	cleanLogs: function(client)

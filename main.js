@@ -1,11 +1,12 @@
 const Discord = require('discord.js');
-const client = new Discord.Client();
+const client = new Discord.Client({ intents: ["DIRECT_MESSAGES", "DIRECT_MESSAGE_TYPING", "GUILDS", "GUILD_MESSAGES", "MESSAGE_CONTENT"] });
 const config = require('./config.json');
 // const basics = require('./basics');
 const utils = require('./utils');
 const usesKaelly = require('./usesKaelly');
 
-client.on('message', message => {
+client.on('messageCreate', message => {
+
     let args = message.content.slice(config.prefix.length).trim().split(' ');
     let cmd = args.shift().toLowerCase();
     
@@ -28,6 +29,7 @@ client.on('message', message => {
 	}
 
     if (message.content.startsWith(config.prefix)) {
+        console.log("ok");
         try {
             let commandFile;
         	try {

@@ -2,12 +2,25 @@
   "name": "Dictatura-bot",
   "description": "",
   "version": "0.0.0",
-  "main": "bot.js",
+  "main": "main.js",
   "scripts": {
-    "start": "node bot.js"
+    "start": "node main.js"
   },
   "dependencies": {
-    "discord.js": "11.1.0",
-    "request": "2.81.0"
-  }
+    "discord.js": "^13.5.0",
+    "mysql": "^2.18.1"
+  },
+  "engines": {
+    "node": "^16.13.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Fahelis/dictatura-bot.git"
+  },
+  "author": "Fahelis",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Fahelis/dictatura-bot/issues"
+  },
+  "homepage": "https://github.com/Fahelis/dictatura-bot#readme"
 }
