@@ -6,7 +6,6 @@ const utils = require('./utils');
 const usesKaelly = require('./usesKaelly');
 
 client.on('messageCreate', message => {
-
     let args = message.content.slice(config.prefix.length).trim().split(' ');
     let cmd = args.shift().toLowerCase();
     
@@ -29,7 +28,6 @@ client.on('messageCreate', message => {
 	}
 
     if (message.content.startsWith(config.prefix)) {
-        console.log("ok");
         try {
             let commandFile;
         	try {
