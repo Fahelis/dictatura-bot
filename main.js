@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const keepAlive = require("./server");
 const client = new Discord.Client({ intents: ["DIRECT_MESSAGES", "DIRECT_MESSAGE_TYPING", "GUILDS", "GUILD_MESSAGES", "MESSAGE_CONTENT"] });
 const config = require('./config.json');
 // const basics = require('./basics');
@@ -101,4 +102,5 @@ client.on('ready', () => {
 	utils.log(client, 'De retour en ligne le ' + currentDate.toDateString() + ' à ' + currentDate.toTimeString());
 });
 
+keepAlive();
 client.login(process.env.BOT_TOKEN);
